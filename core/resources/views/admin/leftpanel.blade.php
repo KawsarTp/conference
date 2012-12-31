@@ -74,7 +74,13 @@
                 </li>
 
                 <li class="menu-item-has-children dropdown">
-                    <a href="{{route('admin.setting')}}"><i class="menu-icon ti-settings"></i>All Setting</a>
+                    <a href="{{route('admin.setting')}}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon ti-settings"></i>General Setting</a>
+                    <ul class="sub-menu children dropdown-menu">
+                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.sponsor')}}">Add Sponsor Requirements</a></li>
+                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.sponsortype')}}">Sponsor Type</a></li>
+                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.managersponsor')}}">Sponsorship Application</a></li>
+                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.managersponsordata')}}">Manage All Data</a></li>
+                    </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

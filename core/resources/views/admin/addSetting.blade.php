@@ -25,7 +25,7 @@
 	    					@csrf
 	    					<div class="form-group">
 	    						<label>Conference Start Date</label>
-	    						<input type="date" name="from" class="form-control">
+	    						<input type="text" name="from" class="form-control" id="datepicker">
 	    					</div>
 	    					
 	    					<div class="form-group">
@@ -52,3 +52,16 @@
     	</div>
     </div>
 </div>
+
+@endsection
+
+@push('datepick')
+
+<script>
+  $( function() {
+  	var date = (new Date("{{$setting->start_date}}") - new Date()) / (1000 * 3600 * 24);
+    $( "#datepicker" ).datepicker({ minDate: Math.floor(date), maxDate: "+1M +10D" });
+  } );
+  </script>
+
+@endpush

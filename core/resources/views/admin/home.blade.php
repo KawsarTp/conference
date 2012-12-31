@@ -8,7 +8,7 @@
 
 <div id="right-panel" class="right-panel">
 
-
+{{-- @dd(gd_info()) --}}
     <!-- Header-->
         @include('admin.nav')
     <!-- /#header -->
@@ -295,6 +295,7 @@
     <!-- Footer -->
         @include('admin.footer')
     <!-- /.site-footer -->
+</div>
 </div>
 
 

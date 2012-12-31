@@ -32,7 +32,7 @@
 </section>
 
 
-<script type="text/javascript">
+<script>
 var x = setInterval(function() {
     var days = document.getElementById("day").innerHTML;  
     

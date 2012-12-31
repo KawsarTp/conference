@@ -13,6 +13,7 @@ use App\Sponsor;
 use App\SponsorshipApplication;
 use App\SponsorType;
 use Carbon\Carbon;
+use Image;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -56,23 +57,26 @@ class AdminController extends Controller
 
     public function speakerSaveToDatabase(Request $request)
     {
+        
         // validate input field
         $this->validate($request,[
             'name' => 'required|unique:speakers',
             'details' =>'required',
             'expertise' =>'required',
-            'image' =>'required|image|max:1024',
+            'image' =>'required|image|max:1024|mimes:jpeg,png,jpg,gif,svg',
         ]);
-
-        $speaker = new Speaker();
 
         $imageName = $request->file('image');
         
         $speakerNameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
-
+        $img = Image::make($imageName);
         $path = 'asset/admin/images/speaker';
+        $img->resize(150,150);
+        $img->save($path.'/'.$speakerNameFormate);
+        
+        $speaker = new Speaker();
 
-        $imageName->move($path,$speakerNameFormate); 
+       
 
         $speaker->name = $request->name;
         $speaker->details = $request->details;
@@ -577,7 +581,8 @@ class AdminController extends Controller
 
     public function settingView()
     {
-        return view('admin.addSetting');
+        $setting = Setting::first();
+        return view('admin.addSetting',compact('setting'));
     }
 
     public function settingStoreToDatabase(Request $request){

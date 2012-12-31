@@ -3,7 +3,7 @@
         <div class="row m-0">
             <div class="col-xl-6 p-0">
                 <div class="maps h-100">
-                    <embed style="width: 100%;margin-top: 50px; height: 80%" src="https://maps.google.com/maps?q={{str_replace(" ", "+", $setting->location)}}&output=embed"></embed>
+                    <embed style="width: 100%;margin-top: 50px; height: 80%" src="https://maps.google.com/maps?q={{str_replace(" ", "+", $setting->location)}}&output=embed">
 
                 </div>
             </div>
@@ -29,7 +29,7 @@
                                             <ul>
                                                 <li>USA, Callifornia 20, Firs</li>
                                                 <li>Avenue, Callifornia</li>
-                                            <ul>
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="event-tab-item text-center">
@@ -38,9 +38,9 @@
                                         </div>
                                         <div class="event-tab-content">
                                             <ul>
-                                                <li><a href="tel:(123) 456-7890">(123) 456-7890</a></li>
-                                                <li><a href="tel:(123) 456-7891">(123) 456-7891</a></li>
-                                            <ul>
+                                                <li><a href="#">(123) 456-7890</a></li>
+                                                <li><a href="#">(123) 456-7891</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="event-tab-item text-center">
@@ -52,7 +52,7 @@
                                                 <li><a href="mailto:contact@example.com">contact@example.com</a>
                                                 </li>
                                                 <li><a href="mailto:info@example.com">info@example.com</a></li>
-                                            <ul>
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="event-tab-item text-center">
@@ -63,7 +63,7 @@
                                             <ul>
                                                 <li>monday to Friday </li>
                                                 <li>time by schedule</li>
-                                            <ul>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                             <ul>
                                                 <li><a href="#0">00 : 41 min</a></li>
                                                 <li><a href="#0">16.52 km</a></li>
-                                            <ul>
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="event-tab-item text-center">
@@ -89,7 +89,7 @@
                                             <ul>
                                                 <li>02 : 17 hours</li>
                                                 <li>20.05 km</li>
-                                            <ul>
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="event-tab-item text-center">
@@ -100,7 +100,7 @@
                                             <ul>
                                                 <li>00 : 03 hours</li>
                                                 <li>20 km</li>
-                                            <ul>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>

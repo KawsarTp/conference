@@ -25,7 +25,7 @@
             </div>
             <div class="col-xl-6 p-0">
                 <div class="overview-right h-100 bg_img" data-background="{{asset('asset/admin/images/overview').'/'.@$content['overview']['image']}}">
-                    <img src="{{asset('asset/admin/images/overview').'/'.@$content['overview']['image']}}">
+                    <img src="{{asset('asset/admin/images/overview').'/'.@$content['overview']['image']}}" alt="image">
                 </div>
             </div>
         </div>
