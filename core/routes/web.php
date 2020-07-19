@@ -39,6 +39,8 @@ Route::group(['prefix' => 'admin'], function () {
       Route::get('update-sponsor','AdminController@updateSponsor')->name('admin.update');
       Route::get('add-managesponsor','AdminController@manageSponsor')->name('admin.managersponsor');
 
+      Route::get('setting','AdminController@settingView')->name('admin.setting');
+      Route::post('setting','AdminController@settingStoreToDatabase');
 });
 
 

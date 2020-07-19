@@ -64,6 +64,10 @@
                     <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.managersponsor')}}">Manage Sponsors</a></li>
                     </ul>
                 </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="{{route('admin.setting')}}"><i class="menu-icon fa fa-sign-in"></i>All Setting</a>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>

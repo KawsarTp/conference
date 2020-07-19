@@ -2,7 +2,10 @@
     <div class="container-fluid p-xl-0">
         <div class="row m-0">
             <div class="col-xl-6 p-0">
-                <div class="maps h-100"></div>
+                <div class="maps h-100">
+                    <embed style="width: 100%;margin-top: 50px; height: 80%" src="https://maps.google.com/maps?q={{str_replace(" ", "+", $setting->location)}}&output=embed"></embed>
+
+                </div>
             </div>
             <div class="col-xl-6 p-0">
                 <div class="event-overview-content padding-top">
@@ -116,3 +119,9 @@
         </div>
     </div>
 </section>
+
+
+
+
+                    
+

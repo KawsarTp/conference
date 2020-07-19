@@ -68,7 +68,7 @@
 
                             <div class="form-group">
                                 <label class="control-label mb-1">Date for this Topic</label>
-                                <input name="date" type="date" class="form-control" placeholder="Topic Name">
+                                <input name="date" type="date" class="form-control" placeholder="Topic Name" min="{{$setting->start_date}}" max="{{$setting->end_date}}">
                             </div>
                             
 
@@ -98,6 +98,9 @@
 
             </div>
         </div> <!-- .card -->
+        <iframe src="https://maps.google.com/maps?q={{str_replace(" ", "+", $setting->location)}}&output=embed"></iframe>
     </div>
     
 </div>
+
+

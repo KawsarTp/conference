@@ -6,6 +6,7 @@ use App\Booking;
 use App\Content;
 use App\Speaker;
 use App\Ticket;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,13 +14,15 @@ class UserController extends Controller
     public function index()
     {
         $speakerList = Speaker::get();
+        $setting =  Setting::first();
+
         $b = Content::pluck('id')->first();
        
         $a = Content::find($b);
 
-        $header = $a->content['header'];
+        $header = $a == null ? ['title'=>'','details'=>'']: $a->content['header'];
         
-        $date = strtotime($header['date']);
+        $date = strtotime($setting->end_date);
         $remaining = $date - time();
 
         $days_remaining = floor($remaining / 86400);
@@ -36,8 +39,9 @@ class UserController extends Controller
 
 
         $tickets = Ticket::all();
+        $setting = Setting::first();
 
-        return view('frontend.home',compact('speakerList','header','time','tickets'));
+        return view('frontend.home',compact('speakerList','header','time','tickets','setting'));
     }
 
 

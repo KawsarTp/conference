@@ -66,9 +66,7 @@
               day: 'Day',
               days: 'Days'
             },
-            function () {
-              alert('Done!');
-        });
+            
         // Scroll To Top 
         var scrollTop = $(".scrollToTop");
         $(window).on('scroll', function () {

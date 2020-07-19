@@ -8,6 +8,7 @@ use App\Content;
 use App\Speaker;
 use App\Ticket;
 use App\Topic;
+use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -259,7 +260,8 @@ class AdminController extends Controller
     public function addconferenceTopic()
     {
         $speakers = Speaker::all();
-        return view('admin.addconferencetopic',compact('speakers'));
+        $setting = Setting::first();
+        return view('admin.addconferencetopic',compact('speakers','setting'));
         
     }
 
@@ -267,7 +269,7 @@ class AdminController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|unique:topics',
-            'from'=> "required|date_format:H:i|before:to|min:",
+            'from'=> "required|date_format:H:i|before:to",
             'to'=> 'required|date_format:H:i|after:from',
             'date'=>'required|after:today',
         ]);
@@ -340,5 +342,43 @@ class AdminController extends Controller
         $topics =  Topic::all();
 
         return view('admin.addspeakerwithtopics',compact('topics'));
+    }
+
+    public function settingView()
+    {
+        return view('admin.addSetting');
+    }
+
+    public function settingStoreToDatabase(Request $request){
+        $this->validate($request,[
+            'from'=>'required|after:today',
+            'to'=>'required|after:from',
+            'location'=>'required'
+        ]);
+
+        $setting =  new Setting();
+
+        if($setting->first() == null){
+            $setting->start_date =  $request->from;
+            $setting->end_date =  $request->to;
+            $setting->location =  $request->location;
+
+            $setting->save();
+        }
+
+        if($setting->all()->count() > 0){
+            $getdata = $setting->first();
+            $getdata->start_date =  $request->from;
+            $getdata->end_date =  $request->to;
+            $getdata->location =  $request->location;
+
+            $getdata->save();
+
+        return redirect()->back()->with('success','Save to database');
+
+        }
+
+        
+
     }
 }

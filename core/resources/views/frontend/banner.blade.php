@@ -5,8 +5,8 @@
         <div class="banner-content text-center">
             
             <div class="banner-header">
-            <h1 class="title">{{$header['title']}}</h1>
-            <p>{{$header['details']}}</p>
+            <h1 class="title">{{$header['title'] == null ? '':$header['title']}}</h1>
+            <p>{{$header['details'] == null ? '':$header['details']}}</p>
             </div>
             <ul class="banner-countdown">
                 <li class="theme-style">

@@ -49,9 +49,11 @@
     <script src="{{asset('asset/frontend/js/wow.min.js')}}"></script>
     <script src="{{asset('asset/frontend/js/parallax.js')}}"></script>
     <script src="{{asset('asset/frontend/js/tweenmax.min.js')}}"></script>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyCo_pcAdFNbTDCAvMwAD19oRTuEmb9M50c"></script>
+ 
     <script src="{{asset('asset/frontend/js/map.js')}}"></script>
     <script src="{{asset('asset/frontend/js/main.js')}}"></script>
+
+
 
 </body>
 
