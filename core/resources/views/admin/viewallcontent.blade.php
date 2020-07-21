@@ -14,8 +14,8 @@
 <div class="container">
     <div class="row justify-content-center" style="margin-top:100px;">
         <div class="card">
-            <div class="card-header">
-                <strong class="card-title">Custom Table</strong>
+            <div class="card-header text-center">
+                <strong class="card-title">View All Site Data</strong>
             </div>
             <div class="table-stats order-table ov-h">
                 <table class="table ">

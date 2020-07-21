@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,\
         Barryvdh\Debugbar\ServiceProvider::class,
+        'UxWeb\SweetAlert\SweetAlertServiceProvider',
 
         /*
          * Package Service Providers...

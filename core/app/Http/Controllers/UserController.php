@@ -22,6 +22,7 @@ class UserController extends Controller
 
         // date pick for dynamic tabs
         $groupDate = Topic::groupBy('date')->selectRaw('count(*) as date, date')->get();
+
         $topic = Topic::with('speaker')->get();
 
        
@@ -29,7 +30,6 @@ class UserController extends Controller
         $speakerList = Speaker::get();
         $setting =  Setting::first();
         $tickets = Ticket::all();
-        $setting = Setting::first();
         $blogDetails = Blog::all();
         
         
@@ -95,7 +95,7 @@ class UserController extends Controller
 
             return redirect()->back()->with('success','Booking Confirmed');
 
-            dd($ticketNumber);
+            // dd($ticketNumber);
 
         }
         

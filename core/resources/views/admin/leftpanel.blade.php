@@ -7,11 +7,11 @@
                 </li>
                 <li class="menu-title"></li><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Contents Section</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-layout"></i>Contents Section</a>
                     <ul class="sub-menu children dropdown-menu">                            
-                        <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="">About Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="">Overview Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.banner')}}">Banner Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.about')}}">About Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.tab')}}">Tab Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="">speaker Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
@@ -20,14 +20,14 @@
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Speakers</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-microphone text-danger"></i>Speakers</a>
                     <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-table"></i><a href="{{route('admin.speaker')}}">Add Speaker</a></li>
                     <li><i class="fa fa-table"></i><a href="{{route('admin.speakerlist')}}">View All Speaker</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Ticket Section</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon  ti-money text-warning"></i>Ticket Section</a>
                     <ul class="sub-menu children dropdown-menu">
                     <li><i class="menu-icon fa fa-th"></i><a href="{{route('admin.tickets')}}">Add Ticket</a></li>
                     <li><i class="menu-icon fa fa-th"></i><a href="{{route('admin.viewtickets')}}">View All Ticket</a></li>
@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="menu-item-has-children dropdown">
-                    <a href="{{route('admin.setting')}}"><i class="menu-icon fa fa-sign-in"></i>All Setting</a>
+                    <a href="{{route('admin.setting')}}"><i class="menu-icon ti-settings"></i>All Setting</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

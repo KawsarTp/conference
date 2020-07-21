@@ -12,7 +12,7 @@
                 <div class="col-xl-6 col-lg-10">
                     <div class="about-overview-right wow fadeIn" data-wow-duration="1s">
                         <div class="shape">
-                            <img src="{{asset('asset/frontend/images/about/about01.jpg')}}" alt="about">
+                            <img src="{{asset("asset/frontend/images/about/".$about->content['image'])}}" alt="about">
                         </div>
                         <ul id="parallax01">
                             <li class="layer" data-depth="0.90">

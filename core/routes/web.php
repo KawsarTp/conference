@@ -2,16 +2,33 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'guest','prefix'=>'admin'], function () {
+Route::group(['middleware' => 'guest:admin','prefix'=>'admin'], function () {
       Route::get('login','LoginRegisterController@loginPage')->name('admin.login');  
+      Route::post('login','LoginRegisterController@login');  
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
+      Route::get('logout',"LoginRegisterController@logout")->name('admin.logout');
       Route::get('home','AdminController@index')->name('admin.home');
-      Route::get('add-content','AdminController@addContentForm')->name('admin.addContent');
+
+
+
+      // Site Content Route
+      Route::get('add-banner','SettingController@addBanner')->name('admin.banner');
+      Route::post('add-banner','SettingController@bannerUpdate');
+
+      Route::get('about-section','SettingController@addAbout')->name('admin.about');
+      Route::post('about-section','SettingController@aboutSectionUpdate');
+
+
+      Route::get('tab-section','SettingController@addTab')->name('admin.tab');
+      Route::post('tab-section','SettingController@aboutSectionUpdate');
+
       Route::post('add-content','AdminController@addContentFormToDatabse');
       Route::get('view-content','AdminController@viewAllContent')->name('admin.viewallcontent');
+
+
 
       Route::get('add-speaker','AdminController@addSpeaker')->name('admin.speaker');
       Route::post('add-speaker','AdminController@speakerSaveToDatabase');

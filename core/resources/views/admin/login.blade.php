@@ -36,27 +36,34 @@
                         <img class="align-content" src="images/logo.png" alt="">
                     </a>
                 </div>
+
                 <div class="login-form">
-                    <form>
+                    @include('admin.alert')
+                    <form action="{{route('admin.login')}}" method="post">
+                        @csrf
                         <div class="form-group">
                             <label>Username</label>
                             <input type="text" class="form-control" placeholder="Username" name="username">
                         </div>
+                        @if($errors->has('username'))
+                            <p class="alert alert-danger">{{$errors->first('username')}}</p>
+                        @endif
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
                         </div>
+                        @if($errors->has('password'))
+                            <p class="alert alert-danger">{{$errors->first('password')}}</p>
+                        @endif
                         <div class="checkbox">
                            
-                            <label class="pull-right">
+                            {{-- <label class="pull-right">
                                 <a href="#">Forgotten Password?</a>
-                            </label>
+                            </label> --}}
 
                         </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-                        <div class="register-link m-t-15 text-center">
-                            <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
-                        </div>
+                        <button type="submit" class="btn btn-info btn-flat m-b-30 m-t-30">Sign in</button>
+                        
                     </form>
                 </div>
             </div>
