@@ -1,7 +1,7 @@
 <header class="header-section">
     <div class="header-area">
         <div class="logo">
-            <a href="#0"><img src="{{asset('asset/frontend/images/logo/logo.png')}}" alt="logo"></a>
+        <a href="{{route('home')}}"><img src="{{asset('asset/frontend/images/logo/logo.png')}}" alt="logo"></a>
         </div>
         <ul class="menu">
             <li>

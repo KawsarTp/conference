@@ -1,9 +1,8 @@
 <section class="sponsor-section padding-top padding-bottom">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
-            <h2 class="title">official sponsor</h2>
-            <p>a porttitor metus cupidatat nunc, luctus erat at. Amet class phasellus in eget sociosqu mi amet morbi
-                taciti eu urna, mi nunc volutpat quis</p>
+        <h2 class="title">{{$sponsor->content['title']}}</h2>
+        <p>{{$sponsor->content['para']}}</p>
         </div>
         <div class="sponsor-wrapper">
             <h4 class="sub-title">diamond sponsors</h4>
@@ -35,7 +34,7 @@
             </div>
         </div>
         <div class="text-center">
-            <a href="#0" class="custom-button">Become a Sponsor</a>
+        <a href="{{route('sponsor')}}" class="custom-button">Become a Sponsor</a>
         </div>
     </div>
 </section>

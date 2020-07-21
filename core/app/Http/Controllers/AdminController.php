@@ -9,6 +9,9 @@ use App\Speaker;
 use App\Ticket;
 use App\Topic;
 use App\Setting;
+use App\Sponsor;
+use App\SponsorshipApplication;
+use App\SponsorType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -291,6 +294,7 @@ class AdminController extends Controller
             return redirect()->back()->with('success','Topic add succefull');
         }
 
+
         if($validateDate->count() == 0){
 
             $topic->name = $request->name;
@@ -342,6 +346,100 @@ class AdminController extends Controller
         $topics =  Topic::all();
 
         return view('admin.addspeakerwithtopics',compact('topics'));
+    }
+
+    public function addSponsor()
+    {
+        return view('admin.addsponsors');
+    }
+
+    public function sponsorAddToDatabase(Request $request)
+    {
+        $this->validate($request,[
+            'details'=>'required',
+            'benefit'=>'required',
+            'about'=>'required',
+        ]);
+        $sponsor = new Sponsor();
+
+        if($sponsor->first() == null ){
+            $sponsor->details = $request->details;
+            $sponsor->benefit = $request->benefit;
+            $sponsor->about = $request->about;
+
+            $sponsor->save();
+
+            return redirect()->back()->with('success','Added Successfully');
+        }
+
+
+        if($sponsor->first() > 0){
+            $sponsor->details = $request->details;
+            $sponsor->benefit = $request->benefit;
+            $sponsor->about = $request->about;
+
+            $sponsor->save();
+
+            return redirect()->back()->with('success','Update Successfully');
+        }
+    }
+
+
+    public function sponsorTypeView()
+    {
+        return view('admin.addsponsortype');
+    }
+
+    public function sponsorTypeSave(Request $request)
+    {
+
+        // return request()->all();
+        $this->validate($request,[
+            "name"=>"required|unique:sponsor_types",
+        ]);
+
+        $sponsorType = new SponsorType();
+
+
+        $sponsorType->name = $request->name;
+
+        $sponsorType->save();
+
+        return redirect()->back()->with('success','Add Successfull');
+    }
+
+    public function manageSponsor()
+    {
+        $applicaitons = SponsorshipApplication::with('types')->latest()->paginate(5);
+        return view('admin.managesponsor',compact('applicaitons'));
+    }
+
+
+    public function updateSponsorApplication(Request $request)
+    {
+        $this->validate($request,[
+            'image'=>'image',
+        ]);
+
+        $sponsor = new SponsorshipApplication();
+
+        $dataField = $sponsor->find($request->id);
+
+        $imageName = $request->file('image');
+        // dd($imageName);
+        $speakerNameFormate = 'sponsor-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+
+        $path = 'asset/admin/images/sponsor';
+
+        
+
+        $imageName->move($path,$speakerNameFormate);
+        
+        SponsorshipApplication::where('id', $request->id)->update(['image' => $speakerNameFormate ]);
+       
+
+
+        return back()->with('succes','update succes');
     }
 
     public function settingView()

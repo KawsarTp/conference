@@ -44,7 +44,7 @@
                         <td>{{$booking->price}}</td>
                         <td>{{$booking->ticket_number}}</td>
                         <td>
-                        <button class="btn btn-info"><span class="ti-eye"></span></button>
+                        <button class="btn btn-info" data-id={{$booking->id}}><span class="ti-eye" ></span></button>
                         </td>
                         </tr>
                         @endforeach
@@ -56,3 +56,4 @@
     </div>
 </div>
 @endsection
+

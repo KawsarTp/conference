@@ -66,6 +66,10 @@
               day: 'Day',
               days: 'Days'
             },
+
+            function(){
+
+            });
             
         // Scroll To Top 
         var scrollTop = $(".scrollToTop");
@@ -320,13 +324,19 @@
   $('.tab ul.tab-menu').addClass('active').find('> li:eq(0)').addClass('active');
 
   $('.tab ul.tab-menu li').click(function (g) {
-    var tab = $(this).closest('.tab'),
+    var date = $(this).attr('value');
+    var val = $("input:text").val();
+
+      var tab = $(this).closest('.tab'),
       index = $(this).closest('li').index();
-    tab.find('li').siblings('li').removeClass('active');
-    $(this).closest('li').addClass('active');
-    tab.find('.tab-area').find('div.tab-item').not('div.tab-item:eq(' + index + ')').hide();
-    tab.find('.tab-area').find('div.tab-item:eq(' + index + ')').show();
-    g.preventDefault();
+      tab.find('li').siblings('li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      
+
+
+      tab.find('.tab-area').find('div.tab-item').not('div.tab-item:eq(' + index + ')').hide();
+      tab.find('.tab-area').find('div.tab-item:eq(' + index + ')').show();
+      g.preventDefault();
   });
 
 })(jQuery);

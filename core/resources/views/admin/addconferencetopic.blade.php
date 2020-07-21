@@ -98,7 +98,7 @@
 
             </div>
         </div> <!-- .card -->
-        <iframe src="https://maps.google.com/maps?q={{str_replace(" ", "+", $setting->location)}}&output=embed"></iframe>
+        {{-- <iframe src="https://maps.google.com/maps?q={{str_replace(" ", "+", $setting->location)}}&output=embed"></iframe> --}}
     </div>
     
 </div>

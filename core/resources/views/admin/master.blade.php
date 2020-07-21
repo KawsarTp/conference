@@ -27,7 +27,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('asset/admin/css/accordion.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('asset/admin/css/tabs.css')}}"> --}}
 
    <style>
     #weatherWidget .currentDesc {
@@ -96,12 +96,14 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     <script src="{{asset('asset/admin/js/init/fullcalendar-init.js')}}"></script>
+    {{-- <script src="{{asset('asset/admin/js/tab.js')}}"></script> --}}
 
 
     <!--Local Stuff-->
-
+@stack('section')
 @stack('js')
 @stack('blog')
+@stack('bookings')
     
 </body>
 </html>

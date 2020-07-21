@@ -11,168 +11,85 @@
     <!-- Header-->
         @include('admin.nav')
     <!-- /#header -->
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-                <div class="col-md-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="one">
-                            <h4 class="panel-title">
-                                <a class="collapsed last" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseThree">
-                                    Heading-Section
-                                    <span> </span>
-                                </a>
-                            </h4>
-                        </div>
-                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="one">
-                                    <div class="panel-body">
-                                    <form action="{{route('admin.addContent')}}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="section" value="header">
-                                            <div class="form-group">
-                                                <label for="title">Title</label>
-                                                <input type="text" class="form-control" name="title">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="title">description</label>
-                                               <textarea name="details" id="" cols="30" rows="5" class="form-control"></textarea>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label for="title">Time for Conference</label>
-                                                <input type="date" class="form-control" name="date">
-                                            </div>
-
-                                            <div class="form-group">
-                                               
-                                                <input type="submit" class="form-control btn btn-danger">
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-md-8">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="one">
-                                <h4 class="panel-title">
-                                    <a class="collapsed last" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseThree">
-                                       
-                                        <span> About Section </span>
-                                    </a>
-                                </h4>
-                            </div>
-                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="one">
-                                        <div class="panel-body">
-                                            <form action="{{route('admin.addContent')}}" method="post" enctype="multipart/form-data">
-                                                @csrf
-                                                <input type="hidden" name="section" value="about">
-                                                <div class="form-group">
-                                                    <label for="title">Title</label>
-                                                    <input type="text" class="form-control" name="title">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="title">sub Title</label>
-                                                    <input type="text" class="form-control" name="sub">
-                                                </div>
-    
-                                                <div class="form-group">
-                                                    <label for="title">description</label>
-                                                   <textarea name="details" id="" cols="30" rows="5" class="form-control"></textarea>
-                                                </div>
-    
-                                                <div class="form-group">
-                                                    <label for="title">Image </label>
-                                                    <input type="file" name="image" class="form-control">
-                                                </div>
-    
-                                                <div class="form-group">
-                                                   
-                                                    <input type="submit" class="form-control btn btn-danger">
-                                                </div>
-    
-                                            </form>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-
-
-                        {{-- About Section --}}
-                        <div class="col-md-5">
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="one">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed last" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Banner Section
-                                            <span> </span>
-                                        </a>
-                                    </h4>
-                                </div>
-                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="one">
-                                            <div class="panel-body">
-                                                <p>Nulla vitae ipsum diam. Pellentesque vitae metus vitae massa egestas posuere justo turpis, blandit nec ex eu, tempus placerat diam. Morbi a felis commodo eros consectetur rhoncus sed eget lectus. Praesent non erat vehicula, posuere massa id, ultricies est. Pellentesque sit amet venenatis est, quis posuere ipsum.</p>
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-    
-
-                            {{-- Overview Section --}}
-                            <div class="col-md-5">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="one">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed last" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                Banner Section
-                                                <span> </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="one">
-                                                <div class="panel-body">
-                                                    <p>Nulla vitae ipsum diam. Pellentesque vitae metus vitae massa egestas posuere justo turpis, blandit nec ex eu, tempus placerat diam. Morbi a felis commodo eros consectetur rhoncus sed eget lectus. Praesent non erat vehicula, posuere massa id, ultricies est. Pellentesque sit amet venenatis est, quis posuere ipsum.</p>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-
-
-                                {{-- Speaker Section --}}
-                                <div class="col-md-5">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="one">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed last" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    Banner Section
-                                                    <span> </span>
-                                                </a>
-                                            </h4>
-                                        </div>
-                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="one">
-                                                    <div class="panel-body">
-                                                        <p>Nulla vitae ipsum diam. Pellentesque vitae metus vitae massa egestas posuere justo turpis, blandit nec ex eu, tempus placerat diam. Morbi a felis commodo eros consectetur rhoncus sed eget lectus. Praesent non erat vehicula, posuere massa id, ultricies est. Pellentesque sit amet venenatis est, quis posuere ipsum.</p>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                    </div>
+    <section class="design-process-section" id="process-tab">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12"> 
+              <!-- design process steps--> 
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs process-model more-icon-preocess" role="tablist">
+                <li role="presentation" class="active"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab"><i class="fa fa-search" aria-hidden="true"></i>
+                  <p>banner</p>
+                  </a></li>
+                <li role="presentation"><a href="#strategy" aria-controls="strategy" role="tab" data-toggle="tab"><i class="fa fa-send-o" aria-hidden="true"></i>
+                  <p>about</p>
+                  </a></li>
+                <li role="presentation"><a href="#optimization" aria-controls="optimization" role="tab" data-toggle="tab"><i class="fa fa-qrcode" aria-hidden="true"></i>
+                  <p>overview</p>
+                  </a></li>
+                <li role="presentation"><a href="#content" aria-controls="content" role="tab" data-toggle="tab"><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                  <p>speakersection</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>schedule</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>ticket</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>ticketsection</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>event</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>blog</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>sponsor</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>footer</p>
+                  </a></li>
+              </ul>
+              <!-- end design process steps--> 
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="discover">
+                  <div class="design-process-content">
+                    <h3 class="semi-bold">Discovery</h3>
+                   <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincid unt ut laoreet dolore magna aliquam erat volutpat</p>
+                   </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="strategy">
+                  <div class="design-process-content">
+                    <h3 class="semi-bold">Strategy</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincid unt ut laoreet dolore magna aliquam erat volutpat</p>
                     </div>
                 </div>
-             </div>
+                <div role="tabpanel" class="tab-pane" id="optimization">
+                  <div class="design-process-content">
+                    <h3 class="semi-bold">Optimization</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincid unt ut laoreet dolore magna aliquam erat volutpat</p>
+                     </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="content">
+                  <div class="design-process-content">
+                    <h3 class="semi-bold">Content</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincid unt ut laoreet dolore magna aliquam erat volutpat</p>              
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="reporting">
+                  <div class="design-process-content">
+                    <h3>Reporting</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincid unt ut laoreet dolore magna aliquam erat volutpat. </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </section>
+      
 </div>
 
 @endsection

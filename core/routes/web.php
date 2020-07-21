@@ -36,8 +36,13 @@ Route::group(['prefix' => 'admin'], function () {
       Route::get('add-topics-speaker','AdminController@addTopicsToSpeaker')->name('admin.topicsaddtospeaker');
 
       Route::get('add-sponsor','AdminController@addSponsor')->name('admin.sponsor');
-      Route::get('update-sponsor','AdminController@updateSponsor')->name('admin.update');
+      Route::post('add-sponsor','AdminController@sponsorAddToDatabase');
+
+      Route::get('sponsor-type','AdminController@sponsorTypeView')->name('admin.sponsortype');
+      Route::post('sponsor-type','AdminController@sponsorTypeSave');
+
       Route::get('add-managesponsor','AdminController@manageSponsor')->name('admin.managersponsor');
+      Route::post('add-managesponsor','AdminController@updateSponsorApplication');
 
       Route::get('setting','AdminController@settingView')->name('admin.setting');
       Route::post('setting','AdminController@settingStoreToDatabase');
@@ -50,4 +55,6 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/','UserController@index')->name('home');
 Route::get('show/{id}','UserController@show')->name('show');
 Route::post('show/{id}','UserController@buyTickets');
+Route::get('sponsor','UserController@sponsor')->name('sponsor');
+Route::post('sponsor','UserController@sponsorApplication');
 

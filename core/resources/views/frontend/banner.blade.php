@@ -1,12 +1,12 @@
-<section class="banner-section bg_img" data-background="./{{asset('asset/frontend/images/banner/banner-bg-one.jpg')}}">
+<section class="banner-section bg_img" data-background="{{asset('asset/frontend/images/banner/banner-bg-one.jpg')}}">
     <div class="banner-shape-two"></div>
     <div class="banner-shape-one"></div>
     <div class="container">
         <div class="banner-content text-center">
             
             <div class="banner-header">
-            <h1 class="title">{{$header['title'] == null ? '':$header['title']}}</h1>
-            <p>{{$header['details'] == null ? '':$header['details']}}</p>
+            <h1 class="title">{{@$banner->content['title']}}</h1>
+            <p>{{@$banner->content['subtitle']}}</p>
             </div>
             <ul class="banner-countdown">
                 <li class="theme-style">

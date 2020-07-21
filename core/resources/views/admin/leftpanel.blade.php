@@ -9,7 +9,12 @@
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Contents Section</a>
                     <ul class="sub-menu children dropdown-menu">                            
-                    <li><i class="fa fa-puzzle-piece"></i><a href="{{route('admin.addContent')}}">Add Contents</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="">About Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="">Overview Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="">speaker Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
                     <li><i class="fa fa-id-badge"></i><a href="{{route('admin.viewallcontent')}}">View All Content</a></li>
                         
                     </ul>
@@ -60,8 +65,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Sponsors Section</a>
                     <ul class="sub-menu children dropdown-menu">
                     <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.sponsor')}}">Add Sponsor Requirements</a></li>
-                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.update')}}">Update Requirements</a></li>
-                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.managersponsor')}}">Manage Sponsors</a></li>
+                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.sponsortype')}}">Sponsor Type</a></li>
+                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.managersponsor')}}">Sponsorship Application</a></li>
                     </ul>
                 </li>
 
