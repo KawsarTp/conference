@@ -26,7 +26,7 @@
                             <th>Speaker Name</th>
                             <th>Speaker Details</th>
                             <th>Speaker Expertise</th>
-                            <th>Status</th>
+                            
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,7 +37,7 @@
                         <td class="serial">{{$i++}}</td>
                             <td class="avatar">
                                 <div class="round-img">
-                                <img class="rounded-circle" src="{{asset("$speaker->image")}}" alt="">
+                                <img class="rounded-circle" src="{{asset("asset/admin/images/speaker").'/'.$speaker->image}}" alt="">
                                 </div>
                             </td>
                         <td>  <span class="name">{{$speaker->name}}</span> </td>
@@ -50,10 +50,9 @@
                         
                         </span> </td>
                         <td><span class="count">{{$speaker->designation}}</span></td>
-                        <td><span class="count">{{$speaker->status ? 'Active' : 'Inactive'}}</span></td>
                         <td>
                             <button class="btn btn-warning fa fa-edit" data-target="#mymodal-{{$speaker->id}}" data-toggle="modal">Edit</button>
-                            <button class="btn {{$speaker->status ? 'btn-success':'btn-danger'}} fa fa-eye">{{$speaker->status ? 'Active' :'Inactive'}}</button>
+                            {{-- <button class="btn {{$speaker->status ? 'btn-success':'btn-danger'}} fa fa-eye">{{$speaker->status ? 'Active' :'Inactive'}}</button> --}}
                         </td>
                         </tr>
 
@@ -64,8 +63,9 @@
                                             <p class="text-center text-light text-uppercase font-weight-bold">Speaker Details</p>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="" method="POST" enctype="multipart/form-data">
+                                        <form action="{{route('admin.speakerlist')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
+                                        <input type="hidden" name="id" value="{{$speaker->id}}">
                                                 <div class="form-group">
                                                     <label for="cc-payment" class="control-label mb-1">Speaker Name</label>
                                                 <input id="cc-payment" name="name" type="text" class="form-control" placeholder="speaker Name" value="{{$speaker->name}}">
@@ -124,10 +124,13 @@
                             </div>
 
                         @endforeach
+
                     </tbody>
                 </table>
+                {{$allSpeaker->links()}}
             </div> <!-- /.table-stats -->
         </div>
+        
     </div>
 </div>
 @endsection

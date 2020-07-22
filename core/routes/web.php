@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
 
       Route::get('tab-section','SettingController@addTab')->name('admin.tab');
       Route::post('tab-section','SettingController@aboutSectionUpdate');
+      Route::post('tab-update','SettingController@tabUpdate')->name('admin.tab-edit');
 
       Route::post('add-content','AdminController@addContentFormToDatabse');
       Route::get('view-content','AdminController@viewAllContent')->name('admin.viewallcontent');
@@ -32,7 +33,9 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
 
       Route::get('add-speaker','AdminController@addSpeaker')->name('admin.speaker');
       Route::post('add-speaker','AdminController@speakerSaveToDatabase');
+
       Route::get('speaker-list','AdminController@viewSpeaker')->name('admin.speakerlist');
+      Route::post('speaker-list','AdminController@updateSpeaker');
 
       Route::get('add-ticket','AdminController@addTickets')->name('admin.tickets');
       Route::post('add-ticket','AdminController@addTicketsToDatabase');
@@ -75,3 +78,5 @@ Route::post('show/{id}','UserController@buyTickets');
 Route::get('sponsor','UserController@sponsor')->name('sponsor');
 Route::post('sponsor','UserController@sponsorApplication');
 
+Route::get('/json','JsonController@json');
+Route::get('/update','JsonController@update');

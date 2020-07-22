@@ -13,8 +13,10 @@ use App\Sponsor;
 use App\SponsorshipApplication;
 use App\SponsorType;
 use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AdminController extends Controller
 {
@@ -109,7 +111,7 @@ class AdminController extends Controller
         $speaker->name = $request->name;
         $speaker->details = $request->details;
         $speaker->designation = $request->expertise;
-        $speaker->image = $saveToDatabase;
+        $speaker->image = $speakerNameFormate;
 
         $speaker->save();
 
@@ -120,9 +122,54 @@ class AdminController extends Controller
 
     public function viewSpeaker()
     {
-        $allSpeaker = Speaker::all();
+        $allSpeaker = Speaker::latest()->paginate(10);
 
         return view('admin.viewallspeaker',compact('allSpeaker'));
+    }
+
+    public function updateSpeaker(Request $request)
+    {
+        $this->validate($request,[
+            'name'=>'required',
+            'details'=>'required',
+            'expertise'=>'required',
+            'image'=>'image'
+        ]);
+
+        $speaker = Speaker::find($request->id);
+        $path = 'asset/admin/images/speaker';
+        
+
+
+        if($request->hasFile('image')){
+                $imageName = $request->file('image');
+                $speakerNameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+            if(file_exists($path.'/'.$speaker->image)){
+                unlink($path.'/'.$speaker->image);
+            }
+                $imageName->move($path,$speakerNameFormate);
+
+                $speaker->name = $request->name;
+                $speaker->details = $request->details;
+                $speaker->image = $speakerNameFormate;
+                $speaker->designation = $request->expertise;
+
+                $speaker->save();
+
+                return redirect()->back()->with('success','Update Successfully');
+        }
+
+
+                $speaker->name = $request->name;
+                $speaker->details = $request->details;
+                $speaker->designation = $request->expertise;
+
+                $speaker->save();
+                return redirect()->back()->with('success','Update Successfully');
+       
+
+        
+
     }
 
     public function addTickets()
@@ -132,16 +179,30 @@ class AdminController extends Controller
 
     public function addTicketsToDatabase(Request $request)
     {
+
         $this->validate($request,[
             'type'=>'required|unique:tickets',
             'price'=>'required|numeric|min:1',
             'stock'=>'required|numeric|min:1',
             'feature'=>'required',
             'details'=>'required',
-            'benefits'=>'required'
+            'benefits'=>'required',
+            'image'=>'required|image'
         ]);
 
         $ticket = new Ticket();
+        
+
+        $imageName = $request->file('image');
+        
+        $speakerNameFormate = 'ticket-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+
+        $path = 'asset/admin/images/ticket';
+
+
+        $imageName->move($path,$speakerNameFormate); 
+
+
 
         $ticket->type = $request->type;
         $ticket->price = $request->price;
@@ -149,6 +210,7 @@ class AdminController extends Controller
         $ticket->feature = $request->feature;
         $ticket->details = $request->details;
         $ticket->benefits = $request->benefits;
+        $ticket->image = $speakerNameFormate;
 
         $ticket->save();
 
@@ -170,11 +232,37 @@ class AdminController extends Controller
             'stock'=>'required|numeric|min:1',
             'feature'=>'required',
             'details'=>'required',
-            'benefits'=>'required'
+            'benefits'=>'required',
+            'image'=>'image'
         ]);
 
         $ticket = Ticket::find($request->id);
 
+        $imageName = $request->file('image');
+        $path = 'asset/admin/images/ticket';
+
+
+        if($request->hasFile('image')){
+            $imageName = $request->file('image');
+            $speakerNameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+        if(file_exists($path.'/'.$ticket->image)){
+            unlink($path.'/'.$ticket->image);
+        }
+            $imageName->move($path,$speakerNameFormate);
+
+            $ticket->type = $request->type;
+            $ticket->price = $request->price;
+            $ticket->stock = $request->stock;
+            $ticket->feature = $request->feature;
+            $ticket->details = $request->details;
+            $ticket->image = $speakerNameFormate;
+            $ticket->benefits = $request->benefits;
+
+            $ticket->save();
+
+            return redirect()->back()->with('success','Update Successfully');
+    }
+        
         $ticket->type = $request->type;
         $ticket->price = $request->price;
         $ticket->stock = $request->stock;

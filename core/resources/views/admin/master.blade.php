@@ -97,14 +97,17 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     <script src="{{asset('asset/admin/js/init/fullcalendar-init.js')}}"></script>
     {{-- <script src="{{asset('asset/admin/js/tab.js')}}"></script> --}}
-    <script src="{{asset('asset/admin/js/notify.js')}}"></script>
-
+    {{-- <script src="{{asset('asset/admin/js/notify.js')}}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <!--Local Stuff-->
 @stack('section')
 @stack('js')
 @stack('blog')
 @stack('bookings')
+@stack('tab')
+@include('alert.success')
+@include('alert.error')
     
 </body>
 </html>

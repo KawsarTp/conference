@@ -21,7 +21,7 @@
        <div class="card">
            <div class="card-body">
                <h2 class="card-title text-center">Ticket Information</h2>
-           <form action="{{route('admin.tickets')}}" method="POST">
+           <form action="{{route('admin.tickets')}}" method="POST" enctype="multipart/form-data">
                    @csrf
                    <div class="form-group">
                        <label for="type">Ticket Type :</label>
@@ -74,6 +74,17 @@
                     @if($errors->has('benefits'))
                     <p class="alert alert-danger">{{$errors->first('benefits')}}</p>
                     @endif
+
+
+                    <div class="form-group">
+                        <label for="type">Ticket Image</label>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+                    @if($errors->has('image'))
+                    <p class="alert alert-danger">{{$errors->first('image')}}</p>
+                    @endif
+
+
                     <div class="form-group">
                         
                         <input type="submit" value="Add Ticket" class="from-control btn btn-primary">

@@ -2,10 +2,8 @@
 
 
 @if(session()->has('success'))
-    {{-- <p class="alert alert-success">{{session('success')}}</p> --}}
-    	<script type="text/javascript">
-			$.notify("BOOM!", "success");
-		</script>
+    <p class="alert alert-success">{{session('success')}}</p>
+    	
 @endif
 
 

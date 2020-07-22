@@ -79,7 +79,39 @@ class SettingController extends Controller
 
     	return view('admin.addtab',compact('content'));
     	
-    }
+	}
+	
+
+
+	public function tabUpdate(Request $request)
+	{
+		$a = file_get_contents(base_path('resources\json\section.json'));
+		$decode = json_decode($a);
+		dd($decode->header->title);
+		return 'ok';
+		$this->validate($request,[
+			'title'=>'required',
+		]);
+		
+		$content =  Content::where('section_name','tab')->first();
+
+		foreach($content->content['tabs'] as $tab){
+			if($request->title == $tab['title']){
+
+				// $data = [
+				// 	'title'=>$request->title,
+				// 	'details'=>$request->details,
+				// 	'subtitle'=>$request->subtitle
+				// ];
+				dd(json_encode($data));
+
+			}
+		}
+
+		// return $request->all();
+
+
+	}
 
 
 }

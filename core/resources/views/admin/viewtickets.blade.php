@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row justify-content-center" style="margin-top:100px;">
         <div class="card">
-            @include('admin.alert')
+            
             <div class="card-header text-center">
                 <strong class="card-title">All Ticket Inforamation</strong>
             </div>
@@ -29,6 +29,7 @@
                             <th>Feature</th>
                             <th>Details</th>
                             <th>Benefits</th>
+                            <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -43,6 +44,7 @@
                         <td><span class="count">{{substr($ticket->feature,0,20)}}</span></td>
                         <td>{{substr($ticket->details,0,20)}}</td>
                         <td>{{substr($ticket->benefits,0,20)}}</td>
+                        <td><img src="{{asset('asset/admin/images/ticket').'/'.$ticket->image}}" alt=""></td>
                         <td>
                         <button class="btn btn-primary modalButton" data-type="{{$ticket->type}}" data-price="{{$ticket->price}}" data-stock="{{$ticket->stock}}" data-feature="{{$ticket->feature}}" data-details="{{$ticket->details}}" data-benefits="{{$ticket->benefits}}" data-id="{{$ticket->id}}"><span class="fa fa-edit"></span></button>
                             <button class="btn btn-danger"><span class="ti-trash"></span></button>
@@ -88,7 +90,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-body">
-                <form action="{{route('admin.viewtickets')}}" method="post">
+                <form action="{{route('admin.viewtickets')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" id="id">
                     <div class="form-group">
@@ -142,6 +144,17 @@
                      @if($errors->has('benefits'))
                      <p class="alert alert-danger">{{$errors->first('benefits')}}</p>
                      @endif
+
+
+                     <div class="form-group">
+                        <label for="type">Image:</label>
+                       <input type="file" name="image" class="form-control">
+                    </div>
+                    @if($errors->has('image'))
+                    <p class="alert alert-danger">{{$errors->first('image')}}</p>
+                    @endif
+
+
                      <div class="form-group">
                          
                          <input type="submit" value="Update Tickets" class="from-control btn btn-primary" >

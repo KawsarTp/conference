@@ -15,11 +15,14 @@
 
 
     <!-- Content -->
-@include('admin.alert')
-    <div class="col-md-8 mx-auto" style="margin-top: 100px;">
+{{-- @include('admin.alert') --}}
+    <div class="container">
+    <div class="row">
+    <div class="col-md-8 mx-auto">
         <div class="card">
             <div class="card-header text-center">
                 <strong class="card-title ">Add Speaker</strong>
+                @include('admin.alert')
             </div>
             <div class="card-body">
                 <!-- Credit Card -->
@@ -48,7 +51,7 @@
 
                             <div class="form-group">
                                 <label for="cc-number" class="control-label mb-1">Speaker Expertise</label>
-                                <input id="cc-payment" name="expertise" type="text" class="form-control" placeholder="speaker Name">
+                                <input id="cc-payment" name="expertise" type="text" class="form-control" placeholder="speaker Expertise">
                             </div>
 
                             @if($errors->has('expertise'))
@@ -79,5 +82,8 @@
             </div>
         </div> <!-- .card -->
     </div>
+
+</div>  <!--row-->
+</div>
     
 </div>
