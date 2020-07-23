@@ -15,7 +15,7 @@
                     <span>{{$speaker->designation}}</span>
                     </div>
                     <div class="speaker-thumb">
-                        <img src="{{asset("$speaker->image")}}" alt="speaker">
+                        <img src="{{asset('asset/admin/images/speaker').'/'.$speaker->image}}" alt="speaker">
                     </div>
                 </div>
             </div>

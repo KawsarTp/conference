@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Content;
+use App\Overview;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
@@ -103,7 +104,7 @@ class SettingController extends Controller
 				// 	'details'=>$request->details,
 				// 	'subtitle'=>$request->subtitle
 				// ];
-				dd(json_encode($data));
+				// dd(json_encode($data));
 
 			}
 		}
@@ -112,6 +113,66 @@ class SettingController extends Controller
 
 
 	}
+
+
+	public function overview()
+	{
+		$overview = Overview::latest()->paginate(10);
+		return view('admin.overview',compact('overview'));
+	}
+
+	public function overviewSaveToDatabase(Request $request)
+	{
+		// return request()->all();
+		$this->validate($request,[
+			'title' => 'required',
+			'details' => 'required',
+			'icon'  => 'required',
+		 ]);
+		 
+		 $overview = new Overview();
+
+		 $overview->title = $request->title;
+		 $overview->details = $request->details;
+		 $overview->icon = $request->icon;
+		 $overview->save();
+
+		 return redirect()->back()->with('success','Add Success');
+	}
+
+
+	public function updateOverview(Request $request)
+	{
+		$this->validate($request,[
+			'title'=>'required',
+			'details'=>'required',
+		]);
+		$overView = Overview::find($request->id);
+		if($request->icon == null){
+			$overView->title = $request->title;
+			$overView->details = $request->details;
+			$overView->save();
+
+			return redirect()->back()->with('success','Update Success');
+		}
+
+			$overView->title = $request->title;
+			$overView->icon = $request->icon;
+			$overView->details = $request->details;
+			$overView->save();
+			return redirect()->back()->with('success','Update Success');
+
+	}
+
+
+	public function deleteOverview(Overview $id)
+	{
+		$id->delete();
+
+		return redirect()->back()->with('success','Deleted Success');
+	}
+
+
 
 
 }

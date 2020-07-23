@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Booking;
 use App\Content;
+use App\Overview;
 use App\Speaker;
 use App\Ticket;
 use App\Setting;
@@ -35,7 +36,7 @@ class UserController extends Controller
         
 
         // time Calculation Method 
-        $time  = $this->dateDiffInDays($setting->end_date);
+        $time  = $this->dateDiffInDays($setting->start_date);
 
 
         // site data 
@@ -51,9 +52,17 @@ class UserController extends Controller
         $blog = Content::where('section_name','blog')->first();
         $sponsor = Content::where('section_name','sponsor')->first();
 
+        $overView = Overview::all();
+
+        $allSponsor = SponsorshipApplication::with('types')->get();
+
+        $itterator = SponsorshipApplication::groupBy('sponsor_type_id')->selectRaw('sponsor_type_id')->get();
+
+        // dd($itterator);
+
         
 
-        return view('frontend.home',compact('speakerList','time','tickets','setting','groupDate','topic','banner','about','tab','speaker','schedule','ticket','map','blog','blogDetails','sponsor'));
+        return view('frontend.home',compact('speakerList','time','tickets','setting','groupDate','topic','banner','about','tab','speaker','schedule','ticket','map','blog','blogDetails','sponsor','overView','allSponsor','itterator'));
     }
 
 

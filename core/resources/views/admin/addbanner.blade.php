@@ -16,8 +16,8 @@
     	<div class="row justify-content-center mt-3">
     		<div class="col-md-10">
 	    		<div class="card">
-	    			<div class="card-header">
-	    				<h3 class="text-center">Banner Content</h3>
+	    			<div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
+	    				<h3 class="text-center text-light">Banner Content</h3>
 	    				@include('admin.alert')
 	    			</div>
 	    			<div class="card-body">

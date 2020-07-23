@@ -11,7 +11,7 @@
                 <div class="ticket-item wow fadeInUp" data-wow-duration="1s">
                 <h3 class="title">{{$ticket->type}}</h3>
                     <div class="ticket-thumb">
-                        
+                    <img class="img-fluid" src="{{asset('asset/admin/images/ticket').'/'.$ticket->image}}" alt="">
                     </div>
                     <div class="ticket-content">
                     <p>{{substr($ticket->details,0,40)}}</p>

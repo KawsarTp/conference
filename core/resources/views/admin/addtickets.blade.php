@@ -17,7 +17,7 @@
     <!-- Content -->
 
     <div class="col-md-6 mx-auto" style="margin-top:100px">
-        @include('admin.alert')
+        {{-- @include('admin.alert') --}}
        <div class="card">
            <div class="card-body">
                <h2 class="card-title text-center">Ticket Information</h2>

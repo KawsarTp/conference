@@ -26,6 +26,11 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::post('tab-section','SettingController@aboutSectionUpdate');
       Route::post('tab-update','SettingController@tabUpdate')->name('admin.tab-edit');
 
+      Route::get('overview-section','SettingController@overview')->name('admin.overview');
+      Route::post('overview-section','SettingController@overviewSaveToDatabase');
+      Route::post('update-section','SettingController@updateOverview')->name('admin.update-overview');
+      Route::get('delete-section/{id}','SettingController@deleteOverview')->name('admin.delete-overview');
+
       Route::post('add-content','AdminController@addContentFormToDatabse');
       Route::get('view-content','AdminController@viewAllContent')->name('admin.viewallcontent');
 

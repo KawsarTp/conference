@@ -22,9 +22,20 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $a = Topic::all();
-        
-        return view('admin.home');
+
+        $bookings = Booking::groupBy('price')->sum('price');
+        $quantity = Booking::groupBy('quantity')->sum('quantity');
+        $speakerCount = Speaker::all()->count();
+        $speaker = Speaker::latest()->paginate(3);
+        $topic = Topic::all()->count();
+        $allBookings = Booking::with('ticket')->paginate(5);
+        $setting = Setting::first();
+        $sponsor = Sponsor::all();
+
+        // $ticket = Ticket::latest()->all();
+
+        // dd(Booking::with('ticket')->groupBy('quantity')->where('ticket_id',));
+        return view('admin.home',compact('bookings','quantity','speaker','topic','allBookings','setting','sponsor','speakerCount'));
     }
 
     public function addContentForm()
@@ -214,7 +225,7 @@ class AdminController extends Controller
 
         $ticket->save();
 
-        return redirect()->back()->with('success','Ticke Info Add Successful');
+        return redirect()->back()->with('success','Ticket Info Add Successful');
     }
 
     public function viewTickets()

@@ -12,6 +12,7 @@
                         <li><i class="fa fa-id-badge"></i><a href="{{route('admin.banner')}}">Banner Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="{{route('admin.about')}}">About Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="{{route('admin.tab')}}">Tab Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.overview')}}">OverView Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="">speaker Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
