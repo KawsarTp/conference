@@ -5,116 +5,334 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Content;
 use App\Overview;
+use App\Tab;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
 {
-    public function addBanner()
+    public function addBanner(Request $request)
     {
-    	$content =  Content::where('section_name','banner')->first();
-    	// dd($content);
+    	$a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
+    	
     	return view('admin.addbanner',compact('content'));
     }
 
-    public function bannerUpdate(Request $request)
-    {	
-    	$this->validate($request,[
-
-    		'title'=>'required',
-    		'subtitle' =>'required'
-
-    	]);
-
-    	$data =['content'=>['title'=>$request->title,'subtitle'=>$request->subtitle]];
-
-    	$content = json_encode($data);
-
-    	Content::where('section_name','banner')->update($data);
-
-    	return redirect()->back()->with('success','Updated Successfull');
-
-    }
-
-
-
-    // About Section
-
-    public function addAbout()
+    public function addAbout(Request $request)
     {
-    	$content =  Content::where('section_name','about')->first();
+    	$a =  file_get_contents(resource_path('json\content.json'));
 
+        $content = json_decode($a,true);
+    	
     	return view('admin.addabout',compact('content'));
     }
 
-    public function aboutSectionUpdate(Request $request)
+   public function addTab(Request $request)
     {
-    	$this->validate($request,[
+    	$a =  file_get_contents(resource_path('json\content.json'));
 
-    		'title'=>'required',
-    		'subtitle' =>'required',
-    		'image'=>'required|image'
+        $content = json_decode($a,true);
+    	$tabs = Tab::latest()->get();
+    	return view('admin.addtab',compact('content','tabs'));
+    }
+    public function addButton(Request $request)
+    {
+        // return 'ok';
+        $this->validate($request,[
 
-    	]);
+            'title' => 'required',
+            'description'=>'required'
 
-    	$imageName = $request->file('image');
-    	$imageConv = 'about-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
 
-    	$path = 'asset/frontend/images/about';
+        ]);
 
-    	$imageName->move($path,$imageConv);
+        $tab = new Tab();
 
-    	$data =['content'=>['title'=>$request->title,'subtitle'=>$request->subtitle,'image'=>$imageConv]];
+        $tab->title = $request->title;
+        $tab->details = $request->description;
+        $tab->save();
 
-    	$content = json_encode($data);
+        return redirect()->back()->with('success','Button added Success');
+    }
 
-    	Content::where('section_name','about')->update($data);
+    public function tabUpdate(Request $request)
+    {
+         $this->validate($request,[
 
-    	return redirect()->back()->with('success','Updated Successfull');
+            'title' => 'required',
+            'description'=>'required'
+
+
+        ]);
+
+
+
+         $tab = Tab::find($request->id);
+
+         $tab->title = $request->title;
+        $tab->details = $request->description;
+        $tab->save();
+
+        return redirect()->back()->with('success','Tab Updated Success');
+           
+    }
+
+    public function tabDelete(Request $request,Tab $id)
+    {   
+        $id->delete();
+        return redirect()->back()->with('success','deleted Success');
     }
 
 
 
-    public function addTab()
+    public function speakerSection(Request $request)
     {
-    	$content =  Content::where('section_name','tab')->first();
+    	$a =  file_get_contents(resource_path('json\content.json'));
 
-    	return view('admin.addtab',compact('content'));
+        $content = json_decode($a,true);
     	
-	}
+    	return view('admin.addspeakersection',compact('content'));
+    }
+
+
+
+    public function scheduleSection(Request $request)
+    {
+    	$a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
+    	
+    	return view('admin.schedulesection',compact('content'));
+    }
+
+
+    public function ticketSection(Request $request)
+    {
+    	$a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
+    	
+    	return view('admin.ticketsection',compact('content'));
+    }
+    
+    public function buyTicketSection(Request $request)
+    {
+    	$a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
+    	
+    	return view('admin.buyticketsection',compact('content'));
+    }
+
+    public function eventSection(Request $request)
+    {
+    	$a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
+    	
+    	return view('admin.eventsection',compact('content'));
+    	
+    }
+
+    public function blogSection(Request $request)
+    {
+    	$a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
+    	
+    	return view('admin.blogsection',compact('content'));
+    	
+    }
+
+
+    public function sponsorSection(Request $request)
+    {
+    	$a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
+    	
+    	return view('admin.sponsorsection',compact('content'));
+    	
+    }
+
+
+    public function addSection(Request $request)
+    {
+
+
+    	if($request->hasFile('image')){
+
+    		$this->validate($request,[
+
+    		'title'=>'required',
+    		'subtitle'=> $request->key == 'tab' ? '':'required',
+    		'image' => 'image',
+
+    	]);
+
+
+
+
+    	$imageName = $request->file('image');
+        
+        $speakerNameFormate = "$request->key".'.'.$imageName->getClientOriginalExtension();
+
+        $path = "asset/admin/images/$request->key";
+
+        $imageName->move($path,$speakerNameFormate); 
+
+    	$key = $request->key;
+
+         $a =  file_get_contents(resource_path('json\content.json'));
+         $fileContent = json_decode($a,true);
+         
+         $pushContent = [
+            "$key"=>[
+                "title"     =>$request->title,
+                "subtitle"  =>$request->subtitle,
+                'image' 	=> $speakerNameFormate,
+                ]
+        ];
+         $margeContent = array_merge($fileContent,$pushContent);
+        
+        $encode = json_encode($margeContent);
+        file_put_contents(resource_path('json\content.json'),$encode);
+
+        return redirect()->back()->with('success','Added Successfull');
+
+    	}
+
+
+
+    	$this->validate($request,[
+
+    		'title'=>'required',
+    		'subtitle'=>'required',
+    		
+
+    	]);
+
+
+
+    	$key = $request->key;
+
+         $a =  file_get_contents(resource_path('json\content.json'));
+         $fileContent = json_decode($a,true);
+         
+         $pushContent = [
+            "$key"=>[
+                "title"     =>$request->title,
+                "subtitle"  =>$request->subtitle,
+                
+                ]
+        ];
+         $margeContent = array_merge($fileContent,$pushContent);
+        
+        $encode = json_encode($margeContent);
+        file_put_contents(resource_path('json\content.json'),$encode);
+
+        return redirect()->back()->with('success','Added Successfull');
+
+
+
+    	 
+    }
+
+
+
+    
+
+
+
+   
+
+
+
+
+
+    public function sectionUpdate(Request $request)
+    {
+
+    	if($request->hasFile('image')){
+    		$this->validate($request,[
+
+    		'title' => 'required',
+    		'subtitle' => 'required',
+    		'image' => 'image'
+
+    	]);
+
+    		$imageName = $request->file('image');
+        
+        	$nameFormate = "$request->key".'.'.$imageName->getClientOriginalExtension();
+
+        	$path = "asset/admin/images/$request->key";
+        	 if(file_exists($path.'/'.$nameFormate)){
+                unlink($path.'/'.$nameFormate);
+            }
+
+        	$imageName->move($path,$nameFormate); 
+
+
+       	
+        $a =  file_get_contents(resource_path('json\content.json'));
+        $data = json_decode($a,true);
+        $input = $request->key;
+            foreach ($data as $key=>$value) {
+                if(array_key_exists( $input, $data)){
+                    $data[ $input]['title'] = $request->title;
+                    $data[ $input]['subtitle'] = $request->subtitle;
+                    $data[$input]['image']= $nameFormate;
+                 }
+            }
+        file_put_contents(resource_path('json\content.json'),json_encode($data));
+
+        return redirect()->back()->with('success','Updated Successfull');
+    	}
+
+    	$a =  file_get_contents(resource_path('json\content.json'));
+        $data = json_decode($a,true);
+        $input = $request->key;
+            foreach ($data as $key=>$value) {
+                if(array_key_exists( $input, $data)){
+                    $data[ $input]['title'] = $request->title;
+                    $data[ $input]['subtitle'] = $request->subtitle;
+                 }
+            }
+        file_put_contents(resource_path('json\content.json'),json_encode($data));
+
+        return redirect()->back()->with('success','Updated Successfull');
+
+
+
+       
+    }
+
+    
+
+    public function deleteSection($key){
+
+        $delItem = $key;
+        $arr_index = [];
+        $a =  file_get_contents(resource_path('json\content.json'));
+        $data = json_decode($a,true);
+        if(array_key_exists($delItem, $data)){
+            unset($data[$delItem]);
+        }
+
+        file_put_contents(resource_path('json\content.json'),json_encode($data));
+
+        return redirect()->back()->with('success',"Deleted Successfully");
+
+
+    }
+
+
 	
 
 
-	public function tabUpdate(Request $request)
-	{
-		$a = file_get_contents(base_path('resources\json\section.json'));
-		$decode = json_decode($a);
-		dd($decode->header->title);
-		return 'ok';
-		$this->validate($request,[
-			'title'=>'required',
-		]);
-		
-		$content =  Content::where('section_name','tab')->first();
-
-		foreach($content->content['tabs'] as $tab){
-			if($request->title == $tab['title']){
-
-				// $data = [
-				// 	'title'=>$request->title,
-				// 	'details'=>$request->details,
-				// 	'subtitle'=>$request->subtitle
-				// ];
-				// dd(json_encode($data));
-
-			}
-		}
-
-		// return $request->all();
-
-
-	}
-
-
+	
 	public function overview()
 	{
 		$overview = Overview::latest()->paginate(10);

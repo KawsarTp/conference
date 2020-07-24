@@ -1,8 +1,8 @@
 <section class="speaker-section padding-bottom padding-top" id="speaker">
     <div class="container-fluid">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
-        <h2 class="title">{{$speaker->content['title']}}</h2>
-            <p>{{$speaker->content['subtitle']}}</p>
+        <h2 class="title">{{@$content['speaker']['title']}}</h2>
+            <p>{{@$content['speaker']['subtitle']}}</p>
         </div>
         <div class="speaker-area d-flex flex-wrap justify-content-center">
         @foreach($speakerList as $speaker)

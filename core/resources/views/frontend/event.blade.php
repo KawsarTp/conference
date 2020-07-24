@@ -10,9 +10,8 @@
             <div class="col-xl-6 p-0">
                 <div class="event-overview-content padding-top">
                     <div class="section-header ml-0 text-left wow fadeInUp" data-wow-duration="1s">
-                        <h2 class="title">join our event</h2>
-                        <p>Magna eget et velit sed, cras neque amet aeante quis mauris mollis elit, fringilla et
-                            suscipitet.</p>
+                        <h2 class="title">{{@$content['map']['title']}}</h2>
+                        <p>{{@$content['map']['subtitle']}}</p>
                     </div>
                     <div class="event-overview-tab tab">
                         <ul class="tab-menu common-menu">

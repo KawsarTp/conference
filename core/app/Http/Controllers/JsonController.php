@@ -12,32 +12,68 @@ class JsonController extends Controller
 
         $data = json_decode($a,true);
 
-        dd($data['banner']['title']);
+        dd($data);
 
         return view('welcome',compact('data'));
         
     }
 
+    public function create(){
+        $key = 'banner';
+         $a =  file_get_contents(resource_path('json\section.js'));
+         $data = json_decode($a,true);
+         
+         $data2 = [
+            "$key"=>[
+                "title"     =>"ami",
+                "subtitle"  =>"tmi",
+                'image' => "",
+                ]
+        ];
+         $p = array_merge($data,$data2);
+        
+        $encode = json_encode($p);
+        file_put_contents(resource_path('json\section.js'),$encode);
+         
+    } 
+
 
     public function update()
     {
         $new = [];
-        $a =  file_get_contents(resource_path('json\section.json'));
+        $a =  file_get_contents(resource_path('json\section.js'));
         $data = json_decode($a,true);
+        $input = 'about';
+            foreach ($data as $key=>$value) {
+                if(array_key_exists( $input, $data)){
+                    $data[ $input]['title'] = $input;
+                    $data[ $input]['subtitle'] = "updated";
+                 }
+            }
+        file_put_contents(resource_path('json\section.js'),json_encode($data));
+    }
 
-        $input = 'lorem ipsum sdjsksjd k sdjdjskj   kjdsj jj kjsk jjj skdjs uiwew ndjkh ';
+    public function delete(){
 
-        $new['banner'] = $input;
+        $delItem = "about";
+        $arr_index = [];
+        $a =  file_get_contents(resource_path('json\section.js'));
+        $data = json_decode($a,true);
+        if(array_key_exists($delItem, $data)){
+            unset($data[$delItem]);
+        }
 
-        $dk = array_merge($data,$new);
-
-        file_put_contents(resource_path('json\section.js'),$dk);
-
+        file_put_contents(resource_path('json\section.js'),json_encode($data));
 
 
 
     }
 
+    
+        
+        
+        
+    }
 
     
 }

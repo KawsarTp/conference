@@ -1,8 +1,8 @@
 <section class="blog-section padding-top">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
-        <h2 class="title">{{$blog->content['title']}}</h2>
-        <p>{{$blog->content['para']}}</p>
+        <h2 class="title">{{@$content['blog']['title']}}</h2>
+        <p>{{@$content['blog']['subtitle']}}</p>
         </div>
         <div class="row mb-30-none justify-content-center">
             @foreach($blogDetails as $blog)

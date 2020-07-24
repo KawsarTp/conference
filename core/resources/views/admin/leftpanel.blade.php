@@ -13,10 +13,13 @@
                         <li><i class="fa fa-id-badge"></i><a href="{{route('admin.about')}}">About Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="{{route('admin.tab')}}">Tab Section</a></li>
                         <li><i class="fa fa-id-badge"></i><a href="{{route('admin.overview')}}">OverView Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="">speaker Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="">Banner Section</a></li>
-                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.viewallcontent')}}">View All Content</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.speaker-section')}}">speaker Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.schedule-section')}}">Schedule Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.ticket-section')}}">Ticket Section</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.buy-ticket')}}">Buy Ticket Section</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.event-section')}}">Event Section</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.blog-section')}}">Blog Section</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.sponsor-section')}}">Sponsor Section</a></li>
                         
                     </ul>
                 </li>

@@ -1,8 +1,8 @@
 <section class="sponsor-section padding-top padding-bottom">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
-        <h2 class="title">{{$sponsor->content['title']}}</h2>
-        <p>{{$sponsor->content['para']}}</p>
+        <h2 class="title">{{@$content['sponsor']['title']}}</h2>
+        <p>{{@$content['sponsor']['subtitle']}}</p>
         </div>
         <div class="sponsor-wrapper">
             @foreach($itterator as $itterators)

@@ -107,6 +107,7 @@
 
     <!--Local Stuff-->
 @stack('section')
+@stack('banner')
 @stack('js')
 @stack('blog')
 @stack('bookings')

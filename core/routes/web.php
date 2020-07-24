@@ -16,19 +16,43 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
 
       // Site Content Route
       Route::get('add-banner','SettingController@addBanner')->name('admin.banner');
-      Route::post('add-banner','SettingController@bannerUpdate');
-
       Route::get('about-section','SettingController@addAbout')->name('admin.about');
-      Route::post('about-section','SettingController@aboutSectionUpdate');
-
-
       Route::get('tab-section','SettingController@addTab')->name('admin.tab');
-      Route::post('tab-section','SettingController@aboutSectionUpdate');
-      Route::post('tab-update','SettingController@tabUpdate')->name('admin.tab-edit');
+      Route::get('speaker-section','SettingController@speakerSection')->name('admin.speaker-section');
+      Route::get('schedule-section','SettingController@scheduleSection')->name('admin.schedule-section');
+      Route::get('ticket-section','SettingController@ticketSection')->name('admin.ticket-section');
+      Route::get('buy-ticket-section','SettingController@buyTicketSection')->name('admin.buy-ticket');
+      Route::get('event-section','SettingController@eventSection')->name('admin.event-section');
+      Route::get('blog-section','SettingController@blogSection')->name('admin.blog-section');
+      Route::get('sponsor-section','SettingController@sponsorSection')->name('admin.sponsor-section');
+
+      Route::post('button-section','SettingController@addButton')->name('admin.addtabbutton');
+      Route::post('tab-update','SettingController@tabUpdate')->name('admin.updatetabbutton');
+      Route::get('tab-update/{id}','SettingController@tabDelete')->name('admin.deletetabbutton');
+
+
+
+
+
+
+      // Route for Adding , Updating and Delete Sections Data
+      Route::post('add-section','SettingController@addSection')->name('admin.addsection');
+      Route::put('update-section','SettingController@sectionUpdate')->name('admin.updatesection');
+      Route::get('delete-section/{key}',"SettingController@deleteSection")->name('admin.section-delete');
+
+
+
+
+     
+      // Route::post('about-section','SettingController@aboutSectionUpdate');
+
+
+      // // Route::post('tab-section','SettingController@aboutSectionUpdate');
+      // // Route::post('tab-update','SettingController@tabUpdate')->name('admin.tab-edit');
 
       Route::get('overview-section','SettingController@overview')->name('admin.overview');
       Route::post('overview-section','SettingController@overviewSaveToDatabase');
-      Route::post('update-section','SettingController@updateOverview')->name('admin.update-overview');
+      Route::post('update-overview-section','SettingController@updateOverview')->name('admin.update-overview');
       Route::get('delete-section/{id}','SettingController@deleteOverview')->name('admin.delete-overview');
 
       Route::post('add-content','AdminController@addContentFormToDatabse');
@@ -85,3 +109,6 @@ Route::post('sponsor','UserController@sponsorApplication');
 
 Route::get('/json','JsonController@json');
 Route::get('/update','JsonController@update');
+Route::get('/create','JsonController@create');
+Route::get('/delete','JsonController@delete');
+Route::get('/tabs','JsonController@tabs');

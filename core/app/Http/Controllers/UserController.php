@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use App\Booking;
-use App\Content;
+use App\Tab;
 use App\Overview;
 use App\Speaker;
 use App\Ticket;
@@ -33,24 +33,10 @@ class UserController extends Controller
         $tickets = Ticket::all();
         $blogDetails = Blog::all();
         
-        
+        $tabs =  Tab::all();
 
         // time Calculation Method 
         $time  = $this->dateDiffInDays($setting->start_date);
-
-
-        // site data 
-        $banner = Content::where('section_name','banner')->first();
-        $about = Content::where('section_name','about')->first();
-        $tab = Content::where('section_name','tab')->first();
-        $overview = Content::where('section_name','overview')->first();
-        $speaker = Content::where('section_name','speaker')->first();
-        $schedule = Content::where('section_name','schedule')->first();
-        $ticket = Content::where('section_name','ticket')->first();
-        $buyticket = Content::where('section_name','buyticket')->first();
-        $map = Content::where('section_name','map')->first();
-        $blog = Content::where('section_name','blog')->first();
-        $sponsor = Content::where('section_name','sponsor')->first();
 
         $overView = Overview::all();
 
@@ -58,11 +44,13 @@ class UserController extends Controller
 
         $itterator = SponsorshipApplication::groupBy('sponsor_type_id')->selectRaw('sponsor_type_id')->get();
 
-        // dd($itterator);
+        $a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
 
         
 
-        return view('frontend.home',compact('speakerList','time','tickets','setting','groupDate','topic','banner','about','tab','speaker','schedule','ticket','map','blog','blogDetails','sponsor','overView','allSponsor','itterator'));
+        return view('frontend.home',compact('speakerList','time','tickets','setting','groupDate','topic','blogDetails','overView','allSponsor','itterator','content','tabs'));
     }
 
 

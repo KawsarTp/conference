@@ -1,8 +1,8 @@
 <section class="schedule-section padding-bottom">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
-        <h2 class="title">{{$schedule->content['title']}}</h2>
-            <p>{{$schedule->content['subtitle']}}</p>
+        <h2 class="title">{{@$content['schedule']['title']}}</h2>
+            <p>{{@$content['schedule']['subtitle']}}</p>
         </div>
         <div class="schedule-area tab">
             <ul class="tab-menu">

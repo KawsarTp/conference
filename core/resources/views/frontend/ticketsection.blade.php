@@ -1,9 +1,8 @@
 <section class="ticket-section padding-bottom padding-top">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
-            <h2 class="title">get your ticket</h2>
-            <p>a porttitor metus cupidatat nunc, luctus erat at. Amet class phasellus in eget sociosqu mi amet morbi
-                taciti eu urna, mi nunc volutpat quis</p>
+            <h2 class="title">{{@$content['ticket']['title']}}</h2>
+            <p>{{@$content['ticket']['subtitle']}}</p>
         </div>
         <div class="row mb-30-none justify-content-center">
             @foreach($tickets as $ticket )
