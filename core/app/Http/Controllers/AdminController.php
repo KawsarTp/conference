@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
 
-        $bookings = Booking::groupBy('price')->sum('price');
+    public function index(){
+
+        $bookings = Booking::sum('price');
         $quantity = Booking::groupBy('quantity')->sum('quantity');
         $speakerCount = Speaker::all()->count();
         $speaker = Speaker::latest()->paginate(3);
@@ -31,59 +31,17 @@ class AdminController extends Controller
         $allBookings = Booking::with('ticket')->paginate(5);
         $setting = Setting::first();
         $sponsor = Sponsor::all();
-
-        // $ticket = Ticket::latest()->all();
-
-        // dd(Booking::with('ticket')->groupBy('quantity')->where('ticket_id',));
-        return view('admin.home',compact('bookings','quantity','speaker','topic','allBookings','setting','sponsor','speakerCount'));
+        $ticket = Ticket::with('bookings')->get();
+        return view('admin.home',compact('bookings','quantity','speaker','topic','allBookings','setting','sponsor','speakerCount','ticket'));
     }
 
-    public function addContentForm()
-    {
+
+
+    public function addContentForm(){
         return view('admin.addcontent');
     }
 
-    public function addContentFormToDatabse(Request $request)
-    {
-        $data = $request->except(['_token']);
-        //     $this->validate($request,[
-        //         'section'=>'required',
-        //         'title'=>'required',
-        //         'details'=>'required',
-        //         'date'=>'required'
-        //    ]);
     
-           Content::create([
-            "content->$request->section"=>$data,
-           ]);
-
-        // if($request->section == 'about'){
-            
-        //     $this->validate($request,[
-        //         'section'=>'required',
-        //         'title'=>'required',
-        //         'sub'=>'required',
-        //         'details'=>'required',
-        //         'image'=>'required'
-        //    ]);
-
-        //    $imageName = $request->file('image');
-        
-        //    $imageFormate = "$request->section-".Str::random(8).'.'.$imageName->getClientOriginalExtension();
-   
-        //    $path = 'asset/admin/images/content';
-   
-        //    $saveToDatabase = $path.'/'.$imageFormate;
-   
-        //    $imageName->move($path,$imageFormate); 
-
-    
-        //    Content::updateOrCreate([
-        //     "content->$request->section"=>data,
-        //    ]);
-        // }
-       
-    }
 
     public function viewAllContent()
     {
@@ -114,8 +72,6 @@ class AdminController extends Controller
         $speakerNameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
 
         $path = 'asset/admin/images/speaker';
-
-        $saveToDatabase = $path.'/'.$speakerNameFormate;
 
         $imageName->move($path,$speakerNameFormate); 
 
@@ -236,7 +192,7 @@ class AdminController extends Controller
 
     public function ticketUpdate(Request $request)
     {
-        // dd($request->all());
+        
         $this->validate($request,[
             'type'=>'required',
             'price'=>'required|numeric|min:1',
@@ -310,18 +266,18 @@ class AdminController extends Controller
         
         $imageName = $request->file('image');
         
-        $speakerNameFormate = 'blog-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+        $blogNameFormate = 'blog-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
 
         $path = 'asset/admin/images/blog';
 
-        $saveToDatabase = $path.'/'.$speakerNameFormate;
+       
 
-        $imageName->move($path,$speakerNameFormate); 
+        $imageName->move($path,$blogNameFormate); 
 
 
         $blog->title = $request->title;
         $blog->details = $request->details;
-        $blog->image = $saveToDatabase;
+        $blog->image = $blogNameFormate;
 
         $blog->save();
 
@@ -343,9 +299,30 @@ class AdminController extends Controller
             'image' => 'image'
         ]);
 
-        $blog = Blog::findOrFail($request->id);
-        
-        unlink($blog->image);
+        $blog = Blog::find($request->id);
+        $path = 'asset/admin/images/blog';
+
+        if($request->hasFile('image')){
+                $imageName = $request->file('image');
+                $blogNameFormate = 'blog-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+                if(file_exists($path.'/'.$blog->image)){
+                    unlink($path.'/'.$blog->image);
+                }
+                $imageName->move($path,$blogNameFormate); 
+                $blog->title = $request->title;
+                $blog->details = $request->details;
+                $blog->image = $blogNameFormate;
+
+                $blog->save();
+
+                return redirect()->back()->with('success','Updated Successfully');
+        }
+
+                $blog->title = $request->title;
+                $blog->details = $request->details;
+                $blog->save();
+
+                return redirect()->back()->with('success','Updated Successfully');
 
     }
 
@@ -449,6 +426,7 @@ class AdminController extends Controller
 
     public function addSponsor()
     {
+       
         return view('admin.addsponsors');
     }
 
@@ -461,6 +439,8 @@ class AdminController extends Controller
         ]);
         $sponsor = new Sponsor();
 
+        
+
         if($sponsor->first() == null ){
             $sponsor->details = $request->details;
             $sponsor->benefit = $request->benefit;
@@ -472,12 +452,13 @@ class AdminController extends Controller
         }
 
 
-        if($sponsor->first() > 0){
-            $sponsor->details = $request->details;
-            $sponsor->benefit = $request->benefit;
-            $sponsor->about = $request->about;
+        if($sponsor->first()->count() > 0){
+            $getSponsor = $sponsor->first();
+            $getSponsor->details = $request->details;
+            $getSponsor->benefit = $request->benefit;
+            $getSponsor->about = $request->about;
 
-            $sponsor->save();
+            $getSponsor->save();
 
             return redirect()->back()->with('success','Update Successfully');
         }
@@ -525,7 +506,7 @@ class AdminController extends Controller
         $dataField = $sponsor->find($request->id);
 
         $imageName = $request->file('image');
-        // dd($imageName);
+    
         $speakerNameFormate = 'sponsor-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
 
         $path = 'asset/admin/images/sponsor';
@@ -539,6 +520,60 @@ class AdminController extends Controller
 
 
         return back()->with('succes','update succes');
+    }
+
+    public function manageAllData ()
+    {
+        $sponsorType = SponsorType::all();
+        $requirements = Sponsor::latest()->get();
+        return view('admin.managesponsordata',compact('requirements','sponsorType'));
+    }
+
+    public function updateSponsorDetails(Request $request)
+    {
+        $this->validate($request,[
+            'details' => 'required',
+            'benefit' => 'required',
+            'about' => 'required',
+        ]);
+
+        $sponsor = Sponsor::find($request->id);
+
+        $sponsor->details = $request->details;
+        $sponsor->benefit = $request->benefit;
+        $sponsor->about = $request->about;
+        $sponsor->save();
+
+        return redirect()->back()->with('success','Updated Success');
+    }
+
+    public function updateSponsorType(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+        ]);
+
+        $type = SponsorType::find($request->id);
+
+        $type->name = $request->name;
+        $type->save();
+
+        return redirect()->back()->with('success','Updated Success');
+    }
+
+    public function deleteSponsorData(Request $request , Sponsor $id)
+    {
+        $id->delete();
+
+        return redirect()->back()->with('success','Deleted Successfully');
+    }
+
+    public function deleteSponsorTypeData(Request $request , SponsorType $id)
+    {
+        $id->delete();
+
+        return redirect()->back()->with('success','Deleted Successfully');
+       
     }
 
     public function settingView()

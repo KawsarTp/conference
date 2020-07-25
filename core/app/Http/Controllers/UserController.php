@@ -43,7 +43,7 @@ class UserController extends Controller
         $allSponsor = SponsorshipApplication::with('types')->get();
 
         $itterator = SponsorshipApplication::groupBy('sponsor_type_id')->selectRaw('sponsor_type_id')->get();
-
+dd(resource_path('json\content.json'));
         $a =  file_get_contents(resource_path('json\content.json'));
 
         $content = json_decode($a,true);
@@ -155,7 +155,21 @@ class UserController extends Controller
     } 
 
 
+public function blogDetails(Blog $id)
+{
+    return view('frontend.blogdetails',compact('id'));
+}
 
+public function pricingPlan()
+{
+    $a =  file_get_contents(resource_path('json\content.json'));
+
+    $content = json_decode($a,true);
+
+    $ticket = Ticket::latest()->get();
+
+    return view('frontend.pricingplan',compact('ticket','content'));
+}
 
 
 }

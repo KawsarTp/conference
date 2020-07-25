@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row justify-content-center" style="margin-top:100px;">
         <div class="card">
-            <div class="card-header text-center">
+            <div class="card-header text-center" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
                 <strong class="card-title">Speaker List</strong>
             </div>
             <div class="table-stats order-table ov-h">
@@ -71,9 +71,7 @@
                                                 <input id="cc-payment" name="name" type="text" class="form-control" placeholder="speaker Name" value="{{$speaker->name}}">
                                                 </div>
                     
-                                                @if($errors->has('name'))
-                                                    <p class="alert alert-danger">{{$errors->first('name')}}</p>
-                                                @endif
+                                                
                     
                                                 <div class="form-group">
                                                     <label for="cc-number" class="control-label mb-1">Speaker Bio</label>
@@ -81,19 +79,13 @@
                                                     <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                                 </div>
                     
-                                                @if($errors->has('details'))
-                                                    <p class="alert alert-danger">{{$errors->first('details')}}</p>
-                                                @endif
-                    
+                                               
                                                 <div class="form-group">
                                                     <label for="cc-number" class="control-label mb-1">Speaker Expertise</label>
                                                 <input id="cc-payment" name="expertise" type="text" class="form-control" placeholder="speaker Name" value="{{$speaker->designation}}">
                                                 </div>
                     
-                                                @if($errors->has('expertise'))
-                                                    <p class="alert alert-danger">{{$errors->first('expertise')}}</p>
-                                                @endif
-                                                
+                                               
                                                 <div class="form-group">
                                                 <div class="d-flex">
                                                         <div class="round-img">
@@ -108,9 +100,7 @@
                                                 </div>
                                                 
                     
-                                                @if($errors->has('image'))
-                                                    <p class="alert alert-danger">{{$errors->first('image')}}</p>
-                                                @endif
+                                                
                     
                                              
                                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

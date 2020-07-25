@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::get('blog-section','SettingController@blogSection')->name('admin.blog-section');
       Route::get('sponsor-section','SettingController@sponsorSection')->name('admin.sponsor-section');
 
+
       Route::post('button-section','SettingController@addButton')->name('admin.addtabbutton');
       Route::post('tab-update','SettingController@tabUpdate')->name('admin.updatetabbutton');
       Route::get('tab-update/{id}','SettingController@tabDelete')->name('admin.deletetabbutton');
@@ -92,6 +93,13 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
 
       Route::get('add-managesponsor','AdminController@manageSponsor')->name('admin.managersponsor');
       Route::post('add-managesponsor','AdminController@updateSponsorApplication');
+      Route::get('manage-sponsor-data','AdminController@manageAllData')->name('admin.managersponsordata');
+
+      Route::post('manage-sponsor-data','AdminController@updateSponsorDetails');
+      Route::put('manage-sponsor-data','AdminController@updateSponsorType');
+
+      Route::get('delete-manage-sponsor-data/{id}','AdminController@deleteSponsorData')->name('admin.sponsor-details-delete');
+      Route::get('delete-sponsor-type-data/{id}','AdminController@deleteSponsorTypeData')->name('admin.sponsor-type-delete');
 
       Route::get('setting','AdminController@settingView')->name('admin.setting');
       Route::post('setting','AdminController@settingStoreToDatabase');
@@ -106,9 +114,7 @@ Route::get('show/{id}','UserController@show')->name('show');
 Route::post('show/{id}','UserController@buyTickets');
 Route::get('sponsor','UserController@sponsor')->name('sponsor');
 Route::post('sponsor','UserController@sponsorApplication');
+Route::get('pricing-plan','UserController@pricingPlan')->name('plan');
+Route::get('blogdetails/{id}','UserController@blogDetails')->name('blogdetails');
 
-Route::get('/json','JsonController@json');
-Route::get('/update','JsonController@update');
-Route::get('/create','JsonController@create');
-Route::get('/delete','JsonController@delete');
-Route::get('/tabs','JsonController@tabs');
+

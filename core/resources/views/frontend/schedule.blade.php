@@ -1,4 +1,4 @@
-<section class="schedule-section padding-bottom">
+<section class="schedule-section padding-bottom" id="schedule">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
         <h2 class="title">{{@$content['schedule']['title']}}</h2>

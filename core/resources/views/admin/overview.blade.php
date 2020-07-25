@@ -57,6 +57,61 @@
     		</div>
     	</div>
     </div>
+
+
+
+    <div class="container">
+    	<div class="row justify-content-center mt-3">
+    		<div class="col-md-10">
+	    		<div class="card">
+	    			<div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
+	    				<h3 class="text-center text-light">OverView Section Image 
+                            @if(array_key_exists('overview',$content))
+                            
+                            @else
+                            <button class="btn btn-outline-primary float-right addimage">ADD <i class="fa fa-plus"></i></button>
+                            @endif
+                        </h3>
+	    				
+                    </div>
+                    
+	    			<div class="card-body">
+	    				<table class="table">
+                            <thead class="text-center bg-dark text-light" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
+                                <tr>
+                                    
+                                    <th>Image</th>
+                                    <th>Action</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody class="text-center">
+                                @if(array_key_exists('overview',$content))
+                                <tr>
+
+                                <td>
+                                    <img src="{{asset('asset/admin/images/overview').'/'.@$content['overview']['image']}}" alt="" width="100px">
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-info editimage"><i class="fa fa-edit"></i></button>
+
+                                    <a class="btn btn-outline-danger delete" href="{{route('admin.section-delete',['key'=>"overview"])}}"><i class="fa fa-trash"></i></a>
+                                </td>
+                                    
+                                </tr>
+                                @else
+                                 <tr> <td class="text-danger text-center">No data</td></tr>
+                                @endif
+
+                            </tbody>
+                        </table>
+                    </div>
+                    
+	    		</div>
+    		</div>
+    	</div>
+    </div>
 </div>
 @endsection
 
@@ -82,6 +137,21 @@
             $(".modal-body #details").val(details);
             $(".modal-body #icon").addClass(icon);
 
+        });
+
+
+        $('.addimage').click(function(e){
+            $('#imageModal').modal('show');
+
+            e.preventDefault();
+        });
+
+
+        
+        $('.editimage').click(function(e){
+            $('#editimageModal').modal('show');
+
+            e.preventDefault();
         });
     </script>
 @endpush
@@ -156,6 +226,68 @@
                         <button class="btn btn-secondary form-control" data-iconset="fontawesome4" data-arrow-prev-icon-class="fa fa-angle-left"
                         data-arrow-next-icon-class="fa fa-angle-right" data-iconset-version="4.7.0" role="iconpicker" name="icon" id="icon" data-icon=""></button>
                             
+                    </div>
+
+
+                    <div class="form-group">
+
+                       <input type="submit" value="Update" class="btn btn-primary form-control"> 
+                            
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="imageModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card-header bg-info text-center text-light" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
+                <h3>Add Overview Section Image</h3>
+            </div>
+            <div class="modal-body">
+            <form action="{{route('admin.addsection')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                    <input type="hidden" name="key" value="overview">
+
+                    <div class="form-group">
+                        <label for="">Image</label>
+                        <input class="form-control" type="file" name="image">
+                    </div>
+
+
+                    <div class="form-group">
+
+                       <input type="submit" value="Save" class="btn btn-primary form-control"> 
+                            
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="editimageModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card-header bg-info text-center text-light" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
+                <h3>Update Image</h3>
+            </div>
+            <div class="modal-body">
+            <form action="{{route('admin.updatesection')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                    <input type="hidden" name="key" value="overview">
+
+                    <div class="form-group">
+                        <label for="">Image</label>
+                        <input class="form-control" type="file" name="image">
                     </div>
 
 

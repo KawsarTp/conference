@@ -28,12 +28,12 @@
             <div class="col-lg-8 mb-lg-0 mb-5">
                 <div class="become-sponsor-article">
                     <h3 class="title">become our sponsor</h3>
-                <p class="main-para">{{$sponsor->details}}</p>
+                <p class="main-para">{{@$sponsor->details}}</p>
                     <h4 class="sub-title">benifites of sponsor</h4>
-                <p>{{$sponsor->benefit}}</p>
+                <p>{{@$sponsor->benefit}}</p>
                     
                     <h4 class="sub-title">Know about sponsorship</h4>
-                <p class="last-para">{{$sponsor->about}}</p>
+                <p class="last-para">{{@$sponsor->about}}</p>
                 </div>
             </div>
             <div class="col-lg-4">

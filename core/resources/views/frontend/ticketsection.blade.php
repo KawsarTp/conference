@@ -1,4 +1,4 @@
-<section class="ticket-section padding-bottom padding-top">
+<section class="ticket-section padding-bottom padding-top" id="ticket">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
             <h2 class="title">{{@$content['ticket']['title']}}</h2>

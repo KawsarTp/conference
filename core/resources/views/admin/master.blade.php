@@ -28,6 +28,7 @@
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
     <link href="{{asset('asset/admin/css/bootstrap-iconpicker.min.css')}}" rel="stylesheet">
+  
     {{-- <link rel="stylesheet" href="{{asset('asset/admin/css/tabs.css')}}"> --}}
 
    <style>
@@ -103,7 +104,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     
     <script src="{{asset('asset/admin/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
-
+    {{-- <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script> --}}
+    {{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script> --}}
+  
 
     <!--Local Stuff-->
 @stack('section')
@@ -115,6 +120,7 @@
 @stack('overview')
 @include('alert.success')
 @include('alert.error')
+@include('alert.errors')
     
 </body>
 </html>

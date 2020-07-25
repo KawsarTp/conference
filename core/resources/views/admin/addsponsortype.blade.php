@@ -21,7 +21,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                @include('admin.alert')
+       
                                 <h3 class="text-center">Sponsor Type</h3>
                             </div>
                             <div class="card-body">
@@ -32,9 +32,7 @@
                                 <input type="text" name="name" class="form-control">
                             </div>
 
-                            @if($errors->has('name'))
-                        <p class="alert alert-danger">{{$errors->first('name')}}</p>
-                        @endif
+                            
 
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary form-control">

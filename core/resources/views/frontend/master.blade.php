@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" href="{{asset('asset/frontend/css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+
 
     <link rel="stylesheet" href="{{asset('asset/frontend/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('asset/frontend/css/animate.css')}}">

@@ -13,7 +13,7 @@
             <h2 class="title">{{@$content['buyticket']['title']}}</h2>
                 <h2 class="title">{{@$content['buyticket']['subtitle']}}</h2>
             </div>
-            <a href="#0" class="custom-button">Buy Ticket</a>
+        <a href="{{route('plan')}}" class="custom-button">Buy Ticket</a>
         </div>
     </div>
 </section>

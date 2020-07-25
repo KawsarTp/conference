@@ -10,14 +10,16 @@ use Illuminate\Support\Str;
 
 class SettingController extends Controller
 {
+
     public function addBanner(Request $request)
     {
     	$a =  file_get_contents(resource_path('json\content.json'));
 
         $content = json_decode($a,true);
     	
-    	return view('admin.addbanner',compact('content'));
+    	return view('admin.content.addbanner',compact('content'));
     }
+
 
     public function addAbout(Request $request)
     {
@@ -25,7 +27,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.addabout',compact('content'));
+    	return view('admin.content.addabout',compact('content'));
     }
 
    public function addTab(Request $request)
@@ -34,11 +36,10 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	$tabs = Tab::latest()->get();
-    	return view('admin.addtab',compact('content','tabs'));
+    	return view('admin.content.addtab',compact('content','tabs'));
     }
     public function addButton(Request $request)
     {
-        // return 'ok';
         $this->validate($request,[
 
             'title' => 'required',
@@ -62,15 +63,11 @@ class SettingController extends Controller
 
             'title' => 'required',
             'description'=>'required'
-
-
         ]);
 
+        $tab = Tab::find($request->id);
 
-
-         $tab = Tab::find($request->id);
-
-         $tab->title = $request->title;
+        $tab->title = $request->title;
         $tab->details = $request->description;
         $tab->save();
 
@@ -92,7 +89,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.addspeakersection',compact('content'));
+    	return view('admin.content.addspeakersection',compact('content'));
     }
 
 
@@ -103,7 +100,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.schedulesection',compact('content'));
+    	return view('admin.content.schedulesection',compact('content'));
     }
 
 
@@ -113,7 +110,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.ticketsection',compact('content'));
+    	return view('admin.content.ticketsection',compact('content'));
     }
     
     public function buyTicketSection(Request $request)
@@ -122,7 +119,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.buyticketsection',compact('content'));
+    	return view('admin.content.buyticketsection',compact('content'));
     }
 
     public function eventSection(Request $request)
@@ -131,7 +128,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.eventsection',compact('content'));
+    	return view('admin.content.eventsection',compact('content'));
     	
     }
 
@@ -141,7 +138,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.blogsection',compact('content'));
+    	return view('admin.content.blogsection',compact('content'));
     	
     }
 
@@ -152,7 +149,7 @@ class SettingController extends Controller
 
         $content = json_decode($a,true);
     	
-    	return view('admin.sponsorsection',compact('content'));
+    	return view('admin.content.sponsorsection',compact('content'));
     	
     }
 
@@ -162,12 +159,11 @@ class SettingController extends Controller
 
 
     	if($request->hasFile('image')){
-
+            
     		$this->validate($request,[
-
-    		'title'=>'required',
-    		'subtitle'=> $request->key == 'tab' ? '':'required',
-    		'image' => 'image',
+    		'title'=>$request->key == 'overview'? '' : 'required',
+    		'subtitle'=> $request->key == 'tab' || $request->key == 'overview'? '':'required',
+    		'image' => $request->key == 'overview' ? 'required|image':'image',
 
     	]);
 
@@ -240,28 +236,17 @@ class SettingController extends Controller
     }
 
 
-
-    
-
-
-
-   
-
-
-
-
-
     public function sectionUpdate(Request $request)
     {
 
     	if($request->hasFile('image')){
+    
     		$this->validate($request,[
-
-    		'title' => 'required',
-    		'subtitle' => 'required',
-    		'image' => 'image'
-
-    	]);
+                'title'=>$request->key == 'overview'? '' : 'required',
+                'subtitle'=> $request->key == 'tab' || $request->key == 'overview'? '':'required',
+                'image' => $request->key == 'overview' ? 'required|image':'image',
+    
+            ]);
 
     		$imageName = $request->file('image');
         
@@ -289,7 +274,15 @@ class SettingController extends Controller
         file_put_contents(resource_path('json\content.json'),json_encode($data));
 
         return redirect()->back()->with('success','Updated Successfull');
-    	}
+        }
+        
+        
+        $this->validate($request,[
+
+    		'title' => 'required',
+    		'subtitle' => 'required',
+
+    	]);
 
     	$a =  file_get_contents(resource_path('json\content.json'));
         $data = json_decode($a,true);
@@ -314,7 +307,6 @@ class SettingController extends Controller
     public function deleteSection($key){
 
         $delItem = $key;
-        $arr_index = [];
         $a =  file_get_contents(resource_path('json\content.json'));
         $data = json_decode($a,true);
         if(array_key_exists($delItem, $data)){
@@ -335,13 +327,16 @@ class SettingController extends Controller
 	
 	public function overview()
 	{
+        $a =  file_get_contents(resource_path('json\content.json'));
+
+        $content = json_decode($a,true);
 		$overview = Overview::latest()->paginate(10);
-		return view('admin.overview',compact('overview'));
+		return view('admin.overview',compact('overview','content'));
 	}
 
 	public function overviewSaveToDatabase(Request $request)
 	{
-		// return request()->all();
+		
 		$this->validate($request,[
 			'title' => 'required',
 			'details' => 'required',

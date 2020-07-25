@@ -28,9 +28,7 @@
                        <input type="text" name="type" class="form-control">
                    </div>
 
-                   @if($errors->has('type'))
-                        <p class="alert alert-danger">{{$errors->first('type')}}</p>
-                    @endif
+                  
 
                    <div class="form-inline my-3">
                         
@@ -43,12 +41,7 @@
                                 <label for="type">Ticket Stock :</label>
                                 <input type="number" name="stock" class="form-control w-100" min="0" value="0">
                             </div>
-                        @if($errors->has('price'))
-                            <p class="alert alert-danger">{{$errors->first('price')}}</p>
-                        @endif
-                        @if($errors->has('stock'))
-                            <p class="alert alert-danger ml-auto">{{$errors->first('stock')}}</p>
-                        @endif
+                        
                    </div>
                     
 
@@ -56,33 +49,24 @@
                         <label for="type">Ticket Features :</label>
                         <textarea name="feature" id="" cols="10" rows="5" class="form-control"></textarea>
                     </div>
-                    @if($errors->has('feature'))
-                    <p class="alert alert-danger">{{$errors->first('feature')}}</p>
-                @endif
-
+                   
                     <div class="form-group">
                         <label for="type">Ticket details :</label>
                         <textarea name="details" id="" cols="10" rows="5" class="form-control"></textarea>
                     </div>
-                    @if($errors->has('details'))
-                    <p class="alert alert-danger">{{$errors->first('details')}}</p>
-                @endif
+                   
                     <div class="form-group">
                         <label for="type">Ticket benefits :</label>
                         <textarea name="benefits" id="" cols="10" rows="5" class="form-control"></textarea>
                     </div>
-                    @if($errors->has('benefits'))
-                    <p class="alert alert-danger">{{$errors->first('benefits')}}</p>
-                    @endif
+                   
 
 
                     <div class="form-group">
                         <label for="type">Ticket Image</label>
                         <input type="file" name="image" class="form-control">
                     </div>
-                    @if($errors->has('image'))
-                    <p class="alert alert-danger">{{$errors->first('image')}}</p>
-                    @endif
+                   
 
 
                     <div class="form-group">

@@ -33,9 +33,7 @@
                                 <input name="name" type="text" class="form-control" placeholder="Topic Name">
                             </div>
 
-                            @if($errors->has('name'))
-                                <p class="alert alert-danger">{{$errors->first('name')}}</p>
-                            @endif
+                           
 
                             <div class="form-group">
                                 <label class="control-label mb-1">Time Slot For A Topic</label>
@@ -47,9 +45,7 @@
                                             <span class="input-group-text">PM</span>
                                             </div>
                                         </div>
-                                        @if($errors->has('from'))
-                                            <p class="alert alert-danger">{{$errors->first('from')}}</p>
-                                        @endif
+                                       
                                     </div>
                                     TO
                                     <div class="col-md-5">
@@ -58,9 +54,7 @@
                                             <div class="input-group-append">
                                             <span class="input-group-text">PM</span>
                                             </div>
-                                            @if($errors->has('to'))
-                                                <p class="alert alert-danger">{{$errors->first('to')}}</p>
-                                            @endif
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -72,9 +66,7 @@
                             </div>
                             
 
-                            @if($errors->has('date'))
-                                <p class="alert alert-danger">{{$errors->first('date')}}</p>
-                            @endif
+                           
 
                             <div class="form-group">
                                 <label class="control-label mb-1">Add Speaker</label>

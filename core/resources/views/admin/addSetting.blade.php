@@ -27,23 +27,19 @@
 	    						<label>Conference Start Date</label>
 	    						<input type="date" name="from" class="form-control">
 	    					</div>
-	    					@if($errors->has('from'))
-	    						<p class="alert alert-danger">{{$errors->first('from')}}</p>
-	    					@endif
+	    					
 	    					<div class="form-group">
 	    						<label>Conference End Date</label>
 	    						<input type="date" name="to" class="form-control">
 	    					</div>	
-	    					@if($errors->has('to'))
-	    						<p class="alert alert-danger">{{$errors->first('to')}}</p>
-	    					@endif
+	    					
 	    					<div class="form-group">
 	    						<label>Conference Location</label>
 	    						<input type="text" name="location" class="form-control">
-	    					</div>
-	    					@if($errors->has('location'))
-	    						<p class="alert alert-danger">{{$errors->first('location')}}</p>
-	    					@endif
+							</div>
+							
+
+	    					
 	    					<div class="form-group">
 	    						<input type="submit" class="form-control btn btn-info" value="Save">
 	    					</div>

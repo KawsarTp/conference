@@ -9,7 +9,7 @@
                             <div class="col-md-6">
                                 <div class="overview-item wow fadeInUp" data-wow-duration="1s">
                                     <div class="overview-header">
-                                    <i class="fa {{$overview->icon}}"></i>
+                                    <i class="fas {{$overview->icon}}"></i>
                                     <h4 class="title">{{$overview->title}}</h4>
                                     </div>
                                     <div class="overview-item-content">
@@ -24,8 +24,8 @@
                 </div>
             </div>
             <div class="col-xl-6 p-0">
-                <div class="overview-right h-100 bg_img" data-background="./{{asset('asset/frontend/images/overview/overview-bg01.jpg')}}">
-                    <img src="{{asset('asset/frontend/images/overview/overview-bg01.jpg" alt="overview')}}">
+                <div class="overview-right h-100 bg_img" data-background="{{asset('asset/admin/images/overview').'/'.@$content['overview']['image']}}">
+                    <img src="{{asset('asset/admin/images/overview').'/'.@$content['overview']['image']}}">
                 </div>
             </div>
         </div>

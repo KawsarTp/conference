@@ -60,8 +60,6 @@
                     <ul class="sub-menu children dropdown-menu">
                     <li><i class="menu-icon fa fa-map-o"></i><a href="{{route('admin.conference')}}">Add Conference Topics</a></li>
                     <li><i class="menu-icon fa fa-street-view"></i><a href="{{route('admin.showallconference')}}">View All Topics</a></li>
-                    <li><i class="menu-icon fa fa-street-view"></i><a href="{{route('admin.topicsaddtospeaker')}}">View All Topics</a></li>
-
                     </ul>
                 </li>
 
@@ -71,6 +69,7 @@
                     <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.sponsor')}}">Add Sponsor Requirements</a></li>
                     <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.sponsortype')}}">Sponsor Type</a></li>
                     <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.managersponsor')}}">Sponsorship Application</a></li>
+                    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.managersponsordata')}}">Manage All Data</a></li>
                     </ul>
                 </li>
 

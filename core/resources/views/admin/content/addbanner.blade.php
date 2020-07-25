@@ -114,9 +114,7 @@
 	    						<textarea name="title" class="form-control" rows="5"></textarea>
 	    						
 	    					</div>
-	    					@if($errors->has('title'))
-	    						<p class="alert alert-danger">{{$errors->first('title')}}</p>
-	    					@endif
+	    					
 
 
 	    					<div class="form-group">
@@ -124,20 +122,14 @@
 	    						<textarea name="subtitle" class="form-control" rows="5"></textarea>
 	    						
 	    					</div>	
-	    					@if($errors->has('sub'))
-	    						<p class="alert alert-danger">{{$errors->first('sub')}}</p>
-	    					@endif
-
+	    					
 
 	    					<div class="form-group">
 	    						<label>Banner Section Image</label>
 	    						<input type="file" name="image" class="form-control">
 	    						
 	    					</div>	
-	    					@if($errors->has('image'))
-	    						<p class="alert alert-danger">{{$errors->first('image')}}</p>
-	    					@endif
-
+	    					
 	    					
 	    					<div class="form-group">
 	    						<input type="submit" class="form-control btn btn-info" value="Save">
@@ -178,9 +170,7 @@
 	    						<textarea name="title" class="form-control" rows="5" id="title"></textarea>
 	    						
 	    					</div>
-	    					@if($errors->has('title'))
-	    						<p class="alert alert-danger">{{$errors->first('title')}}</p>
-	    					@endif
+	    					
 
 
 	    					<div class="form-group">
@@ -188,18 +178,14 @@
 	    						<textarea name="subtitle" class="form-control" rows="5" id="subtitle"></textarea>
 	    						
 	    					</div>	
-	    					@if($errors->has('sub'))
-	    						<p class="alert alert-danger">{{$errors->first('sub')}}</p>
-	    					@endif
+	    					
 
 	    					<div class="form-group">
 	    						<label>Banner Section Image</label>
 	    						<input type="file" name="image" class="form-control">
 	    						
 	    					</div>	
-	    					@if($errors->has('image'))
-	    						<p class="alert alert-danger">{{$errors->first('image')}}</p>
-	    					@endif
+	    					
 	    					
 	    					<div class="form-group">
 	    						<input type="submit" class="form-control btn btn-info" value="Update">

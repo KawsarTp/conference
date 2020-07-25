@@ -144,7 +144,7 @@
                                             <td>{{$booking->email}}</td>
                                             <td>{{$booking->phone}}</td>
                                             <td>{{$booking->quantity}}</td>
-                                            <td class="text-info">{{$booking->price}}</td>
+                                            <td class="text-info">$ {{$booking->price}}</td>
                                             </tr>
                                             @endforeach
                                             @endif
@@ -204,20 +204,21 @@
                                        <thead>
                                            <tr>
                                                <th class="text-secondary">Ticket Type</th>
-                                               <th class="text-secondary">Total Tickets</th>
                                                <th class="text-success">Available</th>
                                                <th class="text-danger">Sold</th>
                                            </tr>
                                        </thead>
 
                                        <tbody>
-                                           {{-- @foreach($ticket as $ticket)
+                                           @foreach($ticket as $data)
                                             <tr>
-                                            <td>{{$ticket->type}}</td>
-                                            <td>{{$ticket->stock}}</td>
-                                            <td></td>
+                                            <td>{{$data->type}}</td>
+                                            <td>{{$data->stock}}</td>
+                                            <td>
+                                                $ {{$data->bookings->sum('price')}}
+                                            </td>
                                             </tr>
-                                            @endforeach --}}
+                                            @endforeach
                                        </tbody>
                                    </table>
                             </div>
@@ -278,25 +279,7 @@
                     </div><!-- /.card -->
                 </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="card ov-h">
-                        <div class="card-body bg-flat-color-2">
-                            <div id="flotBarChart" class="float-chart ml-4 mr-4"></div>
-                        </div>
-                        <div id="cellPaiChart" class="float-chart"></div>
-                    </div><!-- /.card -->
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card weather-box">
-                        <h4 class="weather-title box-title">Weather</h4>
-                        <div class="card-body">
-                            <div class="weather-widget">
-                                <div id="weather-one" class="weather-one"></div>
-                            </div>
-                        </div>
-                    </div><!-- /.card -->
-                </div>
-            </div>
+               
             <!-- /Calender Chart Weather -->
             <!-- Modal - Calendar - Add New Event -->
             

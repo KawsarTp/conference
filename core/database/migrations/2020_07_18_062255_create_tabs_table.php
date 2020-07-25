@@ -16,7 +16,7 @@ class CreateTabsTable extends Migration
         Schema::create('tabs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('details');
+            $table->text('details');
             $table->string('quotes')->nullable();
             $table->timestamps();
         });

@@ -5,8 +5,8 @@
                 <div class="col-xl-6 col-lg-10">
                     <div class="about-overview-left wow fadeIn" data-wow-duration="1s">
                     <h2 class="title">{{@$content['about']['title']}}</h2>
-                        <h5 class="sub-title">{{@$content['about']['subtitle']}}</p>
-                            <a href="#0" class="custom-button">get ticket</a>
+                        <h5 class="sub-title text-justify">{{@$content['about']['subtitle'] }}</p>
+                        <a href="{{route('plan')}}" class="custom-button">get ticket</a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-10">

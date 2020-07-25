@@ -15,8 +15,8 @@
 <div class="container">
     <div class="row justify-content-center" style="margin-top:100px;">
         <div class="card">
-            <div class="card-header text-center">
-                <strong class="card-title">Manage Sponsor Application</strong>
+            <div class="card-header text-center" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
+                <strong class="card-title text-light">Manage Sponsor Application</strong>
             </div>
             <div class="table-stats order-table ov-h">
                 <table class="table ">
@@ -89,9 +89,7 @@
                         <input type="file" name="image" class="form-control">
                     </div>
  
-                    @if($errors->has('image'))
-                         <p class="alert alert-danger">{{$errors->first('image')}}</p>
-                     @endif
+                    
                      
                      <div class="form-group">
                          <input type="submit" value="Update Image" class="from-control btn btn-primary" >

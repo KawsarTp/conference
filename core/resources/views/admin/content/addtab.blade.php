@@ -14,7 +14,7 @@
     <!-- /#header -->
     <div class="container">
       <div class="row justify-content-center mt-3">
-        <div class="col-md-10">
+        <div class="col-md-12">
           <div class="card">
             <div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
               <h3 class="text-center text-light">tab Section 
@@ -75,7 +75,7 @@
 {{-- button --}}
     <div class="container">
       <div class="row justify-content-center mt-3">
-        <div class="col-md-10">
+        <div class="col-md-12">
           <div class="card">
             <div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
               <h3 class="text-center text-light">tab Button 
@@ -88,12 +88,12 @@
           
             <div class="card-body">
 
-              <table class="table">
+              <table class="table text-center">
                 <thead>
                   <tr>
                     
                     <th scope="col">Title</th>
-                    <th scope="col">description</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -101,8 +101,8 @@
                   @foreach($tabs as $tab )
                   <tr>
                     
-                    <td>{{$tab->title}}</td>
-                    <td>{{$tab->details}}</td>
+                    <td>{{substr($tab->title,0,100)}}</td>
+                    <td>{{substr($tab->details,0,100)}}</td>
                     
                     <td>
                       <button class="btn btn-outline-primary edittab" data-id="{{$tab->id}}" data-title="{{$tab->title}}" data-description="{{$tab->details}}"><i class="fa fa-edit"></i></button>
@@ -185,9 +185,7 @@
                   <textarea name="title" class="form-control" rows="5"></textarea>
                   
                 </div>
-                @if($errors->has('title'))
-                  <p class="alert alert-danger">{{$errors->first('title')}}</p>
-                @endif
+                
 
 
                 <div class="form-group">
@@ -195,9 +193,7 @@
                   <input type="file" name="image" class="form-control">
                   
                 </div>  
-                @if($errors->has('image'))
-                  <p class="alert alert-danger">{{$errors->first('image')}}</p>
-                @endif
+                
 
                 
                 <div class="form-group">
@@ -234,10 +230,7 @@
                   <textarea name="title" class="form-control" rows="5" id="title"></textarea>
                   
                 </div>
-                @if($errors->has('title'))
-                  <p class="alert alert-danger">{{$errors->first('title')}}</p>
-                @endif
-
+                
 
                
 
@@ -246,9 +239,7 @@
                   <input type="file" name="image" class="form-control">
                   
                 </div>  
-                @if($errors->has('image'))
-                  <p class="alert alert-danger">{{$errors->first('image')}}</p>
-                @endif
+               
                 
                 <div class="form-group">
                   <input type="submit" class="form-control btn btn-info" value="Update">
@@ -283,9 +274,7 @@
                   <input type="text" name="title" class="form-control">
                   
                 </div>
-                @if($errors->has('title'))
-                  <p class="alert alert-danger">{{$errors->first('title')}}</p>
-                @endif
+              
 
 
                 <div class="form-group">
@@ -293,10 +282,7 @@
                   <textarea name="description" class="form-control" rows="5"></textarea>
                   
                 </div>  
-                @if($errors->has('description'))
-                  <p class="alert alert-danger">{{$errors->first('description')}}</p>
-                @endif
-
+              
                 
                 <div class="form-group">
                   <input type="submit" class="form-control btn btn-info" value="Save">
@@ -330,9 +316,7 @@
                   <input type="text" name="title" class="form-control" id="title">
                   
                 </div>
-                @if($errors->has('title'))
-                  <p class="alert alert-danger">{{$errors->first('title')}}</p>
-                @endif
+               
 
 
                 <div class="form-group">
@@ -340,12 +324,6 @@
                   <textarea name="description" class="form-control" rows="5" id="description"></textarea>
                   
                 </div>
-                @if($errors->has('description'))
-                  <p class="alert alert-danger">{{$errors->first('description')}}</p>
-                @endif
-
-
-               
 
                 
                 <div class="form-group">

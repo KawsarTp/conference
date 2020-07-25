@@ -17,8 +17,8 @@
         <div class="col-md-10">
           <div class="card">
             <div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
-              <h3 class="text-center text-light">Buy Ticket Section 
-                @if(array_key_exists('buyticket', $content))
+              <h3 class="text-center text-light">Map Section 
+                @if(array_key_exists('map', $content))
                   <span></span>
                 @else
                   <button class="btn btn-outline-info float-right add">ADD <i class="fa fa-plus"></i></button>
@@ -35,22 +35,22 @@
                     
                     <th scope="col">Title</th>
                     <th scope="col">subtitle</th>
-                    <th scope="col">image</th>
+                   
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @if(array_key_exists('buyticket', $content))
+                  @if(array_key_exists('map', $content))
                   <tr>
                     
-                    <td>{{substr(@$content['buyticket']['title'],0,30)}}</td>
-                    <td>{{substr(@$content['buyticket']['subtitle'],0,30)}}</td>
-                    <td><img src="{{asset('asset/admin/images/buyticket').'/'.@$content['buyticket']['image']}}" width="50px" height="50px"></td>
+                    <td>{{substr(@$content['map']['title'],0,30)}}</td>
+                    <td>{{substr(@$content['map']['subtitle'],0,30)}}</td>
+                    
             
                     
                     <td>
-                      <button class="btn btn-outline-primary edit" data-key="buyticket" data-title="{{@$content['buyticket']['title']}}" data-subtitle="{{@$content['buyticket']['subtitle']}}"><i class="fa fa-edit"></i></button>
-                      <a href="{{route('admin.section-delete',['key'=>"buyticket"])}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                      <button class="btn btn-outline-primary edit" data-key="map" data-title="{{@$content['map']['title']}}" data-subtitle="{{@$content['map']['subtitle']}}"><i class="fa fa-edit"></i></button>
+                      <a href="{{route('admin.section-delete',['key'=>"map"])}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                       
                     </td>
                   </tr>
@@ -78,7 +78,7 @@
 
   <script type="text/javascript">
     $('.add').click(function(){
-      $("#buyticketModal").modal('show');
+      $("#mapModal").modal('show');
     });
 
     $('.edit').click(function(){
@@ -97,45 +97,33 @@
 @endpush
 
 
-<div id="buyticketModal" class="modal fade" tabindex="-1" role="dialog">
+<div id="mapModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
-        <h3 class="modal-title text-light">Add buyticket Section Content</h3>
+        <h3 class="modal-title text-light">Add map Section Content</h3>
         
       </div>
       <div class="modal-body">
 
-              <form action="{{route('admin.addsection')}}" method="post" enctype="multipart/form-data">
+              <form action="{{route('admin.addsection')}}" method="post" >
                 @csrf
-                <input type="hidden" name="key" value="buyticket">
+                <input type="hidden" name="key" value="map">
                 <div class="form-group">
-                  <label>buyticket Section Title</label>
+                  <label>map Section Title</label>
                   <textarea name="title" class="form-control" rows="5"></textarea>
                   
                 </div>
-                @if($errors->has('title'))
-                  <p class="alert alert-danger">{{$errors->first('title')}}</p>
-                @endif
+                
 
                 <div class="form-group">
                   <label>Sub Title</label>
                   <textarea name="subtitle" class="form-control" rows="5"></textarea>
                   
                 </div>
-                @if($errors->has('subtitle'))
-                  <p class="alert alert-danger">{{$errors->first('subtitle')}}</p>
-                @endif
+               
 
-
-                 <div class="form-group">
-                  <label>Image</label>
-                 <input type="file" name="image" class="form-control">
-                  
-                </div>
-                @if($errors->has('image'))
-                  <p class="alert alert-danger">{{$errors->first('image')}}</p>
-                @endif
+                 
 
 
                 
@@ -164,43 +152,31 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
-        <h3 class="modal-title text-light">Update buyticket Section Content</h3>
+        <h3 class="modal-title text-light">Update map Section Content</h3>
         
       </div>
       <div class="modal-body">
 
-              <form action="{{route('admin.updatesection')}}" method="post" enctype="multipart/form-data">
+              <form action="{{route('admin.updatesection')}}" method="post" >
                 @csrf
                 @method('put')
                 <input type="hidden" name="key" id="id">
                 <div class="form-group">
-                  <label>buyticket Section Title</label>
+                  <label>map Section Title</label>
                   <textarea name="title" class="form-control" rows="5" id="title"></textarea>
                   
                 </div>
-                @if($errors->has('title'))
-                  <p class="alert alert-danger">{{$errors->first('title')}}</p>
-                @endif
+                
 
 
 
                  <div class="form-group">
-                  <label>buyticket Section Sub Title</label>
-                  <textarea name="subtitle" class="form-control" rows="5" id="title"></textarea>
+                  <label>map Section Sub Title</label>
+                  <textarea name="subtitle" class="form-control" rows="5" id="subtitle"></textarea>
                   
                 </div>
-                @if($errors->has('subtitle'))
-                  <p class="alert alert-danger">{{$errors->first('subtitle')}}</p>
-                @endif     
+               
                 
-                <div class="form-group">
-                  <label>Image</label>
-                 <input type="file" name="image" class="form-control">
-                  
-                </div>
-                @if($errors->has('image'))
-                  <p class="alert alert-danger">{{$errors->first('image')}}</p>
-                @endif
 
 
 

@@ -5,7 +5,7 @@
         </div>
         <ul class="menu">
             <li>
-                <a href="#0">Home</a>
+            <a href="{{route('home')}}">Home</a>
                 
             </li>
             <li>
@@ -13,7 +13,7 @@
                
             </li>
             <li>
-                <a href="#0">Schedule</a>
+                <a href="#schedule">Schedule</a>
                 
             </li>
             <li>
@@ -23,7 +23,7 @@
             
             
             <li>
-                <a href="#0" class="header-button">buy ticket</a>
+            <a href="{{route('plan')}}" class="header-button">buy ticket</a>
             </li>
         </ul>
         <div class="header-bar d-lg-none">
