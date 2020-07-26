@@ -36,7 +36,6 @@ class AdminController extends Controller
     }
 
 
-
     public function addContentForm(){
         return view('admin.addcontent');
     }

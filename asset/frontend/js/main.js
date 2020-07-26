@@ -60,16 +60,16 @@
             }
         });
         //Count Down JAva Script
-        $('.banner-countdown').countdown({
-              date: '12/27/2019 05:00:00',
-              offset: +2,
-              day: 'Day',
-              days: 'Days'
-            },
+        // $('.banner-countdown').countdown({
+        //       date: '12/27/2019 05:00:00',
+        //       offset: +2,
+        //       day: 'Day',
+        //       days: 'Days'
+        //     },
 
-            function(){
+        //     function(){
 
-            });
+        //     });
             
         // Scroll To Top 
         var scrollTop = $(".scrollToTop");

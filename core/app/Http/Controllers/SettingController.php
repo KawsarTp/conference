@@ -13,7 +13,7 @@ class SettingController extends Controller
 
     public function addBanner(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -23,7 +23,7 @@ class SettingController extends Controller
 
     public function addAbout(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -32,7 +32,7 @@ class SettingController extends Controller
 
    public function addTab(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	$tabs = Tab::latest()->get();
@@ -85,7 +85,7 @@ class SettingController extends Controller
 
     public function speakerSection(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -96,7 +96,7 @@ class SettingController extends Controller
 
     public function scheduleSection(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -106,7 +106,7 @@ class SettingController extends Controller
 
     public function ticketSection(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -115,7 +115,7 @@ class SettingController extends Controller
     
     public function buyTicketSection(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -124,7 +124,7 @@ class SettingController extends Controller
 
     public function eventSection(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -134,7 +134,7 @@ class SettingController extends Controller
 
     public function blogSection(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -145,7 +145,7 @@ class SettingController extends Controller
 
     public function sponsorSection(Request $request)
     {
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
     	
@@ -180,7 +180,7 @@ class SettingController extends Controller
 
     	$key = $request->key;
 
-         $a =  file_get_contents(resource_path('json\content.json'));
+         $a =  file_get_contents(base_path('resources/json/content.json'));
          $fileContent = json_decode($a,true);
          
          $pushContent = [
@@ -193,7 +193,7 @@ class SettingController extends Controller
          $margeContent = array_merge($fileContent,$pushContent);
         
         $encode = json_encode($margeContent);
-        file_put_contents(resource_path('json\content.json'),$encode);
+        file_put_contents(base_path('resources/json/content.json'),$encode);
 
         return redirect()->back()->with('success','Added Successfull');
 
@@ -213,7 +213,7 @@ class SettingController extends Controller
 
     	$key = $request->key;
 
-         $a =  file_get_contents(resource_path('json\content.json'));
+         $a =  file_get_contents(base_path('resources/json/content.json'));
          $fileContent = json_decode($a,true);
          
          $pushContent = [
@@ -226,7 +226,7 @@ class SettingController extends Controller
          $margeContent = array_merge($fileContent,$pushContent);
         
         $encode = json_encode($margeContent);
-        file_put_contents(resource_path('json\content.json'),$encode);
+        file_put_contents(base_path('resources/json/content.json'),$encode);
 
         return redirect()->back()->with('success','Added Successfull');
 
@@ -261,7 +261,7 @@ class SettingController extends Controller
 
 
        	
-        $a =  file_get_contents(resource_path('json\content.json'));
+        $a =  file_get_contents(base_path('resources/json/content.json'));
         $data = json_decode($a,true);
         $input = $request->key;
             foreach ($data as $key=>$value) {
@@ -271,7 +271,7 @@ class SettingController extends Controller
                     $data[$input]['image']= $nameFormate;
                  }
             }
-        file_put_contents(resource_path('json\content.json'),json_encode($data));
+        file_put_contents(base_path('resources/json/content.json'),json_encode($data));
 
         return redirect()->back()->with('success','Updated Successfull');
         }
@@ -284,7 +284,7 @@ class SettingController extends Controller
 
     	]);
 
-    	$a =  file_get_contents(resource_path('json\content.json'));
+    	$a =  file_get_contents(base_path('resources/json/content.json'));
         $data = json_decode($a,true);
         $input = $request->key;
             foreach ($data as $key=>$value) {
@@ -293,7 +293,7 @@ class SettingController extends Controller
                     $data[ $input]['subtitle'] = $request->subtitle;
                  }
             }
-        file_put_contents(resource_path('json\content.json'),json_encode($data));
+        file_put_contents(base_path('resources/json/content.json'),json_encode($data));
 
         return redirect()->back()->with('success','Updated Successfull');
 
@@ -307,13 +307,13 @@ class SettingController extends Controller
     public function deleteSection($key){
 
         $delItem = $key;
-        $a =  file_get_contents(resource_path('json\content.json'));
+        $a =  file_get_contents(base_path('resources/json/content.json'));
         $data = json_decode($a,true);
         if(array_key_exists($delItem, $data)){
             unset($data[$delItem]);
         }
 
-        file_put_contents(resource_path('json\content.json'),json_encode($data));
+        file_put_contents(base_path('resources/json/content.json'),json_encode($data));
 
         return redirect()->back()->with('success',"Deleted Successfully");
 
@@ -327,7 +327,7 @@ class SettingController extends Controller
 	
 	public function overview()
 	{
-        $a =  file_get_contents(resource_path('json\content.json'));
+        $a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
 		$overview = Overview::latest()->paginate(10);

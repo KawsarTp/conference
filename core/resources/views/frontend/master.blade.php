@@ -53,11 +53,13 @@
     <script src="{{asset('asset/frontend/js/wow.min.js')}}"></script>
     <script src="{{asset('asset/frontend/js/parallax.js')}}"></script>
     <script src="{{asset('asset/frontend/js/tweenmax.min.js')}}"></script>
- 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="{{asset('asset/frontend/js/map.js')}}"></script>
     <script src="{{asset('asset/frontend/js/main.js')}}"></script>
 
-
+    @include('alert.success')
+    @include('alert.error')
+    @include('alert.errors')
 
 </body>
 

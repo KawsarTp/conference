@@ -1,4 +1,4 @@
-<section class="banner-section bg_img" data-background="{{asset('asset/frontend/images/banner/banner-bg-one.jpg')}}">
+<section class="banner-section bg_img" data-background="{{asset('asset/admin/images/banner').'/'.@$content['banner']['image']}}">
     <div class="banner-shape-two"></div>
     <div class="banner-shape-one"></div>
     <div class="container">
@@ -54,16 +54,19 @@ var x = setInterval(function() {
           hours = 23
       }
      
-      
-      document.getElementById("day").innerHTML = days;
-      document.getElementById("hour").innerHTML = hours;
-      document.getElementById("min").innerHTML = minutes;
-      document.getElementById("sec").innerHTML = seconds;
+      if(days<0){
+        document.getElementById("day").innerHTML = 00;
+        document.getElementById("hour").innerHTML = Math.abs(hours);
+        document.getElementById("min").innerHTML = Math.abs(minutes);
+        document.getElementById("sec").innerHTML = Math.abs(seconds);
     
-      if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
-         }
+      }else{
+        document.getElementById("day").innerHTML = days;
+        document.getElementById("hour").innerHTML = hours;
+        document.getElementById("min").innerHTML = minutes;
+        document.getElementById("sec").innerHTML = seconds;
+      }
+      
 }, 1000);
 
 </script>

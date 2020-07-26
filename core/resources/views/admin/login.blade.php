@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="login-form">
-                    @include('admin.alert')
+
                     <form action="{{route('admin.login')}}" method="post">
                         @csrf
                         <div class="form-group">

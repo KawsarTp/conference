@@ -21,6 +21,7 @@ class CreateTicketsTable extends Migration
             $table->text('feature');
             $table->text('details');
             $table->text('benefits');
+            $table->string('image');
             $table->timestamps();
         });
     }

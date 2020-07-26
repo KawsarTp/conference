@@ -1,4 +1,4 @@
-<section class="blog-section padding-top">
+<section class="blog-section padding-top" id="blog">
     <div class="container">
         <div class="section-header wow fadeInUp" data-wow-duration="1s">
         <h2 class="title">{{@$content['blog']['title']}}</h2>

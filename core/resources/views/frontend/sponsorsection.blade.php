@@ -39,7 +39,7 @@
             <div class="col-lg-4">
                 <div class="application-form-area">
                     <h5 class="title">Application Form</h5>
-                    @include('frontend.alert')
+
                 <form class="application-form" action="{{route('sponsor')}}" method="post">
                     @csrf
                         <div class="form-group">

@@ -45,38 +45,28 @@
                         @csrf
                             <input type="hidden" name="price" value="{{$id->price}}">
                             <div class="form-group">
-                                <input type="text" placeholder="Full Name" name="name">
+                                <input type="text" placeholder="Full Name" name="name" required>
                             </div>
-                            @if($errors->has('name'))
-                                <p class="alert alert-danger">{{$errors->first('name')}}</p>
-                            @endif
+                           
                             <div class="form-group">
-                                <input type="text" placeholder="Email" name="email">
+                                <input type="email" placeholder="Email" name="email" required>
                             </div>
-                            @if($errors->has('email'))
-                                <p class="alert alert-danger">{{$errors->first('email')}}</p>
-                            @endif
+                           
                             <div class="form-group">
-                                <input type="text" placeholder="Phone" name="phone">
+                                <input type="text" placeholder="Phone" name="phone" required>
                             </div>
-                            @if($errors->has('phone'))
-                            <p class="alert alert-danger">{{$errors->first('phone')}}</p>
-                            @endif
+                           
                             <div class="form-group">
-                                <input type="number" placeholder="Quantity" min="1" name="quantity">
+                                <input type="number" placeholder="Quantity" min="1" name="quantity" required>
                             </div>
-                            @if($errors->has('quantity'))
-                            <p class="alert alert-danger">{{$errors->first('quantity')}}</p>
-                            @endif
+                            
                             <div class="form-group">
                                 <input type="submit" value="Submit Now">
                             </div>
                             <div class="form-group check-input d-flex flex-wrap align-items-center">
                                 <input type="checkbox" id="check-ticket" value="accept" name="check">
                                 <label for="check-ticket">I Accept The</label> <a href="#0">Terms & Policy</a>
-                                @if($errors->has('check'))
-                            <p class="alert alert-danger">{{$errors->first('check')}}</p>
-                            @endif
+                                
                             </div>
                         </form>
                     </div>

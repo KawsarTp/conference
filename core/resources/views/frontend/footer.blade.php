@@ -32,19 +32,19 @@
             </ul>
             <ul class="footer-menu">
                 <li>
-                    <a href="index.html">Home</a>
+                <a href="{{route('home')}}">Home</a>
                 </li>
                 <li>
-                    <a href="speaker.html">Speakers</a>
+                    <a href="#speaker">Speakers</a>
                 </li>
                 <li>
-                    <a href="schedule.html">Schedule</a>
+                    <a href="#schedule">Schedule</a>
                 </li>
                 <li>
-                    <a href="blog.html">Blog</a>
+                    <a href="#blog">Blog</a>
                 </li>
                 <li>
-                    <a href="contact.html">Contact</a>
+                    <a href="">Contact</a>
                 </li>
             </ul>
         </div>

@@ -35,7 +35,6 @@ class UserController extends Controller
         
         $tabs =  Tab::all();
 
-        // time Calculation Method 
         $time  = $this->dateDiffInDays($setting->start_date);
 
         $overView = Overview::all();
@@ -43,8 +42,8 @@ class UserController extends Controller
         $allSponsor = SponsorshipApplication::with('types')->get();
 
         $itterator = SponsorshipApplication::groupBy('sponsor_type_id')->selectRaw('sponsor_type_id')->get();
-dd(resource_path('json\content.json'));
-        $a =  file_get_contents(resource_path('json\content.json'));
+      
+        $a =  file_get_contents(base_path('resources/json/content.json'));
 
         $content = json_decode($a,true);
 
@@ -63,14 +62,16 @@ dd(resource_path('json\content.json'));
     public function buyTickets(Request $request)
     {
         $this->validate($request,[
-            'name'=>'required',
-            'email'=>'required|unique:bookings',
-            'phone'=>'required|unique:bookings',
-            'quantity'=>'required',
+            'name'=>'required|max:50',
+            'email'=>'required|unique:bookings|email',
+            'phone'=>'required|unique:bookings|max:11',
+            'quantity'=>'required|integer|min:1|max:3',
             'check' => 'required'
         ]);
 
         $ticket = Ticket::find($request->id);
+    
+       
         if($ticket->stock >= $request->quantity){
             $TotalPrice = $request->quantity * $request->price;
             $ticketNumber = 'conf-'.time();
@@ -92,7 +93,7 @@ dd(resource_path('json\content.json'));
 
             return redirect()->back()->with('success','Booking Confirmed');
 
-            // dd($ticketNumber);
+       
 
         }
         
@@ -113,10 +114,10 @@ dd(resource_path('json\content.json'));
         
 
         $this->validate($request,[
-            'name' => 'required',
-            'company'=>'required|unique:sponsorship_applications',
-            'email' => 'required|unique:sponsorship_applications',
-            'website'=>'required|unique:sponsorship_applications',
+            'name' => 'required|max:50',
+            'company'=>'required|unique:sponsorship_applications|max:40',
+            'email' => 'required|unique:sponsorship_applications|email',
+            'website'=>'required|unique:sponsorship_applications|regex:/^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?$/',
             'type'=>'required',
         ]);
 
@@ -145,6 +146,7 @@ dd(resource_path('json\content.json'));
         $hours_remaining = floor(($remaining % 86400) / 3600);
         $min = floor(($remaining % 3600) / 60);
         $sec = ($remaining % 60);
+  
 
         return [
             'day'=>$days_remaining,
@@ -162,7 +164,7 @@ public function blogDetails(Blog $id)
 
 public function pricingPlan()
 {
-    $a =  file_get_contents(resource_path('json\content.json'));
+    $a =  file_get_contents(base_path('resources/json/content.json'));
 
     $content = json_decode($a,true);
 
