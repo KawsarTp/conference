@@ -12,18 +12,18 @@
     <!-- Header-->
         @include('admin.nav')
     <!-- /#header -->
-    <div class="container">
-    	<div class="row justify-content-center mt-3">
-    		<div class="col-md-10">
+    <div class="container-fluid">
+    	<div class="row justify-content-center">
+    		<div class="col-md-12 mt-3">
 	    		<div class="card">
-	    			<div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
-	    				<h3 class="text-center text-light">Over View Section <span class="float-right"><a href="javascript:void(0)" class="btn btn-outline-primary overview">ADD <i class="fa fa-plus"></i></a></span></h3>
+	    			<div class="card-header card-background">
+	    				<h3 class="text-center text-light">Over View Content <span class="float-right"><a href="javascript:void(0)" class="btn btn-outline-primary overview">ADD <i class="fa fa-plus"></i></a></span></h3>
 	    				
                     </div>
                     
 	    			<div class="card-body">
 	    				<table class="table">
-                            <thead class="text-center bg-dark text-light" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
+                            <thead class="text-center bg-dark text-light">
                                 <tr>
                                     <th>sl</th>
                                     <th>title</th>
@@ -34,7 +34,7 @@
 
                             </thead>
 
-                            <tbody>
+                            <tbody class="text-center">
                                 @php($i = 1)
                                 @foreach($overview as $data)
                                 <tr>
@@ -60,52 +60,47 @@
 
 
 
-    <div class="container">
+    <div class="container-fluid">
     	<div class="row justify-content-center mt-3">
-    		<div class="col-md-10">
+    		<div class="col-md-12">
 	    		<div class="card">
-	    			<div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
-	    				<h3 class="text-center text-light">OverView Section Image 
-                            @if(array_key_exists('overview',$content))
-                            
-                            @else
-                            <button class="btn btn-outline-primary float-right addimage">ADD <i class="fa fa-plus"></i></button>
-                            @endif
-                        </h3>
+	    			<div class="card-header card-background">
+	    				<h3 class="text-center text-light">Over View Section Image</h3>
 	    				
                     </div>
                     
 	    			<div class="card-body">
-	    				<table class="table">
-                            <thead class="text-center bg-dark text-light" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
-                                <tr>
-                                    
-                                    <th>Image</th>
-                                    <th>Action</th>
-                                </tr>
+	    				<form action="{{route('admin.updatesection')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('put')
+                                <input type="hidden" name="key" value="overview">
+            
+                                <div class="form-row">
 
-                            </thead>
-
-                            <tbody class="text-center">
-                                @if(array_key_exists('overview',$content))
-                                <tr>
-
-                                <td>
-                                    <img src="{{asset('asset/admin/images/overview').'/'.@$content['overview']['image']}}" alt="" width="100px">
-                                </td>
-                                <td>
-                                    <button class="btn btn-outline-info editimage"><i class="fa fa-edit"></i></button>
-
-                                    <a class="btn btn-outline-danger delete" href="{{route('admin.section-delete',['key'=>"overview"])}}"><i class="fa fa-trash"></i></a>
-                                </td>
-                                    
-                                </tr>
-                                @else
-                                 <tr> <td class="text-danger text-center">No data</td></tr>
-                                @endif
-
-                            </tbody>
-                        </table>
+                                    <div class="col">
+                                        <label for="">Image: </label>
+                                        <input type="file" name="image" class="form-control d-block" required>
+                                        <span class="image-size">N.B-Image Size will be 982 X 627 px</span>
+                                    </div>
+    
+                                    <div class="col py-3">
+                                        <div class="pl-5">
+                                            <label for="" class="align-top">Current Image : </label>
+                                            <img src="{{asset('asset/admin/images/overview/'. @$content['overview']['image'])}}"
+                                                alt="Banner" class="img-fluid w-25 img-thumbnail ">
+                                        </div>
+    
+                                    </div>
+    
+    
+                                </div>
+            
+                                <div class="form-group">
+            
+                                   <input type="submit" value="Update" class="btn btn-primary form-control"> 
+                                        
+                                </div>
+                            </form>
                     </div>
                     
 	    		</div>
@@ -115,9 +110,12 @@
 </div>
 @endsection
 
-@push('overview')
-    <script>
-        $('.overview').click(function(e){
+
+@push('content')
+
+<script src="http://blast.thesoftking.com/lab/xenwallet/assets/admin/js/nicEdit.js"></script>
+<script>
+     $('.overview').click(function(e){
             $('#myModal').modal('show');
 
             e.preventDefault();
@@ -139,27 +137,53 @@
 
         });
 
-
-        $('.addimage').click(function(e){
-            $('#imageModal').modal('show');
-
-            e.preventDefault();
+    bkLib.onDomLoaded(function () {
+        $(".nicEdit").each(function (index) {
+            $(this).attr("id", "nicEditor" + index);
+            new nicEditor({
+                fullPanel: true
+            }).panelInstance('nicEditor' + index, {
+                hasPanel: true
+            });
         });
+    });
+
+    function getCont() {
+        var c = ndinstance.getContent();
+
+        var start_ptn = /(<.[^>]+>)*/gmi; //Filter label opening	
+        var end_ptn = /<\/?\w+>$/; //Filter tag ends
+        var space_ptn = /(&nbsp;)*/; //Filter spaces
+        var c1 = c.replace(start_ptn, "").replace(end_ptn).replace(space_ptn, "");
+
+    }
+
+</script>
 
 
-        
-        $('.editimage').click(function(e){
-            $('#editimageModal').modal('show');
+<style>
+    .card-background {
+        background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(151, 10, 130, 1) 0%, rgba(33, 33, 33, 1) 100.2%);
+    }
 
-            e.preventDefault();
-        });
-    </script>
+
+    .image-size {
+        color: brown;
+    }
+
+    textarea {
+        background-color: white;
+    }
+
+</style>
+
+    
 @endpush
 
 <div id="myModal" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="card-header bg-info text-center text-light" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
+            <div class="card-header bg-info text-center text-light card-background">
                 <h3>Add Overview Section</h3>
             </div>
             <div class="modal-body">
@@ -169,12 +193,12 @@
 
                     <div class="form-group">
                         <label for="">Title</label>
-                        <input class="form-control" type="text" name="title">
+                        <input class="form-control" type="text" name="title" required>
                     </div>
 
                     <div class="form-group">
                         <label for="my-textarea">Details</label>
-                        <textarea id="my-textarea" class="form-control" name="details" rows="3"></textarea>
+                        <textarea id="my-textarea" class="form-control" name="details" rows="8" required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -188,7 +212,7 @@
 
                     <div class="form-group">
 
-                       <input type="submit" value="Save" class="btn btn-primary form-control"> 
+                       <input type="submit" value="Add Overview" class="btn btn-primary form-control"> 
                             
                     </div>
                 </form>
@@ -212,12 +236,12 @@
                     <input type="hidden" id="id" name="id">
                     <div class="form-group">
                         <label for="">Title</label>
-                        <input class="form-control" type="text" name="title" id="title">
+                        <input class="form-control" type="text" name="title" id="title" required>
                     </div>
 
                     <div class="form-group">
                         <label for="my-textarea">Details</label>
-                        <textarea class="form-control" name="details" rows="3" id="details"></textarea>
+                        <textarea class="form-control" name="details" rows="3" id="details" required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -240,64 +264,3 @@
     </div>
 </div>
 
-
-
-
-
-<div id="imageModal" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="card-header bg-info text-center text-light" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
-                <h3>Add Overview Section Image</h3>
-            </div>
-            <div class="modal-body">
-            <form action="{{route('admin.addsection')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                    <input type="hidden" name="key" value="overview">
-
-                    <div class="form-group">
-                        <label for="">Image</label>
-                        <input class="form-control" type="file" name="image">
-                    </div>
-
-
-                    <div class="form-group">
-
-                       <input type="submit" value="Save" class="btn btn-primary form-control"> 
-                            
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div id="editimageModal" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="card-header bg-info text-center text-light" style="background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );">
-                <h3>Update Image</h3>
-            </div>
-            <div class="modal-body">
-            <form action="{{route('admin.updatesection')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                    <input type="hidden" name="key" value="overview">
-
-                    <div class="form-group">
-                        <label for="">Image</label>
-                        <input class="form-control" type="file" name="image">
-                    </div>
-
-
-                    <div class="form-group">
-
-                       <input type="submit" value="Update" class="btn btn-primary form-control"> 
-                            
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

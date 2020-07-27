@@ -13,8 +13,7 @@ use App\Sponsor;
 use App\SponsorshipApplication;
 use App\SponsorType;
 use Carbon\Carbon;
-use Image;
-
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\File;
@@ -51,6 +50,7 @@ class AdminController extends Controller
 
     public function addSpeaker()
     {
+
         return view('admin.speaker');
     }
 
@@ -60,7 +60,7 @@ class AdminController extends Controller
         
         // validate input field
         $this->validate($request,[
-            'name' => 'required|unique:speakers',
+            'name' => 'required',
             'details' =>'required',
             'expertise' =>'required',
             'image' =>'required|image|max:1024|mimes:jpeg,png,jpg,gif,svg',
@@ -68,20 +68,23 @@ class AdminController extends Controller
 
         $imageName = $request->file('image');
         
-        $speakerNameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+        $nameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
         $img = Image::make($imageName);
         $path = 'asset/admin/images/speaker';
-        $img->resize(150,150);
-        $img->save($path.'/'.$speakerNameFormate);
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $img->resize(460,530);
+        $img->save($path.'/'.$nameFormate);
         
         $speaker = new Speaker();
-
        
-
         $speaker->name = $request->name;
         $speaker->details = $request->details;
         $speaker->designation = $request->expertise;
-        $speaker->image = $speakerNameFormate;
+        $speaker->image = $nameFormate;
 
         $speaker->save();
 
@@ -113,15 +116,18 @@ class AdminController extends Controller
 
         if($request->hasFile('image')){
                 $imageName = $request->file('image');
-                $speakerNameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+                $nameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
             if(file_exists($path.'/'.$speaker->image)){
                 unlink($path.'/'.$speaker->image);
             }
-                $imageName->move($path,$speakerNameFormate);
+
+                $img = Image::make($imageName);
+                $img->resize(460,530);
+                $img->save($path.'/'.$nameFormate);
 
                 $speaker->name = $request->name;
                 $speaker->details = $request->details;
-                $speaker->image = $speakerNameFormate;
+                $speaker->image = $nameFormate;
                 $speaker->designation = $request->expertise;
 
                 $speaker->save();
@@ -136,10 +142,14 @@ class AdminController extends Controller
 
                 $speaker->save();
                 return redirect()->back()->with('success','Update Successfully');
-       
 
-        
+    }
 
+    public function deleteSpeaker(Speaker $id)
+    {
+       $id->delete();
+
+       return redirect()->back()->with('success','Deleted Succesfully');
     }
 
     public function addTickets()

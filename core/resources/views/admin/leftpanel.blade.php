@@ -7,19 +7,19 @@
                 </li>
                 <li class="menu-title"></li><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-layout"></i>Contents Section</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-layout"></i>Frontend Manager</a>
                     <ul class="sub-menu children dropdown-menu">                            
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.banner')}}">Banner Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.about')}}">About Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.tab')}}">Tab Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.overview')}}">OverView Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.speaker-section')}}">speaker Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.schedule-section')}}">Schedule Section</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.ticket-section')}}">Ticket Section</a></li>
-                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.buy-ticket')}}">Buy Ticket Section</a></li>
-                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.event-section')}}">Event Section</a></li>
-                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.blog-section')}}">Blog Section</a></li>
-                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.sponsor-section')}}">Sponsor Section</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.banner')}}">Banner content</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.about')}}">About content</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.tab')}}">Tab content</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.overview')}}">OverView content</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.speaker-section')}}">speaker content</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.schedule-section')}}">Schedule content</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('admin.ticket-section')}}">Ticket content</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.buy-ticket')}}">Buy Ticket content</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.event-section')}}">Event content</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.blog-section')}}">Blog content</a></li>
+                    <li><i class="fa fa-id-badge"></i><a href="{{route('admin.sponsor-section')}}">Sponsor content</a></li>
                         
                     </ul>
                 </li>

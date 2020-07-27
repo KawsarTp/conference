@@ -12,55 +12,67 @@
     <!-- Header-->
         @include('admin.nav')
     <!-- /#header -->
-    <div class="container">
-      <div class="row justify-content-center mt-3">
-        <div class="col-md-10">
+    <div class="container-fluid">
+      <div class="row justify-content-center ">
+        <div class="col-md-12 mt-3">
           <div class="card">
-            <div class="card-header" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
-              <h3 class="text-center text-light">Buy Ticket Section 
-                @if(array_key_exists('buyticket', $content))
-                  <span></span>
-                @else
-                  <button class="btn btn-outline-info float-right add">ADD <i class="fa fa-plus"></i></button>
-                  @endif
-              </h3>
+            <div class="card-header card-background">
+              <h3 class="text-center text-light">Buy Ticket Content </h3>
               
             </div>
           
             <div class="card-body">
 
-              <table class="table">
-                <thead>
-                  <tr>
-                    
-                    <th scope="col">Title</th>
-                    <th scope="col">subtitle</th>
-                    <th scope="col">image</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @if(array_key_exists('buyticket', $content))
-                  <tr>
-                    
-                    <td>{{substr(@$content['buyticket']['title'],0,30)}}</td>
-                    <td>{{substr(@$content['buyticket']['subtitle'],0,30)}}</td>
-                    <td><img src="{{asset('asset/admin/images/buyticket').'/'.@$content['buyticket']['image']}}" width="50px" height="50px"></td>
-            
-                    
-                    <td>
-                      <button class="btn btn-outline-primary edit" data-key="buyticket" data-title="{{@$content['buyticket']['title']}}" data-subtitle="{{@$content['buyticket']['subtitle']}}"><i class="fa fa-edit"></i></button>
-                      <a href="{{route('admin.section-delete',['key'=>"buyticket"])}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
-                      
-                    </td>
-                  </tr>
-                  @else
-                    <tr>
-                      <td colspan="3" class="text-danger font-weight-bold text-center">No Data Found</td>
-                    </tr>
-                  @endif
-                </tbody>
-              </table>
+              <form action="{{route('admin.updatesection')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                <input type="hidden" name="key" id="id" value="buyticket">
+                <div class="form-group">
+                  <label>buyticket Section Title</label>
+                <input type="text" name="title" class="form-control" required value="{{@$content['buyticket']['title']}}">
+                  
+                </div>
+                
+
+
+                 <div class="form-group">
+                  <label>buyticket Section Sub Title</label>
+                 <textarea name="subtitle" class="form-control nicEdit" rows="5" id="title" required>{{@$content['buyticket']['subtitle']}}</textarea>
+                  
+                </div>
+                   
+                
+                <div class="form-row">
+
+                  <div class="col">
+                      <label for="">Image: </label>
+                      <input type="file" name="image" class="form-control d-block">
+                      <span class="image-size">N.B-Image Size will be 1920 X 470 px</span>
+                  </div>
+
+                  <div class="col py-3">
+                      <div class="pl-5">
+                          <label for="" class="align-top">Current Image : </label>
+                          <img src="{{asset('asset/admin/images/buyticket/'. @$content['buyticket']['image'])}}"
+                              alt="buyticket" class="img-fluid w-25 img-thumbnail ">
+                      </div>
+
+                  </div>
+
+
+              </div>
+               
+
+
+
+                <div class="form-group">
+                  <input type="submit" class="form-control btn btn-info" value="Update" onclick="getCont()">
+                </div>
+
+
+              </form>
+
+              
 
               
             </div>
@@ -74,131 +86,51 @@
 </div>
 @endsection
 
-@push('banner')
+@push('content')
 
-  <script type="text/javascript">
-    $('.add').click(function(){
-      $("#buyticketModal").modal('show');
+
+<script src="http://blast.thesoftking.com/lab/xenwallet/assets/admin/js/nicEdit.js"></script>
+<script>
+    bkLib.onDomLoaded(function () {
+        $(".nicEdit").each(function (index) {
+            $(this).attr("id", "nicEditor" + index);
+            new nicEditor({
+                fullPanel: true
+            }).panelInstance('nicEditor' + index, {
+                hasPanel: true
+            });
+        });
     });
 
-    $('.edit').click(function(){
-      $("#editModal").modal('show');
-      var key = $(this).data('key');
-      var title = $(this).data('title');
-      var subtitle = $(this).data('subtitle');
+    function getCont() {
+        var c = ndinstance.getContent();
 
-          $(".modal-body #id").val(key);
-          $(".modal-body #title").val(title);
-          $(".modal-body #subtitle").val(subtitle);
-    });
+        var start_ptn = /(<.[^>]+>)*/gmi; //Filter label opening	
+        var end_ptn = /<\/?\w+>$/; //Filter tag ends
+        var space_ptn = /(&nbsp;)*/; //Filter spaces
+        var c1 = c.replace(start_ptn, "").replace(end_ptn).replace(space_ptn, "");
 
-  </script>
+    }
 
+</script>
+
+
+<style>
+    .card-background {
+        background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(151, 10, 130, 1) 0%, rgba(33, 33, 33, 1) 100.2%);
+    }
+
+
+    .image-size {
+        color: brown;
+    }
+
+    textarea {
+        background-color: white;
+    }
+
+</style>
+  
 @endpush
 
 
-<div id="buyticketModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
-        <h3 class="modal-title text-light">Add buyticket Section Content</h3>
-        
-      </div>
-      <div class="modal-body">
-
-              <form action="{{route('admin.addsection')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="key" value="buyticket">
-                <div class="form-group">
-                  <label>buyticket Section Title</label>
-                  <textarea name="title" class="form-control" rows="5"></textarea>
-                  
-                </div>
-                
-
-                <div class="form-group">
-                  <label>Sub Title</label>
-                  <textarea name="subtitle" class="form-control" rows="5"></textarea>
-                  
-                </div>
-                
-
-                 <div class="form-group">
-                  <label>Image</label>
-                 <input type="file" name="image" class="form-control">
-                  
-                </div>
-               
-
-
-                
-                <div class="form-group">
-                  <input type="submit" class="form-control btn btn-info" value="Save">
-                </div>
-
-
-              </form>
-        
-      </div>
-     
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-{{-- Edit Modal --}}
-
-
-<div id="editModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(151,10,130,1) 0%, rgba(33,33,33,1) 100.2% );">
-        <h3 class="modal-title text-light">Update buyticket Section Content</h3>
-        
-      </div>
-      <div class="modal-body">
-
-              <form action="{{route('admin.updatesection')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                <input type="hidden" name="key" id="id">
-                <div class="form-group">
-                  <label>buyticket Section Title</label>
-                  <textarea name="title" class="form-control" rows="5" id="title"></textarea>
-                  
-                </div>
-                
-
-
-                 <div class="form-group">
-                  <label>buyticket Section Sub Title</label>
-                  <textarea name="subtitle" class="form-control" rows="5" id="title"></textarea>
-                  
-                </div>
-                   
-                
-                <div class="form-group">
-                  <label>Image</label>
-                 <input type="file" name="image" class="form-control">
-                  
-                </div>
-               
-
-
-
-                <div class="form-group">
-                  <input type="submit" class="form-control btn btn-info" value="Update">
-                </div>
-
-
-              </form>
-        
-      </div>
-     
-    </div>
-  </div>
-</div>

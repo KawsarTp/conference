@@ -40,14 +40,15 @@
     @yield('content')
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="http://zaman.thesoftking.com/lottery/assets/templates/basic//js/jquery-3.3.1.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="assets/js/main.js"></script>
-
+{{-- <script src="{{asset('asset/admin/js/main.js')}}"></script> --}}
+{{-- 
     <!--  Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
@@ -60,23 +61,32 @@
     <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="assets/js/init/weather-init.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-    <script src="{{asset('asset/admin/js/init/fullcalendar-init.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script> --}}
+    {{-- <script src="{{asset('asset/admin/js/init/fullcalendar-init.js')}}"></script> --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
     
-    <script src="{{asset('asset/admin/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
+    {{-- <script src="{{asset('asset/admin/js/bootstrap-iconpicker.bundle.min.js')}}"></script> --}}
     
-  
+
+<script src="http://zaman.thesoftking.com/lottery/assets/admin/js/nicEdit.js"></script>
+<script>
+    bkLib.onDomLoaded(function() {
+        $(".nicEdit").each(function( index ) {
+            $(this).attr("id","nicEditor"+index);
+            new nicEditor({fullPanel : true}).panelInstance('nicEditor'+index,{hasPanel : true});
+        });
+    });
+</script>
+    
 
     <!--Local Stuff-->
 @stack('datepick')
 @stack('section')
-@stack('banner')
+@stack('content')
 @stack('js')
 @stack('blog')
 @stack('bookings')

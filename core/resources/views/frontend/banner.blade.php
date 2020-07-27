@@ -5,8 +5,8 @@
         <div class="banner-content text-center">
             
             <div class="banner-header">
-            <h1 class="title">{{@$content['banner']['title']}}</h1>
-            <p>{{@$content['banner']['subtitle']}}</p>
+            <h1 class="title">{!! @$content['banner']['title'] !!}</h1>
+            <p>{{ @$content['banner']['subtitle'] }}</p>
             </div>
             <ul class="banner-countdown">
                 <li class="theme-style">

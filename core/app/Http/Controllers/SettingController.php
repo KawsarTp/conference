@@ -7,6 +7,7 @@ use App\Content;
 use App\Overview;
 use App\Tab;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class SettingController extends Controller
 {
@@ -238,6 +239,11 @@ class SettingController extends Controller
 
     public function sectionUpdate(Request $request)
     {
+ 
+        if($request->key == 'overview' && empty($request->file('image'))){
+            return redirect()->back()->with('error','Empty Value can not be Updated');
+        }
+        // .................Updated If image has on form request............
 
     	if($request->hasFile('image')){
     
@@ -247,23 +253,49 @@ class SettingController extends Controller
                 'image' => $request->key == 'overview' ? 'required|image':'image',
     
             ]);
+            
 
-    		$imageName = $request->file('image');
-        
-        	$nameFormate = "$request->key".'.'.$imageName->getClientOriginalExtension();
+            $imageName = $request->file('image');
 
-        	$path = "asset/admin/images/$request->key";
-        	 if(file_exists($path.'/'.$nameFormate)){
+            $nameFormate = "$request->key".'.'.$imageName->getClientOriginalExtension();
+
+            $path = "asset/admin/images/$request->key";
+
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+            if(file_exists($path.'/'.$nameFormate)){
                 unlink($path.'/'.$nameFormate);
             }
 
-        	$imageName->move($path,$nameFormate); 
+            $img = Image::make($imageName);
 
+            if($request->key == 'banner'){
+                $img->resize(1920,932);
+            }
 
+            if($request->key == 'about' || $request->key == 'tab'){
+                $img->resize(806,710);
+            }
+
+            if($request->key == 'overview'){
+                $img->resize(982,627);
+            }
+
+            if($request->key == 'buyticket'){
+                $img->resize(1920,470);
+            }
+            
+
+            $img->save($path.'/'.$nameFormate);
+            
+
+        	 
        	
-        $a =  file_get_contents(base_path('resources/json/content.json'));
-        $data = json_decode($a,true);
-        $input = $request->key;
+            $a =  file_get_contents(base_path('resources/json/content.json'));
+            $data = json_decode($a,true);
+            $input = $request->key;
             foreach ($data as $key=>$value) {
                 if(array_key_exists( $input, $data)){
                     $data[ $input]['title'] = $request->title;
@@ -275,12 +307,14 @@ class SettingController extends Controller
 
         return redirect()->back()->with('success','Updated Successfull');
         }
+
         
         
+        // .................Updated While No image with form Request.............
         $this->validate($request,[
 
-    		'title' => 'required',
-    		'subtitle' => 'required',
+    		'title' => $request->key == 'overview'? '' : 'required',
+    		'subtitle' => $request->key == 'overview' || $request->key == 'tab' ? '' : 'required',
 
     	]);
 
@@ -380,6 +414,7 @@ class SettingController extends Controller
 
 	public function deleteOverview(Overview $id)
 	{
+
 		$id->delete();
 
 		return redirect()->back()->with('success','Deleted Success');

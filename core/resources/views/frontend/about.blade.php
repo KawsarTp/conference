@@ -6,7 +6,7 @@
                 <div class="col-xl-6 col-lg-10">
                     <div class="about-overview-left wow fadeIn" data-wow-duration="1s">
                         <h2 class="title">{{@$content['about']['title']}}</h2>
-                        <h5 class="sub-title text-justify">{{@$content['about']['subtitle'] }}</h5>
+                        <h5 class="sub-title text-justify">{!! @$content['about']['subtitle'] !!}</h5>
                         <a href="{{route('plan')}}" class="custom-button">get ticket</a>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                 <div class="col-xl-6 col-lg-10">
                     <div class="about-overview-right wow fadeIn" data-wow-duration="1s">
                         <div class="shape">
-                            <img src="{{asset("asset/admin/images/about".'/'.@$content[about]['image'])}}" alt="about">
+                            <img src="{{asset('asset/admin/images/about'.'/'.@$content["about"]["image"])}}" alt="about">
                         </div>
                         <ul id="parallax01">
                             <li class="layer" data-depth="0.90">

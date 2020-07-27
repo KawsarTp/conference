@@ -37,9 +37,9 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
 
 
       // Route for Adding , Updating and Delete Sections Data
-      Route::post('add-section','SettingController@addSection')->name('admin.addsection');
+      // Route::post('add-section','SettingController@addSection')->name('admin.addsection');
       Route::put('update-section','SettingController@sectionUpdate')->name('admin.updatesection');
-      Route::get('delete-section/{key}',"SettingController@deleteSection")->name('admin.section-delete');
+      // Route::get('delete-section/{key}',"SettingController@deleteSection")->name('admin.section-delete');
 
 
 
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::get('overview-section','SettingController@overview')->name('admin.overview');
       Route::post('overview-section','SettingController@overviewSaveToDatabase');
       Route::post('update-overview-section','SettingController@updateOverview')->name('admin.update-overview');
-      Route::get('delete-section/{id}','SettingController@deleteOverview')->name('admin.delete-overview');
+      Route::get('delete-over-view-section/{id}','SettingController@deleteOverview')->name('admin.delete-overview');
 
       Route::post('add-content','AdminController@addContentFormToDatabse');
       Route::get('view-content','AdminController@viewAllContent')->name('admin.viewallcontent');
@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
 
       Route::get('speaker-list','AdminController@viewSpeaker')->name('admin.speakerlist');
       Route::post('speaker-list','AdminController@updateSpeaker');
+      Route::get('delete-speaker/{id}',"AdminController@deleteSpeaker")->name('admin.speakerdelete');
 
       Route::get('add-ticket','AdminController@addTickets')->name('admin.tickets');
       Route::post('add-ticket','AdminController@addTicketsToDatabase');
