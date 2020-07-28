@@ -21,31 +21,31 @@
 
                 <div class="card">
                     <div class="card-header card-background">
-                        <h2 class="card-title text-center text-light">Add Ticket </h2>
+                        <h2 class="card-title text-center text-light">Edit Ticket </h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('admin.tickets')}}" method="post" enctype="multipart/form-data" >
+                        <form action="{{route('admin.edittickets',['ticket'=>$ticket->id])}}" method="post" enctype="multipart/form-data" >
                             @csrf
 
                             <div class="form-row ">
-
+                            
                                 <div class="col">
                                     <label class="control-label mb-1">Type : </label>
                                     <input name="type" type="text" class="form-control" placeholder="Ticket Type"
-                                        required value="{{old('type')}}">
+                                required value="{{$ticket->type}}">
                                 </div>
 
                                 <div class="col">
                                     <div class="pl-5">
                                         <label for="type">Ticket Price :</label>
-                                        <input type="number" name="price" class="form-control w-100" value="0" min="0">
+                                    <input type="number" name="price" class="form-control w-100" value="{{$ticket->price}}" min="0">
                                     </div>
                                 </div>
 
                                 <div class="col">
                                     <div class="pl-5">
                                         <label for="type">Ticket Stock :</label>
-                                        <input type="number" name="stock" class="form-control w-100" min="0" value="0">
+                                        <input type="number" name="stock" class="form-control w-100" min="0" value="{{$ticket->stock}}">
                                     </div>
                                 </div>
                             </div>
@@ -55,13 +55,13 @@
 
                                 <div class="col">
                                     <label for="type">Ticket Features :</label>
-                                    <textarea name="feature" rows="5" class="form-control nicEdit">{{old('feature')}}</textarea>
+                                    <textarea name="feature" rows="5" class="form-control nicEdit" >{{$ticket->feature}}</textarea>
                                 </div>
 
                                 <div class="col">
                                     <div class="">
                                         <label for="type">Ticket details :</label>
-                                        <textarea name="details" rows="5" class="form-control nicEdit">{{old('details')}}</textarea>
+                                        <textarea name="details" rows="5" class="form-control nicEdit" >{{$ticket->details}}</textarea>
                                     </div>
                                 </div>
 
@@ -69,22 +69,36 @@
 
                             <div class="form-group pt-3">
                                 <label for="type">Ticket benefits :</label>
-                                <textarea rows="5" class="form-control nicEdit" name="benefits">{{old('benefits')}}</textarea>
+                                <textarea rows="5" class="form-control nicEdit" name="benefits" >{{$ticket->benefits}}</textarea>
                             </div>
 
+                            <div class="form-row">
+
+                                <div class="col">
+                                    <label for="">Image: </label>
+                                    <input type="file" name="image" class="form-control d-block">
+                                    <span class="image-size">N.B-Image Size will be 193 X 175 px</span>
+                                </div>
+
+                                <div class="col py-3">
+                                    <div class="pl-5">
+                                        <label for="" class="align-top">Current Image : </label>
+                                        <img src="{{asset('asset/admin/images/ticket/'.$ticket->image)}}"
+                                            alt="Banner" class="img-fluid w-25 img-thumbnail ">
+                                    </div>
+
+                                </div>
 
 
-                          <div class="form-group">
-                                <label for="type">Ticket Image</label>
-                                <input type="file" name="image" class="form-control" required>
-                                <span class="image-size">Image size should be 193 X 175 px</span>
                             </div>
+
+                         
 
 
 
                             <div class="form-group">
 
-                                <input type="submit" class="btn btn-info" value="Add Ticket" onclick="getCont()">
+                                <input type="submit" value="update Ticket" class="form-control btn btn-info">
                             </div>
 
                         </form>
@@ -108,17 +122,6 @@
             new nicEditor({fullPanel : true}).panelInstance('nicEditor'+index,{hasPanel : true});
         });
     });
-
-    
-    function getCont() {
-        var c = ndinstance.getContent();
-
-        var start_ptn = /(<.[^>]+>)*/gmi; //Filter label opening	
-        var end_ptn = /<\/?\w+>$/; //Filter tag ends
-        var space_ptn = /(&nbsp;)*/; //Filter spaces
-        var c1 = c.replace(start_ptn, "").replace(end_ptn).replace(space_ptn, "");
-
-    }
 </script>
 
 <style>

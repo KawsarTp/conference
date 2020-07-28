@@ -20,7 +20,8 @@ class CreateSponsorshipApplicationsTable extends Migration
             $table->string('company')->unique();
             $table->string('Email')->unique();
             $table->string('website');
-            $table->string('image')->nullable();
+            $table->string('image');
+            $table->boolean('status');
             $table->timestamps();
 
 

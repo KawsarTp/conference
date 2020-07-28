@@ -15,6 +15,7 @@ use App\SponsorType;
 use App\Topic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -39,7 +40,7 @@ class UserController extends Controller
 
         $overView = Overview::all();
 
-        $allSponsor = SponsorshipApplication::with('types')->get();
+        $allSponsor = SponsorshipApplication::with('types')->where('status',1)->get();
 
         $itterator = SponsorshipApplication::groupBy('sponsor_type_id')->selectRaw('sponsor_type_id')->get();
       
@@ -117,24 +118,33 @@ class UserController extends Controller
             'name' => 'required|max:50',
             'company'=>'required|unique:sponsorship_applications|max:40',
             'email' => 'required|unique:sponsorship_applications|email',
-            'website'=>'required|unique:sponsorship_applications|regex:/^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?$/',
+            'website'=>'required|unique:sponsorship_applications|regex:/^\w+(\.\w+)*(:[0-9]+)?\/?$/',
             'type'=>'required',
+            'image' => 'required'
         ]);
 
-       $application =  new SponsorshipApplication();
+        $application =  new SponsorshipApplication();
+        $imageName = $request->file('image');
+        $path = 'asset/admin/images/sponsor';
+
+        $nameFormate = 'sponsor-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+        $imageName->move($path,$nameFormate);
+        
 
        $application->name = $request->name;
        $application->company = $request->company;
        $application->email = $request->email;
        $application->website = $request->website;
        $application->sponsor_type_id = $request->type;
+       $application->image = $nameFormate;
+       $application->status = false;
 
        $application->save();
 
        return redirect()->back()->with('success','Request Sent Success');
 
     }
-
+   
 
     public function dateDiffInDays($date1)  
     { 

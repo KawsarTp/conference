@@ -169,20 +169,20 @@ class AdminController extends Controller
             'benefits'=>'required',
             'image'=>'required|image'
         ]);
-
-        $ticket = new Ticket();
-        
+        $ticket = new Ticket();        
 
         $imageName = $request->file('image');
         
-        $speakerNameFormate = 'ticket-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+        $nameFormate = 'ticket-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
 
         $path = 'asset/admin/images/ticket';
-
-
-        $imageName->move($path,$speakerNameFormate); 
-
-
+        
+        $img = Image::make($imageName);
+        $img->resize(193,175);
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        $img->save($path.'/'.$nameFormate);
 
         $ticket->type = $request->type;
         $ticket->price = $request->price;
@@ -190,7 +190,7 @@ class AdminController extends Controller
         $ticket->feature = $request->feature;
         $ticket->details = $request->details;
         $ticket->benefits = $request->benefits;
-        $ticket->image = $speakerNameFormate;
+        $ticket->image = $nameFormate;
 
         $ticket->save();
 
@@ -203,7 +203,12 @@ class AdminController extends Controller
         return view('admin.viewtickets',compact('tickets'));
     }
 
-    public function ticketUpdate(Request $request)
+    public function editTicket(Ticket $ticket)
+    {
+        return view('admin.editticketinfo',compact('ticket'));
+    }
+
+    public function ticketUpdate(Request $request,Ticket $ticket)
     {
         
         $this->validate($request,[
@@ -216,26 +221,28 @@ class AdminController extends Controller
             'image'=>'image'
         ]);
 
-        $ticket = Ticket::find($request->id);
-
         $imageName = $request->file('image');
         $path = 'asset/admin/images/ticket';
 
+       
 
         if($request->hasFile('image')){
-            $imageName = $request->file('image');
-            $speakerNameFormate = 'speaker-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
-        if(file_exists($path.'/'.$ticket->image)){
-            unlink($path.'/'.$ticket->image);
-        }
-            $imageName->move($path,$speakerNameFormate);
+            $nameFormate = 'ticket-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
+            $img = Image::make($imageName);
+            $img->resize(193,175);
+
+            if(file_exists($path.'/'.$ticket->image)){
+                unlink($path.'/'.$ticket->image);
+            }
+
+            $img->save($path.'/'.$nameFormate);
 
             $ticket->type = $request->type;
             $ticket->price = $request->price;
             $ticket->stock = $request->stock;
             $ticket->feature = $request->feature;
             $ticket->details = $request->details;
-            $ticket->image = $speakerNameFormate;
+            $ticket->image = $nameFormate;
             $ticket->benefits = $request->benefits;
 
             $ticket->save();
@@ -255,6 +262,12 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Update Succeess');
     }
 
+    public function deleteTicket(Ticket $ticket)
+    {
+        $ticket->delete();
+
+        return redirect()->back()->with('success','Deleted Success');
+    }
     public function viewAllBookings()
     {
         $bookings = Booking::with('ticket')->get();
@@ -283,10 +296,14 @@ class AdminController extends Controller
 
         $path = 'asset/admin/images/blog';
 
-       
+        $img = Image::make($imageName);
+        $img->resize(750,466);
+        
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
 
-        $imageName->move($path,$blogNameFormate); 
-
+        $img->save($path.'/'.$blogNameFormate);
 
         $blog->title = $request->title;
         $blog->details = $request->details;
@@ -337,6 +354,13 @@ class AdminController extends Controller
 
                 return redirect()->back()->with('success','Updated Successfully');
 
+    }
+
+    public function deleteBlog (Blog $id)
+    {
+        $id->delete();
+
+        return redirect()->back()->with('success','Deleted Success');
     }
 
     public function addTopic()
@@ -439,8 +463,8 @@ class AdminController extends Controller
 
     public function addSponsor()
     {
-       
-        return view('admin.addsponsors');
+       $sponsor = Sponsor::first();
+        return view('admin.addsponsors',compact('sponsor'));
     }
 
     public function sponsorAddToDatabase(Request $request)
@@ -454,18 +478,18 @@ class AdminController extends Controller
 
         
 
-        if($sponsor->first() == null ){
-            $sponsor->details = $request->details;
-            $sponsor->benefit = $request->benefit;
-            $sponsor->about = $request->about;
+        // if($sponsor->first() == null ){
+        //     $sponsor->details = $request->details;
+        //     $sponsor->benefit = $request->benefit;
+        //     $sponsor->about = $request->about;
 
-            $sponsor->save();
+        //     $sponsor->save();
 
-            return redirect()->back()->with('success','Added Successfully');
-        }
+        //     return redirect()->back()->with('success','Added Successfully');
+        // }
 
 
-        if($sponsor->first()->count() > 0){
+        if($sponsor->count() > 0){
             $getSponsor = $sponsor->first();
             $getSponsor->details = $request->details;
             $getSponsor->benefit = $request->benefit;
@@ -480,7 +504,8 @@ class AdminController extends Controller
 
     public function sponsorTypeView()
     {
-        return view('admin.addsponsortype');
+        $sponsorType = SponsorType::latest()->get(['id','name']);
+        return view('admin.addsponsortype',compact('sponsorType'));
     }
 
     public function sponsorTypeSave(Request $request)
@@ -508,31 +533,19 @@ class AdminController extends Controller
     }
 
 
-    public function updateSponsorApplication(Request $request)
+    public function updateSponsorApplication(Request $request, SponsorshipApplication $id)
     {
-        $this->validate($request,[
-            'image'=>'image',
-        ]);
+   
+        if($id->status){
+            $id->status = 0;
+            $id->save();
+            return back()->with('success','Deactive Sponsor succes');
+        } 
 
-        $sponsor = new SponsorshipApplication();
-
-        $dataField = $sponsor->find($request->id);
-
-        $imageName = $request->file('image');
-    
-        $speakerNameFormate = 'sponsor-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
-
-        $path = 'asset/admin/images/sponsor';
-
+        $id->status = 1;
+        $id->save();
+        return back()->with('success','Active Sponsor succes');
         
-
-        $imageName->move($path,$speakerNameFormate);
-        
-        SponsorshipApplication::where('id', $request->id)->update(['image' => $speakerNameFormate ]);
-       
-
-
-        return back()->with('succes','update succes');
     }
 
     public function manageAllData ()

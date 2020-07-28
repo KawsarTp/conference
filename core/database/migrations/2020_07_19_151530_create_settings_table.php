@@ -15,8 +15,13 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('icon');
+            $table->string('logo');
+            $table->string('name');
+            $table->string('event');
+            $table->string('days');
             $table->string('start_date');
-            $table->string('end_date');
+            $table->string('');
             $table->string('location');
             $table->timestamps();
         });

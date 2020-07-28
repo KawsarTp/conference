@@ -31,8 +31,8 @@
         <p>{{@$content['ticket']['subtitle']}}</p>
         </div>
 
-        @foreach($ticket as $data)
         <div class="row mb-30-none justify-content-center">
+        @foreach($ticket as $data)
             <div class="col-xl-4 col-md-6">
                 <div class="ticket-item">
                     <h3 class="title">{{$data->type}}</h3>
@@ -40,14 +40,14 @@
                     <img src="{{asset('asset/admin/images/ticket').'/'.$data->image}}" alt="ticket">
                     </div>
                     <div class="ticket-content">
-                    <p>{{substr($data->details,0,50)}}</p>
+                    <p>{{substr($data->details,0,30)}}</p>
                     <h3 class="sub-title">{{$data->price}}</h3>
                     <a href="{{route('show',['id'=>$data->id])}}" class="custom-button active">Buy Ticket</a>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-@endforeach
 
     </div>
 </section>

@@ -9,17 +9,15 @@
 <link rel="stylesheet" href="{{asset('asset/frontend/css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-
-
-    <link rel="stylesheet" href="{{asset('asset/frontend/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/frontend/css/animate.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/frontend/css/lightcase.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/frontend/css/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/frontend/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/frontend/css/owl.theme.default.min.css')}}">
+<link rel="stylesheet" href="{{asset('asset/frontend/css/all.min.css')}}">
+<link rel="stylesheet" href="{{asset('asset/frontend/css/animate.css')}}">
+<link rel="stylesheet" href="{{asset('asset/frontend/css/lightcase.css')}}">
+<link rel="stylesheet" href="{{asset('asset/frontend/css/flaticon.css')}}">
+<link rel="stylesheet" href="{{asset('asset/frontend/css/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{asset('asset/frontend/css/owl.theme.default.min.css')}}">
     
-    <link rel="shortcut icon" href="{{asset('asset/frontend/images/favicon.png')}}" type="image/x-icon">
-    <link rel="stylesheet" href="{{asset('asset/frontend/css/style.css')}}">
+<link rel="shortcut icon" href="{{asset('asset/frontend/images/favicon.png')}}" type="image/x-icon">
+<link rel="stylesheet" href="{{asset('asset/frontend/css/style.css')}}">
 
     <title>{{config('app.name')}}</title>
 
@@ -60,7 +58,7 @@
     @include('alert.success')
     @include('alert.error')
     @include('alert.errors')
-
+    @stack('content')
 </body>
 
 </html>

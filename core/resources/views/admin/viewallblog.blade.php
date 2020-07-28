@@ -43,7 +43,7 @@
                                 <td>{{substr($blog->details,0,100)}}</td>
                                 <td>
                                     <button class="btn btn-primary modalButton" data-image="{{$blog->image}}" data-title="{{$blog->title}}" data-details="{{$blog->details}}" data-id="{{$blog->id}}"><span class="fa fa-edit"></span></button>
-                                    <button class="btn btn-danger"><span class="ti-trash"></span></button>
+                                    <a class="btn btn-danger" href="{{route('admin.deleteblog',['id'=>$blog->id])}}"><span class="ti-trash"></span></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -63,6 +63,22 @@
 @endsection
 
 @push('blog')
+<style>
+
+    .card-background {
+        background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(151, 10, 130, 1) 0%, rgba(33, 33, 33, 1) 100.2%);
+    }
+
+
+    .image-size {
+        color: brown;
+    }
+
+    textarea {
+        background-color: white;
+    }
+
+</style>
 
     <script>
         $(".modalButton").on('click',function(){
@@ -71,11 +87,11 @@
         var image = $(this).data('image');
         var title = $(this).data('title');
         var details = $(this).data('details');
-       
 
         $(".modal-body #id").val(id);
         $(".modal-body #title").val(title);
         $(".modal-body #editor").val(details);
+        $(".modal-body #image").attr('src',"{{asset('asset/admin/images/blog')}}" + '/' + image);
       
     });
     </script>
@@ -106,15 +122,26 @@
                      
                      
                  
+                     <div class="form-row">
+
+                        <div class="col">
+                            <label for="">Image: </label>
+                            <input type="file" name="image" class="form-control d-block">
+                            <span class="image-size">NB :- Image Should be 750 X 466 px</span>
+                        </div>
+
+                        <div class="col py-3">
+                            <div class="pl-5">
+                                <label for="" class="align-top">Current Image : </label>
+                                <img src="" alt="blog" class="img-fluid w-75 img-thumbnail " id="image">
+                            </div>
+
+                        </div>
+
+
+                    </div>
                      
                      <div class="form-group">
-                        <label for="type">Image:</label>
-                        <input type="file" name="image" class="form-control" id="image">
-                     </div>
-               
-                     
-                     <div class="form-group">
-                         
                          <input type="submit" value="Update Blog" class="from-control btn btn-primary" >
                      </div>
  

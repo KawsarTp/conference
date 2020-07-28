@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Content;
 use App\Overview;
+use App\Setting;
 use App\Tab;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -420,6 +421,31 @@ class SettingController extends Controller
 		return redirect()->back()->with('success','Deleted Success');
 	}
 
+
+    public function logoIcon()
+    {
+        return view('admin.logoicon');
+    }
+
+    public function logoIconSaveToDatabase(Request $request)
+    {
+        $this->validate($request,[
+            'icon' => 'required|mimes:jpg,png',
+            'logo' => 'required|mimes:jpg,png',
+            'name' => 'required',
+            'event' => 'required',
+            'days' => 'required|numeric|min:1',
+            'limit' => 'required|numeric|min:1',
+            'location' => 'required',
+        ]);
+        
+        $setting =  new Setting();
+
+        dd($setting);
+
+        
+
+    }
 
 
 

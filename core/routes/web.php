@@ -11,9 +11,6 @@ Route::group(['middleware' => 'guest:admin','prefix'=>'admin'], function () {
 Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::get('logout',"LoginRegisterController@logout")->name('admin.logout');
       Route::get('home','AdminController@index')->name('admin.home');
-
-
-
       // Site Content Route
       Route::get('add-banner','SettingController@addBanner')->name('admin.banner');
       Route::get('about-section','SettingController@addAbout')->name('admin.about');
@@ -30,27 +27,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::post('button-section','SettingController@addButton')->name('admin.addtabbutton');
       Route::post('tab-update','SettingController@tabUpdate')->name('admin.updatetabbutton');
       Route::get('tab-update/{id}','SettingController@tabDelete')->name('admin.deletetabbutton');
-
-
-
-
-
-
-      // Route for Adding , Updating and Delete Sections Data
-      // Route::post('add-section','SettingController@addSection')->name('admin.addsection');
       Route::put('update-section','SettingController@sectionUpdate')->name('admin.updatesection');
-      // Route::get('delete-section/{key}',"SettingController@deleteSection")->name('admin.section-delete');
-
-
-
-
-     
-      // Route::post('about-section','SettingController@aboutSectionUpdate');
-
-
-      // // Route::post('tab-section','SettingController@aboutSectionUpdate');
-      // // Route::post('tab-update','SettingController@tabUpdate')->name('admin.tab-edit');
-
       Route::get('overview-section','SettingController@overview')->name('admin.overview');
       Route::post('overview-section','SettingController@overviewSaveToDatabase');
       Route::post('update-overview-section','SettingController@updateOverview')->name('admin.update-overview');
@@ -58,7 +35,6 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
 
       Route::post('add-content','AdminController@addContentFormToDatabse');
       Route::get('view-content','AdminController@viewAllContent')->name('admin.viewallcontent');
-
 
 
       Route::get('add-speaker','AdminController@addSpeaker')->name('admin.speaker');
@@ -71,13 +47,16 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::get('add-ticket','AdminController@addTickets')->name('admin.tickets');
       Route::post('add-ticket','AdminController@addTicketsToDatabase');
       Route::get('view-ticket','AdminController@viewTickets')->name('admin.viewtickets');
-      Route::post('view-ticket',"AdminController@ticketUpdate");
+      Route::get('view-ticket/{ticket}','AdminController@editTicket')->name('admin.edittickets');
+      Route::post('view-ticket/{ticket}',"AdminController@ticketUpdate");
+      Route::get('delete-ticket/{ticket}',"AdminController@deleteTicket")->name('admin.deleteticket');
 
       Route::get('view-all-bookings','AdminController@viewAllBookings')->name('admin.viewallbookings');
 
       Route::get('add-blog','AdminController@addBlogDetails')->name('admin.blog');
       Route::post('add-blog','AdminController@addBlogDetailsToDatabase');
       Route::get('view-all','AdminController@viewAllBlog')->name('admin.viewallblog');
+      Route::get('view-all/{id}','AdminController@deleteBlog')->name('admin.deleteblog');
       Route::post('view-all','AdminController@editBlog');
 
 
@@ -93,17 +72,25 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::post('sponsor-type','AdminController@sponsorTypeSave');
 
       Route::get('add-managesponsor','AdminController@manageSponsor')->name('admin.managersponsor');
-      Route::post('add-managesponsor','AdminController@updateSponsorApplication');
+      Route::get('change-sponsor/{id}',"AdminController@updateSponsorApplication")->name('admin.sponsorstatus');
+     
       Route::get('manage-sponsor-data','AdminController@manageAllData')->name('admin.managersponsordata');
 
-      Route::post('manage-sponsor-data','AdminController@updateSponsorDetails');
-      Route::put('manage-sponsor-data','AdminController@updateSponsorType');
+      
+
+  
 
       Route::get('delete-manage-sponsor-data/{id}','AdminController@deleteSponsorData')->name('admin.sponsor-details-delete');
       Route::get('delete-sponsor-type-data/{id}','AdminController@deleteSponsorTypeData')->name('admin.sponsor-type-delete');
 
       Route::get('setting','AdminController@settingView')->name('admin.setting');
       Route::post('setting','AdminController@settingStoreToDatabase');
+
+
+      Route::get('logo-icon','SettingController@logoIcon')->name('admin.logo-icon');
+      Route::post('logo-icon','SettingController@logoIconSaveToDatabase');
+      Route::post('app-name','SettingController@logoIcon')->name('admin.appname');
+      Route::post('event','SettingController@logoIcon')->name('admin.event');
 });
 
 

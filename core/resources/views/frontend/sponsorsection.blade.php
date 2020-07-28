@@ -40,26 +40,29 @@
                 <div class="application-form-area">
                     <h5 class="title">Application Form</h5>
 
-                <form class="application-form" action="{{route('sponsor')}}" method="post">
+                <form class="application-form" action="{{route('sponsor')}}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="form-group">
-                            <input type="text" placeholder="Full Name" name="name">
+                        <input type="text" placeholder="Full Name" name="name" required value="{{old('name')}}">
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Company Name" name="company">
+                        <input type="text" placeholder="Company Name" name="company" required value="{{old('company')}}">
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Email" name="email">
+                            <input type="email" placeholder="Email" name="email" required value="{{old('email')}}">
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Website" name="website">
+                            <input type="text" placeholder="Website" name="website" required value="{{old('website')}}">
                         </div>
                         <div class="form-group">
-                            <select id="select-cata" name="type">
-                                @foreach($types as $type)
-                            <option value="{{$type->id}}">{{$type->name}}</option>
+                            <select id="select-cata" name="type" required>
+                            @foreach($types as $type)
+                                <option value="{{$type->id}}">{{$type->name}}</option>
                             @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" placeholder="image" name="image" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Submit Now">
