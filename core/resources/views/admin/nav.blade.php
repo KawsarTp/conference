@@ -1,7 +1,7 @@
 <header id="header" class="header">
     <div class="top-left">
         <div class="navbar-header">
-        <a class="navbar-brand" href="{{route('admin.home')}}"><img src="{{asset('asset/admin/images/logo.png')}}" alt="Logo"></a>
+        <a class="navbar-brand" href="{{route('admin.home')}}"><img src="{{asset('asset/admin/images/logo/'.$title->logo)}}" alt="Logo"></a>
             <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
         </div>
     </div>

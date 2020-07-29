@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+<link rel="icon" href="{{asset('asset/admin/images/'.$title->icon)}}">
 <link rel="stylesheet" href="{{asset('asset/frontend/css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
@@ -16,11 +17,10 @@
 <link rel="stylesheet" href="{{asset('asset/frontend/css/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{asset('asset/frontend/css/owl.theme.default.min.css')}}">
     
-<link rel="shortcut icon" href="{{asset('asset/frontend/images/favicon.png')}}" type="image/x-icon">
 <link rel="stylesheet" href="{{asset('asset/frontend/css/style.css')}}">
 
-    <title>{{config('app.name')}}</title>
-
+    <title>{{$title->name}}</title>
+@stack('css')
 </head>
 
 <body>

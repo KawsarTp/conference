@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AdminController extends Controller
 {
-
+   
     public function index(){
 
         $bookings = Booking::sum('price');
@@ -332,7 +332,7 @@ class AdminController extends Controller
         $blog = Blog::find($request->id);
         $path = 'asset/admin/images/blog';
 
-        if($request->hasFile('image')){
+            if($request->hasFile('image')){
                 $imageName = $request->file('image');
                 $blogNameFormate = 'blog-'.Str::random(8).'.'.$imageName->getClientOriginalExtension();
                 if(file_exists($path.'/'.$blog->image)){
@@ -383,11 +383,13 @@ class AdminController extends Controller
 
     public function addconferenceTopicToDatabase(Request $request)
     {
+        // dd($request->date);
+ 
         $this->validate($request,[
-            'name' => 'required|unique:topics',
+            'name' => 'required',
             'from'=> "required|date_format:H:i|before:to",
             'to'=> 'required|date_format:H:i|after:from',
-            'date'=>'required|after:today',
+            'date'=>'required|date|after:today',
         ]);
 
         $topic = new Topic();
@@ -461,6 +463,12 @@ class AdminController extends Controller
         return view('admin.addspeakerwithtopics',compact('topics'));
     }
 
+    public function deleteTopic(Topic $id)
+    {
+        $id->delete();
+
+        return redirect()->back()->with('success','Deleted Successfully');
+    }
     public function addSponsor()
     {
        $sponsor = Sponsor::first();
@@ -636,8 +644,13 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Save to database');
 
         }
+    }
 
-        
 
+    public function updateTopic(Request $request)
+    {
+       $this->validate($request,[
+            
+       ]);
     }
 }

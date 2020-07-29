@@ -110,8 +110,8 @@
 
 
 </div>
-
-
+<div class="clearfix"></div>
+@endsection
 @push('content')
 
 <script src="{{asset('asset/admin/js/nicEdit.js')}}"></script>

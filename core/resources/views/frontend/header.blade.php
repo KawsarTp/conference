@@ -16,11 +16,7 @@
                 <a href="#schedule">Schedule</a>
                 
             </li>
-            <li>
-                <a href="#0">Contact</a>
-               
-            </li>
-            
+           
             
             <li>
             <a href="{{route('plan')}}" class="header-button">buy ticket</a>

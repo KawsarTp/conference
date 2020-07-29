@@ -40,24 +40,24 @@
             <div class="col-lg-4">
                 <div class="application-form-area">
                     <h5 class="title">buy ticket</h5>
-                    @include('frontend.alert')
+
                     <form class="application-form" action="{{route('show',['id'=>$id->id])}}" method="POST">
                         @csrf
                         <input type="hidden" name="price" value="{{$id->price}}">
                         <div class="form-group">
-                            <input type="text" placeholder="Full Name" name="name" required>
+                        <input type="text" placeholder="Full Name" name="name" required value="{{old('name')}}">
                         </div>
 
                         <div class="form-group">
-                            <input type="email" placeholder="Email" name="email" required>
+                            <input type="email" placeholder="Email" name="email" required value="{{old('email')}}">
                         </div>
 
                         <div class="form-group">
-                            <input type="text" placeholder="Phone" name="phone" required>
+                            <input type="text" placeholder="Phone" name="phone" required value="{{old('phone')}}">
                         </div>
 
                         <div class="form-group">
-                            <input type="number" placeholder="Quantity" min="1" name="quantity" required>
+                            <input type="number" placeholder="Quantity" min="1" name="quantity" required >
                         </div>
 
                         <div class="form-group check-input d-flex flex-wrap align-items-center mb-2">
@@ -81,21 +81,3 @@
 @endsection
 
 
-
-@push('content')
-
-
-
-
-@endpush
-
-
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p>Content</p>
-            </div>
-        </div>
-    </div>
-</div>

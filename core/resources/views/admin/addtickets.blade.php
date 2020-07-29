@@ -97,7 +97,7 @@
 
 </div>
 
-
+<div class="clearfix"></div>
 @push('content')
 
 <script src="{{asset('asset/admin/js/nicEdit.js')}}"></script>

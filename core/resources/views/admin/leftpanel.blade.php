@@ -77,9 +77,8 @@
                     <a href="{{route('admin.setting')}}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon ti-settings"></i>General Setting</a>
                     <ul class="sub-menu children dropdown-menu">
                         
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.logo-icon')}}">Logo And Icon</a></li>
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.appname')}}">Application Name</a></li>
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.event')}}">Event</a></li>
+                        <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('admin.logo-icon')}}">All Setting</a></li>
+                        
                     </ul>
                 </li>
             </ul>

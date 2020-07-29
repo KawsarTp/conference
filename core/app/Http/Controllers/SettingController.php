@@ -424,26 +424,77 @@ class SettingController extends Controller
 
     public function logoIcon()
     {
-        return view('admin.logoicon');
+        $setting = Setting::first();
+        return view('admin.logoicon',compact('setting'));
     }
 
     public function logoIconSaveToDatabase(Request $request)
     {
+
         $this->validate($request,[
-            'icon' => 'required|mimes:jpg,png',
-            'logo' => 'required|mimes:jpg,png',
+            'icon' => 'mimes:jpg,png',
+            'logo' => 'mimes:jpg,png',
             'name' => 'required',
-            'event' => 'required',
+            'startdate' => 'required',
             'days' => 'required|numeric|min:1',
             'limit' => 'required|numeric|min:1',
             'location' => 'required',
         ]);
-        
-        $setting =  new Setting();
+        $checkSetting = Setting::first();
+        if($checkSetting == null){
+            $setting = new Setting();
+            $path = 'asset/admin/images';
+            $imageName = $request->file('icon');
+            $iconNameFormate = 'icon'.'.'.$imageName->getClientOriginalExtension();
+            $imageName->move($path,$iconNameFormate);
 
-        dd($setting);
 
-        
+            $logPath = 'asset/admin/images/logo';
+            $logoImage = $request->file('logo');
+            $logoNameFormate = 'logo'.'.'.$logoImage->getClientOriginalExtension();
+
+            $logoImage->move($logPath,$logoNameFormate);
+
+            $setting->name =  $request->name;
+            $setting->event =  $request->startdate;
+            $setting->days =  $request->days;
+            $setting->location = $request->location;
+            $setting->limit = $request->limit;
+            $setting->icon = $iconNameFormate;
+            $setting->logo = $logoNameFormate;
+
+            $setting->save();
+
+            return redirect()->back()->with('success','updated Success');
+        }
+            $setting = Setting::first();
+
+            if($request->hasFile('icon')){
+                $path = 'asset/admin/images';
+                $imageName = $request->file('icon');
+                $iconNameFormate = 'icon'.'.'.$imageName->getClientOriginalExtension();
+                $imageName->move($path,$iconNameFormate);
+                $setting->icon = $iconNameFormate;
+            }
+
+            if($request->hasFile('logo')){
+                $logPath = 'asset/admin/images/logo';
+                $logoImage = $request->file('logo');
+                $logoNameFormate = 'logo'.'.'.$logoImage->getClientOriginalExtension();
+    
+                $logoImage->move($logPath,$logoNameFormate);
+                $setting->logo = $logoNameFormate;
+            }
+
+            $setting->name =  $request->name;
+            $setting->event =  $request->startdate;
+            $setting->days =  $request->days;
+            $setting->location = $request->location;
+            $setting->limit = $request->limit;
+            
+            $setting->save();
+
+            return redirect()->back()->with('success','updated Success');
 
     }
 

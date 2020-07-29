@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="form-group">
                                             
-                                            <input type="file" name="icon" class="form-control">
+                                            <input type="file" name="logo" class="form-control">
                                         </div>
                                    
                                 </div>
@@ -41,30 +41,30 @@
                                    
                                         <div class="form-group">
                                             <label for="">Icon</label>
-                                            <img src="{{asset('asset/admin/images'.'/'.@$setting->logo)}}" alt="Icon">
+                                            <img src="{{asset('asset/admin/images'.'/'.@$setting->icon)}}" alt="Icon">
                                         </div>
                                         <div class="form-group">
                                             
-                                            <input type="file" name="logo" class="form-control">
+                                            <input type="file" name="icon" class="form-control" >
                                         </div>
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="">Application Name</label>
-                                <input type="text" name="name" class="form-control" value="">
+                            <input type="text" name="name" class="form-control" required value="{{$setting->name}}">
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Event Starting Date</label>
-                                        <input type="text" name="event" class="form-control" value="" id="datepicker">
+                                    <input type="text" name="startdate" class="form-control" id="datepicker" required value="{{$setting->event}}">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Total Days of Event</label>
-                                        <input type="number" name="days" class="form-control" value="">
+                                    <input type="number" name="days" class="form-control"  required value="{{$setting->days}}">
                                     </div>
                                 </div>
                             </div>
@@ -73,18 +73,18 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Location</label>
-                                        <input type="text" name="location" class="form-control" value="">
+                                    <input type="text" name="location" class="form-control" required value="{{$setting->location}}">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Ticket buy Limit:</label>
-                                        <input type="number" name="limit" class="form-control" value="">
+                                    <input type="number" name="limit" class="form-control"  required value="{{$setting->limit}}">
                                     </div>
                                 </div>
                             </div>                  
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary form-control" value="Save">
+                                <input type="submit" class="btn btn-primary form-control" value="Update Setting">
                             </div>
                         </form>
                     </div>
@@ -108,8 +108,11 @@
 @push('content')
 <script>
     $( function() {
-      $( "#datepicker" ).datepicker({minDate:+1});
-    } );
+      $( "#datepicker" ).datepicker({
+          minDate:+1,
+          dateFormat: "yy-mm-dd",
+        });
+    });
     </script>
     <style>
 

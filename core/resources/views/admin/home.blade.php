@@ -246,7 +246,7 @@
                                         @foreach($speaker as $speakers)
                                         <tr>
                                         <td>{{$speakers->name}}</td>
-                                        <td><img src="{{asset('asset/admin/images/speaker/'.$speakers->image)}}" alt="" width="50px"> </td>
+                                        <td><img src="{{asset('asset/admin/images/speaker/'.$speakers->image)}}" alt="" width="50"> </td>
                                         <td>{{$speakers->designation}}</td>
                                         </tr>
                                         @endforeach

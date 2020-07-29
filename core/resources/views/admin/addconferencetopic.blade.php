@@ -12,8 +12,7 @@
     <!-- Header-->
         @include('admin.nav')
     <!-- /#header -->
-
-
+   
     <!-- Content -->
 <div class="container-fluid">
     <div class="row">
@@ -42,9 +41,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <input type="time" name="from" class="form-control" placeholder="From" required>
-                                                <div class="input-group-append">
-                                                <span class="input-group-text">PM</span>
-                                                </div>
+                                                
                                             </div>
                                            
                                         </div>
@@ -52,10 +49,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <input type="time" name="to" class="form-control" placeholder="To" required>
-                                                <div class="input-group-append">
-                                                <span class="input-group-text">PM</span>
-                                                </div>
-                                               
+                                        
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +57,7 @@
     
                                 <div class="form-group">
                                     <label class="control-label mb-1">Date for this Topic</label>
-                                    <input name="date" type="date" class="form-control" placeholder="Topic Name" min="{{$setting->start_date}}" max="{{$setting->end_date}}">
+                                <input name="date" type="text" class="form-control" id="datepicker" placeholder="Date start {{$setting->event}}">
                                 </div>
                                 
     
@@ -96,13 +90,14 @@
     </div>
 </div>
 </div>
-
+<div class="clearfix"></div>
 @endsection
 
 @push('content')
 
 <script src="http://blast.thesoftking.com/lab/xenwallet/assets/admin/js/nicEdit.js"></script>
 <script>
+   
     bkLib.onDomLoaded(function() {
         $( ".nicEdit" ).each(function( index ) {
             $(this).attr("id","nicEditor"+index);
@@ -118,7 +113,21 @@ function getCont(){
 		 var space_ptn = /(&nbsp;)*/; //Filter spaces
 		var c1 = c.replace(start_ptn,"").replace(end_ptn).replace(space_ptn,"");
 
-	}
+    }
+
+
+
+
+    $( function() {
+      $( "#datepicker" ).datepicker({
+          minDate:+0,
+          maxDate:"{{$setting->days}}",
+          dateFormat: "yy-mm-dd",
+
+        });
+        
+    });
+    
 </script>
 <style>
 	.card-background{

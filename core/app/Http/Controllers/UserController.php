@@ -21,7 +21,7 @@ class UserController extends Controller
 {
     public function index()
     {
-
+        // dd(session()->has('invoice'));
         // date pick for dynamic tabs
         $groupDate = Topic::groupBy('date')->selectRaw('count(*) as date, date')->get();
 
@@ -60,47 +60,76 @@ class UserController extends Controller
     }
 
 
-    public function buyTickets(Request $request)
+    public function buyTickets(Request $request,$id)
     {
         $this->validate($request,[
             'name'=>'required|max:50',
             'email'=>'required|unique:bookings|email',
-            'phone'=>'required|unique:bookings|max:11',
-            'quantity'=>'required|integer|min:1|max:3',
+            'phone'=>'required|unique:bookings|min:11',
+            'quantity'=>'required|integer|min:1',
             'check' => 'required'
         ]);
-
-        $ticket = Ticket::find($request->id);
-    
-       
-        if($ticket->stock >= $request->quantity){
-            $TotalPrice = $request->quantity * $request->price;
-            $ticketNumber = 'conf-'.time();
-            $booking = new Booking();
-            $booking->name = $request->name ;
-            $booking->ticket_id = $request->id;
-            $booking->email = $request->email;
-            $booking->phone = $request->phone;
-            $booking->quantity =  $request->quantity;
-            $booking->price = $TotalPrice;
-            $booking->ticket_number = $ticketNumber;
-
-            $booking->save();
-
-            $remainTicket = $ticket->stock - $request->quantity;
-
-            $ticket->stock = $remainTicket;
-            $ticket->save();
-
-            return redirect()->back()->with('success','Booking Confirmed');
-
-       
-
-        }
         
-        return redirect()->back()->with('error','No Available Tickets');
+        $setting = Setting::first();
+        $ticket = Ticket::find($request->id);
+        if($setting->limit < $request->quantity){
+            return redirect()->back()->with("error","Limit exceed You can Only buy {$setting->limit} tickets at a time")->withInput();
+        }
+        if($ticket->stock == 0){
+            return redirect()->back()->with("error","Sorry! We have no Available Tickets For now")->withInput();
+        }
+
+        if($ticket->stock < $request->quantity){
+            return redirect()->back()->with("error","Request Limit exceed  {$ticket->stock} tickets available")->withInput();
+        }
+        $TotalPrice = $request->quantity * $request->price;
+        $ticketNumber = 'conf-'.time();
+
+        $data =[];
+        $data['id'] =  $request->id;
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['unitPrice'] = $ticket->price;
+        $data['phone'] = $request->phone;
+        $data['quantity'] = $request->quantity;
+        $data['price'] = $TotalPrice;
+        $data['ticketNumber'] = $ticketNumber;
+        $data['ticket_id'] = $ticket->type;
+        session()->put('invoice',$data);
+
+
+        return redirect()->route('invoice');
+       
+    }
+       
+        
+    public function checkout()
+    {
+        $data = session()->get('invoice');
+
+        $ticket = Ticket::find(session('invoice.id'));
+        $booking = new Booking();
+        $booking->name = $data['name'] ;
+        $booking->ticket_id = $data['id'];
+        $booking->email = $data['email'];
+        $booking->phone = $data['phone'];
+        $booking->quantity =  $data['quantity'];
+        $booking->price = $data['price'];
+        $booking->ticket_number = $data['ticketNumber'];
+
+        $booking->save();
+
+        $remainTicket = $ticket->stock - $data['quantity'];
+
+        $ticket->stock = $remainTicket;
+        $ticket->save();
+
+        session()->forget('invoice');
+
+        return redirect()->route('home')->with('success','Booking Confirmed');
         
     }
+        
 
     public function sponsor()
     {
@@ -182,6 +211,15 @@ public function pricingPlan()
 
     return view('frontend.pricingplan',compact('ticket','content'));
 }
+public function invoice()
+{
+    
+    if(!session()->has('invoice')){
+        return redirect()->route('plan')->with('error','First You Have to book a ticket');
+    }
 
+    return view('frontend.invoice');
+    
+}
 
 }

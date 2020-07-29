@@ -20,8 +20,8 @@ class CreateSettingsTable extends Migration
             $table->string('name');
             $table->string('event');
             $table->string('days');
-            $table->string('start_date');
-            $table->string('');
+
+            $table->string('limit');
             $table->string('location');
             $table->timestamps();
         });

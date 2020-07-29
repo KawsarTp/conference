@@ -63,8 +63,9 @@ Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
       Route::get('add-conference','AdminController@addconferenceTopic')->name('admin.conference');
       Route::post('add-conference','AdminController@addconferenceTopicToDatabase');
       Route::get('show-all-conference','AdminController@viewAllTopic')->name('admin.showallconference');
+      Route::post('show-all-conference','AdminController@updateTopic');
       Route::get('add-topics-speaker','AdminController@addTopicsToSpeaker')->name('admin.topicsaddtospeaker');
-
+      Route::get('topic-delete/{id}',"AdminController@deleteTopic")->name('admin.topic-delete');
       Route::get('add-sponsor','AdminController@addSponsor')->name('admin.sponsor');
       Route::post('add-sponsor','AdminController@sponsorAddToDatabase');
 
@@ -104,5 +105,8 @@ Route::get('sponsor','UserController@sponsor')->name('sponsor');
 Route::post('sponsor','UserController@sponsorApplication');
 Route::get('pricing-plan','UserController@pricingPlan')->name('plan');
 Route::get('blogdetails/{id}','UserController@blogDetails')->name('blogdetails');
+Route::get('invoice','UserController@invoice')->name('invoice');
+
+Route::get('checkout',"UserController@checkout")->name('checkout');
 
 
